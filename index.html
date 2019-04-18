@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data Retriever</title>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: url(https://wallpaperplay.com/walls/full/3/7/a/37709.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body, html {
+  font-family: Helvetica;
+}
+
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+.row {margin: 0 -5px;}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+.card1:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card1{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #3F89E1;
+}
+.card3{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #ECE577;
+}
+.card2{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #B7EC77;
+}
+.card4{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #EC7789;
+}
+
+h3 {
+  font-family: courier;
+  }
+
+fieldset { border:2px solid #BEEDF5 }
+
+</style>
+</head>
+<body>
+
+
+<h1  style="color:white;font-size:250%;text-align:center;font-family:courier;font-weight:bold">ENSEMBL DATA RETRIEVER</h1>
+<p style="color:white;font-size:100%;text-align:center;">Retrieve data from the Ensembl web database.</p>
+</br>
+<div class="row">
+  <div class="column">
+    <div class="card1">
+      <h3>List of species</h3>
+      <p>Generates a list with the species available in the ENSEMBL database.</p>
+      <p>If the whole list wants to be retrieved, ignore the text box below and just click on 'Generate list of species'.</p>
+      <p>
+          <form action="listSpecies" method="get">
+            <br><input type="search" name="limit" size="40" placeholder="Type the number of species..."/></br>
+            <br><input type="submit" name="listSpecies" value="Generate list of species"/></br>
+          </form>
+      </p>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card2">
+      <h3>Karyotype</h3>
+      <p>Return information about the karyotype of a specie: The name (usually a number) of all the chromosomes.</p><br>
+        <form action="karyotype" method="get">
+            <br><input type="search" name="limit" size="40" placeholder="Type the specie's karyotype..."/></br>
+            <br><input type="submit" name="getkaryo" value="Get karyotype"/></br>
+            </br>
+          </form>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card3">
+      <h3>Chromosome lenght</h3>
+      <p>Return the length of the chromosome of the given specie.</p>
+      <p>
+        <form action="chromosomeLength" method="get">
+            <br><input type="search" name="limit" size="40" placeholder="Type the specie..."/></br>
+            <br><input type="search" name="limit" size="40" placeholder="Type the chromosome number..."/></br>
+            <br><input type="submit" name="getlenght" value="Get lenght"/></br>
+          </form>
+      </p>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card4">
+      <h3>Human gene database.</h3>
+        <h4 font-weight="bold">Gene</h4>
+        <p>Return the sequence of a given human gene.</p>
+        <h4>Gene info</h4>
+        <p>Return information about a human gene: start, end, Length, id and Chromosome.</p>
+      <p>Some text</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
