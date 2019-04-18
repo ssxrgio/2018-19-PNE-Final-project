@@ -2,7 +2,6 @@ import socketserver
 import http.server
 import termcolor
 import json
-import mimetypes
 
 PORT = 8000
 HOSTNAME = "rest.ensembl.org"
@@ -57,10 +56,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             print(len(species_list))
 
             if "limit" in path:
-                limit = path[path.find("=") + 1]
+                limit = path[path.find("=") + 1:]
 
-                if limit == "&":
+                if limit == "":
                     header_inf = "List of species:\n"
+                    photo = "https://i.imgur.com/wHk5lIk.jpg"
                     data = str()
 
                     for i in range(len(species_list)):
@@ -70,28 +70,25 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     if limit.isalpha():
                         header_inf = "Invalid limit parameter. Please, try again with a number from 1 to {}".format(str(len(species_list)))
                         data = ""
+                        photo = "https://i.imgur.com/poj7xfa.jpg"
 
                     else:
-                        if path[path.find("=") + 2].isdigit():
-                            limit = int(path[path.find("=") + 1:path.find("=") + 3])
-
-                        if path[path.find("=") + 3].isdigit():
-                            limit = int(path[path.find("=") + 1:path.find("=") + 4])
-
-                        else:
-                            limit = int(limit)
+                        limit = int(limit)
 
                         if limit > len(json_species):
                             header_inf = "Sorry, there are not that many species in the database"
                             data = "Please, choose a number from 1 to {}".format(str(len(species_list)))
+                            photo = "https://i.imgur.com/poj7xfa.jpg"
 
                         elif limit <= 0:
                             header_inf = "Invalid limit parameter. Please, try again with a number from 1 to {}.".format(str(len(species_list)))
                             data = ""
+                            photo = "https://i.imgur.com/poj7xfa.jpg"
 
                         else:
                             header_inf = "Showing {} species.".format(str(limit))
                             data = str(" ")
+                            photo = "https://i.imgur.com/wHk5lIk.jpg"
 
                             for i in range(limit):
                                 data += str(i + 1) + ". " + str(species_list[i]) + " | " + "\n"
@@ -100,8 +97,33 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
 
                 with open("listSpecies.html", "r") as file:
-                    content = file.read().format(header_inf, data)
+                    content = file.read().replace("SPECIESIMAGE", photo).replace("SPECIESHEADER", header_inf).replace("SPECIESDATA", data)
                     file.close()
+
+        elif "karyotype" in path:
+            specie_input = path[path.find("=") + 1:].lower()
+            print(specie_input)
+            karyo = get_json("/info/assembly/" + specie_input + "?content-type=application/json")
+            print(karyo)
+            specie = specie_input.replace("+", " ")
+            data = ""
+
+            if "karyotype" in karyo:
+                karyotype = karyo["karyotype"]
+                photo = "https://i.imgur.com/mXVUQAW.jpg"
+
+                for i in range(len(karyotype)):
+                    data += karyotype[i] + " | " + " "
+
+                data = "Showing karyotype: " + data
+
+            else:
+                data = "Sorry, '{}' is not available in the database.".format(specie)
+                photo = "https://i.imgur.com/L6IgO0M.jpg"
+
+            with open("karyotype.html", "r") as file:
+                content = file.read().replace("KARYOIMAGE", photo).replace("KARYOHEADER", str("Input specie: " + specie)).replace("KARYODATA", data)
+                file.close()
 
         else:
             with open("error.html", "r") as file:
