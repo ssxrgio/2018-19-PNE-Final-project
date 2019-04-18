@@ -1,0 +1,31 @@
+@charset "UTF-8";
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 70%;
+  border-radius: 5px;
+  background-color: #3F89E1;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+}
+
+.container {
+  position: relative;
+  text-align:center
+  color:white;
+  padding: 8px;
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 130px;
+  right: 35px;
+}
