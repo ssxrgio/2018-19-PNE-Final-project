@@ -77,7 +77,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                         if limit > len(json_species):
                             header_inf = "Sorry, there are not that many species in the database"
-                            data = "Please, choose a number from 1 to {}".format(str(len(species_list)))
+                            data = "Please, choose a number from 1 to {}.".format(str(len(species_list)))
                             photo = "https://i.imgur.com/poj7xfa.jpg"
 
                         elif limit <= 0:
@@ -122,7 +122,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 photo = "https://i.imgur.com/L6IgO0M.jpg"
 
             with open("karyotype.html", "r") as file:
-                content = file.read().replace("KARYOIMAGE", photo).replace("KARYOHEADER", str("Input specie: " + specie)).replace("KARYODATA", data)
+                content = file.read().replace("KARYOIMAGE", photo).replace("KARYOHEADER", str("Input specie: {}.".format(specie))).replace("KARYODATA", data)
                 file.close()
 
         else:
