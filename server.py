@@ -60,7 +60,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                 if limit == "":
                     header_inf = "List of species:\n"
-                    photo = "https://i.imgur.com/wHk5lIk.jpg"
+                    photo = "https://i.imgur.com/RMjXpq5.jpg"
                     data = str()
 
                     for i in range(len(species_list)):
