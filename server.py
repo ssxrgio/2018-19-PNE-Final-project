@@ -67,7 +67,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     if not limit.isdigit():
                         header_inf = "Invalid limit parameter. Please, try again with a number from 1 to {}.".format(str(len(species_list)))
                         data = ""
-                        photo = "https://i.imgur.com/poj7xfa.jpg"
+                        photo = "https://i.imgur.com/aKaXdU6.jpg"
 
                     else:
                         limit = int(limit)
@@ -112,7 +112,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
             if not specie_input.isalpha():
                 data = "I'm sorry to tell you that '{}' is not a specie. Try again.".format(specie)
-                photo = "https://i.imgur.com/poj7xfa.jpg"
+                photo = "https://i.imgur.com/aKaXdU6.jpg"
 
             else:
                 if "karyotype" in karyo:
@@ -155,7 +155,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                 print(karyotype)
 
-                num = path[self.path.find("chromosome=") + 11:]
+                num = path[path.find("chromosome=") + 11:]
                 print(num, type(num))
 
                 if num.isalpha() or "." in num:
@@ -163,16 +163,23 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                     for i in karyotype:
                         print(i["name"])
+
                         if num == i["name"]:
                             length = i["length"]
                             break
 
-                            data = "Length of chromosome '{}' of the specie '{}' is {} bp.".format(num, specie, str(length))
-                            photo = "https://i.imgur.com/RuuZ4VG.jpg"
 
                         else:
-                            data = "I'm sad to tell you that '{}' it is not a valid input chromosome.".format(num)
-                            photo = "https://i.imgur.com/poj7xfa.jpg"
+                            length = 'error'
+
+                    if length == "error":
+                        data = "I'm sorry to tell you that '{}' is not a valid input chromosome.".format(num)
+                        photo = "https://i.imgur.com/aKaXdU6.jpg"
+
+                    else:
+                        data = "Length of chromosome '{}' of the specie '{}' is {} bp.".format(num, specie, str(length))
+                        photo = "https://i.imgur.com/RuuZ4VG.jpg"
+
 
                 elif num.isdigit():
                     if len(json_karyo) >= int(num):
@@ -189,8 +196,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         photo = "https://i.imgur.com/poj7xfa.jpg"
 
                 else:
-                    data = "I'm sad to tell you that '{}' it is not a valid input number.".format(num)
-                    photo = "https://i.imgur.com/poj7xfa.jpg"
+                    data = "I'm sorry to tell you that '{}' is not a valid input number.".format(num)
+                    photo = "https://i.imgur.com/aKaXdU6.jpg"
 
             else:
                 data= "Karyotype for '{}' is not available.".format(specie)
