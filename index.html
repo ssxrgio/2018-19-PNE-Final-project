@@ -91,7 +91,8 @@ h3 {
     <div class="card1">
       <h3>List of species</h3>
       <p>Generates a list with the species available in the ENSEMBL database.</p>
-      <p>If the whole list wants to be retrieved, ignore the text box below and just click on 'Generate list of species'.</p>
+      <p>If an specific number of species wants to be retrieved, write that number below.</p>
+      <p>If not, ignore the text box below and just click on 'Generate list of species'.</p>
       <p>
           <form action="listSpecies" method="get">
             <br><input type="search" name="limit" size="40" placeholder="Type the number of species..."/></br>
@@ -104,7 +105,7 @@ h3 {
   <div class="column">
     <div class="card2">
       <h3>Karyotype</h3>
-      <p>Return information about the species <acronym title="Number and visual appearance of the chromosomes in the cell nuclei of an organism or species">karyotype.</acronym></p><br>
+      <p>Returns information about the species <acronym title="Number and visual appearance of the chromosomes in the cell nuclei of an organism or species">karyotype.</acronym></p><br>
         <form action="karyotype" method="get">
             <br><input required type="search" name="specie" size="40" placeholder="Type the specie's karyotype..."/></br>
             <br><input type="submit" value="Get karyotype"/></br>
@@ -116,7 +117,7 @@ h3 {
   <div class="column">
     <div class="card3">
       <h3>Chromosome lenght</h3>
-      <p>Return the length of the chromosome of the given specie.</p>
+      <p>Returns the length of the chromosome of the given specie.</p>
       <p>
         <form action="chromosomeLength" method="get">
             <br><input required type="search" name="specie" size="40" placeholder="Type the specie..."/></br>
@@ -131,9 +132,9 @@ h3 {
     <div class="card4">
       <h3>Human gene database.</h3>
         <h4 font-weight="bold">Gene</h4>
-        <p>Return the sequence of a given human gene.</p>
+        <p>Returns the sequence of a given human gene.</p>
         <h4>Gene info</h4>
-        <p>Return information about a human gene: start, end, Length, id and Chromosome.</p>
+        <p>Returns information about a human gene: start, end, Length, id and Chromosome.</p>
       <p>Some text</p>
     </div>
   </div>
