@@ -9,7 +9,7 @@
 }
 
 html {
-  background: url(https://wallpaperplay.com/walls/full/3/7/a/37709.jpg) no-repeat center center fixed;
+  background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -54,19 +54,19 @@ body, html {
 }
 .card3{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 16px;
+  padding: 31px;
   text-align: center;
   background-color: #ECE577;
 }
 .card2{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 16px;
+  padding: 32px;
   text-align: center;
   background-color: #B7EC77;
 }
 .card4{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 16px;
+  padding: 32px;
   text-align: center;
   background-color: #EC7789;
 }
@@ -75,14 +75,13 @@ h3 {
   font-family: courier;
   }
 
-fieldset { border:2px solid #BEEDF5 }
+
 
 </style>
 </head>
 <body>
 
-
-<h1  style="color:white;font-size:250%;text-align:center;font-family:courier;font-weight:bold">ENSEMBL DATA RETRIEVER</h1>
+<p style="color:white;font-size:250%;text-align:center;font-family:courier">ENSEMBL DATA RETRIEVER</p>
 <p style="color:white;font-size:100%;text-align:center;">Retrieve data from the Ensembl web database.</p>
 </br>
 <div class="row">
@@ -94,7 +93,7 @@ fieldset { border:2px solid #BEEDF5 }
       <p>
           <form action="listSpecies" method="get">
             <br><input type="search" name="limit" size="40" placeholder="Type the number of species..."/></br>
-            <br><input type="submit" name="listSpecies" value="Generate list of species"/></br>
+            <br><input type="submit" value="Generate list of species"/></br>
           </form>
       </p>
     </div>
@@ -105,8 +104,8 @@ fieldset { border:2px solid #BEEDF5 }
       <h3>Karyotype</h3>
       <p>Return information about the karyotype of a specie: The name (usually a number) of all the chromosomes.</p><br>
         <form action="karyotype" method="get">
-            <br><input type="search" name="limit" size="40" placeholder="Type the specie's karyotype..."/></br>
-            <br><input type="submit" name="getkaryo" value="Get karyotype"/></br>
+            <br><input required="required" type="search" name="specie" size="40" placeholder="Type the specie's karyotype..."/></br>
+            <br><input type="submit" value="Get karyotype"/></br>
             </br>
           </form>
     </div>

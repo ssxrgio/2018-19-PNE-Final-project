@@ -4,6 +4,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
 </head>
 <style>
+html {
+  background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 
 .card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -15,19 +22,17 @@
   margin-right: auto;
 }
 
-.card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
 img {
   border-radius: 5px 5px 0 0;
 }
 
 .container {
   position: relative;
-  text-align:center
+  text-align:left
   color:white;
   padding: 8px;
+  margin-left: 20px;
+  margin-right:20px;
 }
 
 .bottom-right {
@@ -43,15 +48,15 @@ img {
 }
 
 </style>
-<body style="background-color:#040d1c">
+<body>
 <h1></h1>
 <div class="bottom-right" style="text-align:center;color:white;font-size:250%;font-family:courier;font-weight:bold">LIST OF SPECIES</div>
 <div class="top-right" style="text-align:center;color:white;font-size:100%;font-family:courier">Ensembl Data Retriever</div>
 <div class="card">
   <img src= "SPECIESIMAGE" style="width:100%">
   <div class="container">
-    <h3 style="text-align:center;font-family:courier;color:white">SPECIESHEADER<b></b></h3>
-    <p style="text-align:center;color:white;font-family:helvetica;font-size:90%">SPECIESDATA</p>
+    <h3 style="font-family:courier;color:white">SPECIESHEADER<b></b></h3>
+    <p style="color:white;font-family:helvetica;font-size:90%">SPECIESDATA</p>
   </div>
 </div>
 <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>

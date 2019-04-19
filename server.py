@@ -118,7 +118,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 data = "Showing karyotype: " + data
 
             else:
-                data = "Sorry, '{}' is not available in the database.".format(specie)
+                data = "Sorry, the specie '{}' is not available in the database.".format(specie)
                 photo = "https://i.imgur.com/L6IgO0M.jpg"
 
             with open("karyotype.html", "r") as file:
