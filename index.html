@@ -48,24 +48,28 @@ body, html {
 
 .card1{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
   padding: 16px;
   text-align: center;
-  background-color: #3F89E1;
+  background-color: #6da4f9;
 }
 .card3{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
   padding: 31px;
   text-align: center;
   background-color: #ECE577;
 }
 .card2{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
   padding: 32px;
   text-align: center;
   background-color: #B7EC77;
 }
 .card4{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
   padding: 32px;
   text-align: center;
   background-color: #EC7789;
@@ -74,8 +78,6 @@ body, html {
 h3 {
   font-family: courier;
   }
-
-
 
 </style>
 </head>
@@ -104,7 +106,7 @@ h3 {
       <h3>Karyotype</h3>
       <p>Return information about the karyotype of a specie: The name (usually a number) of all the chromosomes.</p><br>
         <form action="karyotype" method="get">
-            <br><input required="required" type="search" name="specie" size="40" placeholder="Type the specie's karyotype..."/></br>
+            <br><input required type="search" name="specie" size="40" placeholder="Type the specie's karyotype..."/></br>
             <br><input type="submit" value="Get karyotype"/></br>
             </br>
           </form>
@@ -117,9 +119,9 @@ h3 {
       <p>Return the length of the chromosome of the given specie.</p>
       <p>
         <form action="chromosomeLength" method="get">
-            <br><input type="search" name="limit" size="40" placeholder="Type the specie..."/></br>
-            <br><input type="search" name="limit" size="40" placeholder="Type the chromosome number..."/></br>
-            <br><input type="submit" name="getlenght" value="Get lenght"/></br>
+            <br><input required type="search" name="specie" size="40" placeholder="Type the specie..."/></br>
+            <br><input required type="search" name="chromosome" size="40" placeholder="Type the chromosome number..."/></br>
+            <br><input type="submit" value="Get lenght"/></br>
           </form>
       </p>
     </div>

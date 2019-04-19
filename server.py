@@ -52,23 +52,20 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             for i in range(len(json_species)):
                 species_list.append(json_species[i]["display_name"])
 
-            print(species_list)
-            print(len(species_list))
-
             if "limit" in path:
                 limit = path[path.find("=") + 1:]
 
                 if limit == "":
-                    header_inf = "List of species:\n"
+                    header_inf = "List of species: "
                     photo = "https://i.imgur.com/RMjXpq5.jpg"
-                    data = str()
+                    data = list()
 
                     for i in range(len(species_list)):
-                        data += str(i + 1) + ". " + str(species_list[i]) + " | " + "\n"
+                        data.append(str(i + 1) + ". " + str(species_list[i]))
 
                 else:
-                    if limit.isalpha():
-                        header_inf = "Invalid limit parameter. Please, try again with a number from 1 to {}".format(str(len(species_list)))
+                    if not limit.isdigit():
+                        header_inf = "Invalid limit parameter. Please, try again with a number from 1 to {}.".format(str(len(species_list)))
                         data = ""
                         photo = "https://i.imgur.com/poj7xfa.jpg"
 
@@ -87,14 +84,21 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                         else:
                             header_inf = "Showing {} species.".format(str(limit))
-                            data = str(" ")
+                            data = list()
                             photo = "https://i.imgur.com/wHk5lIk.jpg"
 
                             for i in range(limit):
-                                data += str(i + 1) + ". " + str(species_list[i]) + " | " + "\n"
+                                data.append(str(i + 1) + ". " + str(species_list[i]))
+
 
                         termcolor.cprint("Limit is {}".format(limit), "green")
 
+                data = str(data).strip("[]").replace("'", "")
+
+                print("List of species from the .json file: ", species_list)
+                print("Lenght of the list: ", len(species_list))
+                print("Informative text to the user sent ro the server: ", header_inf)
+                print("Data sent to the server: ", data)
 
                 with open("listSpecies.html", "r") as file:
                     content = file.read().replace("SPECIESIMAGE", photo).replace("SPECIESHEADER", header_inf).replace("SPECIESDATA", data)
@@ -102,34 +106,99 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
         elif "karyotype" in path:
             specie_input = path[path.find("=") + 1:].lower()
-            print(specie_input)
             karyo = get_json("/info/assembly/" + specie_input + "?content-type=application/json")
-            print(karyo)
             specie = specie_input.replace("+", " ")
-            data = ""
+            data = list()
 
             if not specie_input.isalpha():
                 data = "I'm sorry to tell you that '{}' is not a specie. Try again.".format(specie)
-                photo = "https://i.imgur.com/L6IgO0M.jpg"
+                photo = "https://i.imgur.com/poj7xfa.jpg"
 
             else:
-
                 if "karyotype" in karyo:
                     karyotype = karyo["karyotype"]
-                    photo = "https://i.imgur.com/mXVUQAW.jpg"
 
-                    for i in range(len(karyotype)):
-                        data += karyotype[i] + " | " + " "
+                    if karyo["karyotype"] == []:
+                        data = "karyotype not available in the database."
+                        photo = "https://i.imgur.com/poj7xfa.jpg"
 
-                    data = "Showing karyotype: " + data
+
+                    else:
+                        for i in range(len(karyotype)):
+                            data.append(karyotype[i])
+
+                    data = "Showing karyotype: {}".format(str(data).strip("[]").replace("'", ""))
+                    photo = "https://i.imgur.com/ihzq1ZU.jpg"
 
 
                 else:
                     data = "Sorry, the specie '{}' is not available in the database.".format(specie)
-                    photo = "https://i.imgur.com/L6IgO0M.jpg"
+                    photo = "https://i.imgur.com/poj7xfa.jpg"
+
+            print("Specie input: ", specie_input)
+            print("Json retrieved from the ENSEMBL webpage: ", karyo)
+            print("Data sent to the server: ", data)
+            print()
 
             with open("karyotype.html", "r") as file:
                 content = file.read().replace("KARYOIMAGE", photo).replace("KARYOHEADER", str("Input specie: {}.".format(specie))).replace("KARYODATA", data)
+                file.close()
+
+        elif "chromosomeLength" in path:
+            specie = path[path.find("=") + 1:path.find("&")]
+            karyo = get_json("/info/assembly/" + specie + "?content-type=application/json")
+
+
+            if 'top_level_region' in karyo:
+                json_karyo = karyo["karyotype"]
+                karyotype = karyo["top_level_region"]
+
+                print(karyotype)
+
+                num = path[self.path.find("chromosome=") + 11:]
+                print(num, type(num))
+
+                if num.isalpha() or "." in num:
+                    num = str(num.upper())
+
+                    for i in karyotype:
+                        print(i["name"])
+                        if num == i["name"]:
+                            length = i["length"]
+                            break
+
+                            data = "Length of chromosome '{}' of the specie '{}' is {} bp.".format(num, specie, str(length))
+                            photo = "https://i.imgur.com/RuuZ4VG.jpg"
+
+                        else:
+                            data = "I'm sad to tell you that '{}' it is not a valid input chromosome.".format(num)
+                            photo = "https://i.imgur.com/poj7xfa.jpg"
+
+                elif num.isdigit():
+                    if len(json_karyo) >= int(num):
+                        for i in karyotype:
+                            if num == i['name']:
+                                length = i['length']
+                                break
+
+                        data = "Length of chromosome '{}' of the specie '{}' is {} bp.".format(num, specie, str(length))
+                        photo = "https://i.imgur.com/RuuZ4VG.jpg"
+
+                    elif len(json_karyo)< int(num):
+                        data = 'Chromosome not found. There are {} chromosomes available. Please, try again.'.format(str(len(json_karyo)))
+                        photo = "https://i.imgur.com/poj7xfa.jpg"
+
+                else:
+                    data = "I'm sad to tell you that '{}' it is not a valid input number.".format(num)
+                    photo = "https://i.imgur.com/poj7xfa.jpg"
+
+            else:
+                data= "Karyotype for '{}' is not available.".format(specie)
+                photo = "https://i.imgur.com/poj7xfa.jpg"
+
+
+            with open("chromlength.html", "r") as file:
+                content = file.read().replace("LENIMAGE", photo).replace("LENHEADER", str(data))
                 file.close()
 
         else:
