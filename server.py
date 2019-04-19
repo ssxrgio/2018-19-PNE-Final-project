@@ -108,18 +108,25 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             specie = specie_input.replace("+", " ")
             data = ""
 
-            if "karyotype" in karyo:
-                karyotype = karyo["karyotype"]
-                photo = "https://i.imgur.com/mXVUQAW.jpg"
-
-                for i in range(len(karyotype)):
-                    data += karyotype[i] + " | " + " "
-
-                data = "Showing karyotype: " + data
+            if not specie_input.isalpha():
+                data = "I'm sorry to tell you that '{}' is not a specie. Try again.".format(specie)
+                photo = "https://i.imgur.com/L6IgO0M.jpg"
 
             else:
-                data = "Sorry, the specie '{}' is not available in the database.".format(specie)
-                photo = "https://i.imgur.com/L6IgO0M.jpg"
+
+                if "karyotype" in karyo:
+                    karyotype = karyo["karyotype"]
+                    photo = "https://i.imgur.com/mXVUQAW.jpg"
+
+                    for i in range(len(karyotype)):
+                        data += karyotype[i] + " | " + " "
+
+                    data = "Showing karyotype: " + data
+
+
+                else:
+                    data = "Sorry, the specie '{}' is not available in the database.".format(specie)
+                    photo = "https://i.imgur.com/L6IgO0M.jpg"
 
             with open("karyotype.html", "r") as file:
                 content = file.read().replace("KARYOIMAGE", photo).replace("KARYOHEADER", str("Input specie: {}.".format(specie))).replace("KARYODATA", data)
