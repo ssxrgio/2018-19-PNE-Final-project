@@ -231,7 +231,7 @@ with socketserver.TCPServer(("", PORT), Handler) as httpd:
     try:
         httpd.serve_forever()
 
-    except KeyboardInterrupt, OSError:
+    except KeyboardInterrupt:
         print("")
         print("Server stopped.")
         httpd.server_close()
