@@ -16,6 +16,7 @@ def get_json(ENDPOINT):
     conn = http.client.HTTPSConnection(HOSTNAME)
     conn.request(METHOD, ENDPOINT, None, headers)
     r1 = conn.getresponse()
+    print(ENDPOINT)
     print()
     print("Response received: ", end='')
     print(r1.status, r1.reason)
@@ -24,6 +25,7 @@ def get_json(ENDPOINT):
     conn.close()
     json_info = json.loads(text_json)
 
+    print('Json retrieved', json_info)
     return json_info
 
 class TestHandler(http.server.BaseHTTPRequestHandler):
@@ -105,12 +107,12 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     file.close()
 
         elif "karyotype" in path:
-            specie_input = path[path.find("=") + 1:].lower()
+            specie_input = path[path.find("=") + 1:].lower().replace("+", "_").replace("/", "").lower()
             karyo = get_json("/info/assembly/" + specie_input + "?content-type=application/json")
-            specie = specie_input.replace("+", " ")
+            specie = specie_input.replace("_", " ")
             data = list()
 
-            if not specie_input.isalpha():
+            if not specie.replace(" ", "").isalpha():
                 data = "I'm sorry to tell you that '{}' is not a specie. Try again.".format(specie)
                 photo = "https://i.imgur.com/aKaXdU6.jpg"
 
@@ -119,7 +121,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     karyotype = karyo["karyotype"]
 
                     if karyo["karyotype"] == []:
-                        data = "karyotype not available in the database."
+                        data = "Karyotype not available in the database."
                         photo = "https://i.imgur.com/poj7xfa.jpg"
 
 
@@ -132,7 +134,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
 
                 else:
-                    data = "Sorry, the specie '{}' is not available in the database.".format(specie)
+                    data = "Sorry, the specie '{}' is not available in the database.".format(specie.replace("_", " "))
                     photo = "https://i.imgur.com/poj7xfa.jpg"
 
             print("Specie input: ", specie_input)
@@ -145,7 +147,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 file.close()
 
         elif "chromosomeLength" in path:
-            specie = path[path.find("=") + 1:path.find("&")]
+            specie = path[path.find("=") + 1:path.find("&")].lower().replace("+", "_").replace("/", "").lower()
             karyo = get_json("/info/assembly/" + specie + "?content-type=application/json")
 
 
@@ -153,7 +155,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 json_karyo = karyo["karyotype"]
                 karyotype = karyo["top_level_region"]
 
-                print(karyotype)
+                print("Karyotype is", karyotype)
 
                 num = path[path.find("chromosome=") + 11:]
                 print(num, type(num))
@@ -173,34 +175,56 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             length = 'error'
 
                     if length == "error":
-                        data = "I'm sorry to tell you that '{}' is not a valid input chromosome.".format(num)
+                        data = "I'm sorry to tell you that '{}' is not a valid input chromosome. Check the 'Karyotype' page to know them".format(num)
                         photo = "https://i.imgur.com/aKaXdU6.jpg"
 
                     else:
-                        data = "Length of chromosome '{}' of the specie '{}' is {} bp.".format(num, specie, str(length))
+                        data = "Length of chromosome '{}' of the specie '{}' is {} bp.".format(num, specie.replace("_", " "), str(length))
                         photo = "https://i.imgur.com/RuuZ4VG.jpg"
 
 
                 elif num.isdigit():
                     if len(json_karyo) >= int(num):
-                        for i in karyotype:
-                            if num == i['name']:
-                                length = i['length']
+                        for e in karyotype:
+                            if num == e['name']:
+                                length = e['length']
                                 break
 
-                        data = "Length of chromosome '{}' of the specie '{}' is {} bp.".format(num, specie, str(length))
+                        data = "Length of chromosome '{}' of the specie '{}' is {} bp.".format(num, specie.replace("_", " "), str(length))
                         photo = "https://i.imgur.com/RuuZ4VG.jpg"
 
                     elif len(json_karyo)< int(num):
-                        data = 'Chromosome not found. There are {} chromosomes available. Please, try again.'.format(str(len(json_karyo)))
+                        data = "Chromosome not found. There are {} chromosomes available. Check the 'Karyotype' page to know them".format(str(len(json_karyo)))
                         photo = "https://i.imgur.com/poj7xfa.jpg"
 
                 else:
-                    data = "I'm sorry to tell you that '{}' is not a valid input number.".format(num)
-                    photo = "https://i.imgur.com/aKaXdU6.jpg"
+                    for e in num:
+                        if e.isalpha():
+                            num = num.replace(e, e.upper())
+
+                    print(num)
+
+                    for i in karyotype:
+                        print(i["name"])
+
+                        if num == i["name"]:
+                            length = i["length"]
+                            break
+
+                        else:
+                            length = 'error'
+
+                    if length == "error":
+                        data = "Chromosome not found. There are {} chromosomes available. Check the 'Karyotype' page to know them".format(str(len(json_karyo)))
+                        photo = "https://i.imgur.com/aKaXdU6.jpg"
+
+                    else:
+                        data = "Length of chromosome '{}' of the specie '{}' is {} bp.".format(num, specie.replace("_", " "), str(length))
+                        photo = "https://i.imgur.com/RuuZ4VG.jpg"
+
 
             else:
-                data= "Karyotype for '{}' is not available.".format(specie)
+                data= "Karyotype for '{}' is not available.".format(specie.replace("_", " "))
                 photo = "https://i.imgur.com/poj7xfa.jpg"
 
 
