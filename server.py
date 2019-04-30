@@ -270,7 +270,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             except KeyError:
                 header = ""
                 data = "Sorry, the gene '{}' was not found for Homo Sapiens specie.".format(gene_input)
-                photo = "https://i.imgur.com/aKaXdU6.jpg"
+                photo = "https://i.imgur.com/poj7xfa.jpg"
 
             with open("gene.html", "r") as file:
                 content = file.read().replace("GENEOPERAT", "GENE INFORMATION").replace("SEQIMAGE", photo).replace("SEQHEADER", header).replace("SEQDATA", data)
@@ -299,7 +299,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 photo = "https://i.imgur.com/aKaXdU6.jpg"
 
             with open("gene.html", "r") as file:
-                content = file.read().replace("GENEOPERAT", "GENE CALCULATIONS").replace("SEQIMAGE", photo).replace("SEQHEADER", header).replace("SEQDATA", data)
+                content = file.read().replace("GENEOPERAT", "GENE OPERATIONS").replace("SEQIMAGE", photo).replace("SEQHEADER", header).replace("SEQDATA", data)
                 file.close()
 
         else:
