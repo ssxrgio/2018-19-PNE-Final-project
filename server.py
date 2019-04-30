@@ -232,6 +232,29 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 content = file.read().replace("LENIMAGE", photo).replace("LENHEADER", str(data))
                 file.close()
 
+        elif "geneSeq" in path:
+            gene_input = path[path.find("=") + 1:].upper()
+            print(gene_input)
+
+            try:
+                gene_id = get_json("/lookup/symbol/homo_sapiens/" + gene_input + "?expand=1;content-type=application/json")["id"]
+                print(gene_id)
+                gene_seq = get_json("/sequence/id/" + gene_id + "?content-type=application/json")["seq"]
+                print(gene_seq)
+N
+                header = "The sequence for '{}' is: ".format(gene_input)
+                data = gene_seq
+                photo = "https://i.imgur.com/Fhayqk0.jpg"
+
+            except KeyError:
+                header = ""
+                data = "Sorry, the gene '{}' was not found for Homo Sapiens specie.".format(gene_input)
+                photo = "https://i.imgur.com/aKaXdU6.jpg"
+
+            with open("genseq.html", "r") as file:
+                content = file.read().replace("SEQIMAGE", photo).replace("SEQHEADER", header).replace("SEQDATA", data)
+                file.close()
+
         else:
             with open("error.html", "r") as file:
                 content = file.read()
