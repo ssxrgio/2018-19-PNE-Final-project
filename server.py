@@ -2,6 +2,7 @@ import socketserver
 import http.server
 import termcolor
 import json
+from Seq import Seq
 
 PORT = 8000
 HOSTNAME = "rest.ensembl.org"
@@ -66,12 +67,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         data.append(str(i + 1) + ". " + str(species_list[i]))
 
                 else:
-                    if not limit.isdigit():
-                        header_inf = "Invalid limit parameter. Please, try again with a number from 1 to {}.".format(str(len(species_list)))
-                        data = ""
-                        photo = "https://i.imgur.com/aKaXdU6.jpg"
-
-                    else:
+                    try:
                         limit = int(limit)
 
                         if limit > len(json_species):
@@ -95,6 +91,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                         termcolor.cprint("Limit is {}".format(limit), "green")
 
+                    except ValueError:
+                        header_inf = "Invalid limit parameter. Please, try again with a number from 1 to {}.".format(str(len(species_list)))
+                        data = ""
+                        photo = "https://i.imgur.com/aKaXdU6.jpg"
+
                 data = str(data).strip("[]").replace("'", "")
 
                 print("List of species from the .json file: ", species_list)
@@ -117,7 +118,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 photo = "https://i.imgur.com/aKaXdU6.jpg"
 
             else:
-                if "karyotype" in karyo:
+                try:
                     karyotype = karyo["karyotype"]
 
                     if karyo["karyotype"] == []:
@@ -133,7 +134,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     photo = "https://i.imgur.com/ihzq1ZU.jpg"
 
 
-                else:
+                except KeyError:
                     data = "Sorry, the specie '{}' is not available in the database.".format(specie.replace("_", " "))
                     photo = "https://i.imgur.com/poj7xfa.jpg"
 
@@ -147,20 +148,19 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 file.close()
 
         elif "chromosomeLength" in path:
-            specie = path[path.find("=") + 1:path.find("&")].lower().replace("+", "_").replace("/", "").lower()
+            specie = path[path.find("specie=") + 7:path.find("&")].lower().replace("+", "_").replace("/", "").lower()
             karyo = get_json("/info/assembly/" + specie + "?content-type=application/json")
 
-
-            if 'top_level_region' in karyo:
+            try:
                 json_karyo = karyo["karyotype"]
                 karyotype = karyo["top_level_region"]
 
                 print("Karyotype is", karyotype)
 
-                num = path[path.find("chromosome=") + 11:]
+                num = path[path.find("chromo=") + 7:]
                 print(num, type(num))
 
-                if num.isalpha() or "." in num:
+                if num.isalpha():
                     num = str(num.upper())
 
                     for i in karyotype:
@@ -169,7 +169,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         if num == i["name"]:
                             length = i["length"]
                             break
-
 
                         else:
                             length = 'error'
@@ -181,7 +180,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     else:
                         data = "Length of chromosome '{}' of the specie '{}' is {} bp.".format(num, specie.replace("_", " "), str(length))
                         photo = "https://i.imgur.com/RuuZ4VG.jpg"
-
 
                 elif num.isdigit():
                     if len(json_karyo) >= int(num):
@@ -223,17 +221,16 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         photo = "https://i.imgur.com/RuuZ4VG.jpg"
 
 
-            else:
+            except KeyError:
                 data= "Karyotype for '{}' is not available.".format(specie.replace("_", " "))
                 photo = "https://i.imgur.com/poj7xfa.jpg"
-
 
             with open("chromlength.html", "r") as file:
                 content = file.read().replace("LENIMAGE", photo).replace("LENHEADER", str(data))
                 file.close()
 
         elif "geneSeq" in path:
-            gene_input = path[path.find("=") + 1:].upper()
+            gene_input = path[path.find("gene=") + 5:].upper()
             print(gene_input)
 
             try:
@@ -241,7 +238,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 print(gene_id)
                 gene_seq = get_json("/sequence/id/" + gene_id + "?content-type=application/json")["seq"]
                 print(gene_seq)
-N
+
                 header = "The sequence for '{}' is: ".format(gene_input)
                 data = gene_seq
                 photo = "https://i.imgur.com/Fhayqk0.jpg"
@@ -251,8 +248,58 @@ N
                 data = "Sorry, the gene '{}' was not found for Homo Sapiens specie.".format(gene_input)
                 photo = "https://i.imgur.com/aKaXdU6.jpg"
 
-            with open("genseq.html", "r") as file:
-                content = file.read().replace("SEQIMAGE", photo).replace("SEQHEADER", header).replace("SEQDATA", data)
+            with open("gene.html", "r") as file:
+                content = file.read().replace("GENEOPERAT", "GENE SEQUENCE").replace("SEQIMAGE", photo).replace("SEQHEADER", header).replace("SEQDATA", data)
+                file.close()
+
+        elif "geneInfo" in path:
+            gene_input = path[path.find("gene=") + 5:].upper()
+
+            try:
+                gene = get_json("/lookup/symbol/homo_sapiens/" + gene_input + "?expand=1;content-type=application/json")
+                gene_id = gene["id"]
+                gene_start= gene["start"]
+                gene_end = gene["end"]
+                gen_chromo = gene["seq_region_name"]
+                lenght = len(get_json("/sequence/id/" + gene_id + "?content-type=application/json")["seq"])
+
+                header = "Information for gene '{}' is: ".format(gene_input)
+                data = "<br>Gene ID: {}</br><br>Start: {}</br><br>End: {}</br><br>Lenght: {}</br><br>Chromosome where it belongs: {}</br>".format(gene_id, gene_start, gene_end, lenght, gen_chromo)
+                photo = "https://i.imgur.com/Fhayqk0.jpg"
+
+            except KeyError:
+                header = ""
+                data = "Sorry, the gene '{}' was not found for Homo Sapiens specie.".format(gene_input)
+                photo = "https://i.imgur.com/aKaXdU6.jpg"
+
+            with open("gene.html", "r") as file:
+                content = file.read().replace("GENEOPERAT", "GENE INFORMATION").replace("SEQIMAGE", photo).replace("SEQHEADER", header).replace("SEQDATA", data)
+                file.close()
+
+        elif "geneCalc" in path:
+            gene_input = path[path.find("gene=") + 5:].upper()
+
+            try:
+                gene_id = get_json("/lookup/symbol/homo_sapiens/" + gene_input + "?expand=1;content-type=application/json")["id"]
+                sequence = Seq(get_json("/sequence/id/" + gene_id + "?content-type=application/json")["seq"])
+
+                lenght = sequence.len()
+                percA = sequence.perc("A")
+                percC = sequence.perc("C")
+                percG = sequence.perc("G")
+                percT = sequence.perc("T")
+
+                header = "Information for gene '{}' is: ".format(gene_input)
+                data = "<br>Lenght: {}</br><br>Percentage of Adenine: {}</br><br>Percentage of Thymine: {}</br><br>Percentage of Cytosine: {}</br><br>Percentage of Guanine: {}</br>".format(lenght, percA, percT, percC, percG)
+                photo = "https://i.imgur.com/Fhayqk0.jpg"
+
+            except KeyError:
+                header = ""
+                data = "Sorry, the gene '{}' was not found for Homo Sapiens specie.".format(gene_input)
+                photo = "https://i.imgur.com/aKaXdU6.jpg"
+
+            with open("gene.html", "r") as file:
+                content = file.read().replace("GENEOPERAT", "GENE CALCULATIONS").replace("SEQIMAGE", photo).replace("SEQHEADER", header).replace("SEQDATA", data)
                 file.close()
 
         else:
