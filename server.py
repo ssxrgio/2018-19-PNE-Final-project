@@ -66,7 +66,9 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     data = list()
 
                     for i in range(len(species_list)):
-                        data.append(str(i + 1) + ". " + str(species_list[i]))
+                        data.append("<li style=\"font-family:helvetica;font-size:90%;word-break:break-all\">{}</li>".format(str(species_list[i])))
+
+                    data = "<ol>{}</ol>".format(str(data).strip("[]").replace("'", "").replace(",", ""))
 
                 else:
                     try:
@@ -78,7 +80,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             photo = "https://i.imgur.com/poj7xfa.jpg"
 
                         elif limit <= 0:
-                            header_inf = "Invalid limit parameter. Please, try again with a number from 1 to {}.".format(str(len(species_list)))
+                            header_inf = "Error: invalid limit parameter. Please, try again with a number from 1 to {}.".format(str(len(species_list)))
                             data = ""
                             photo = "https://i.imgur.com/poj7xfa.jpg"
 
@@ -88,13 +90,14 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             photo = "https://i.imgur.com/wHk5lIk.jpg"
 
                             for i in range(limit):
-                                data.append(str(i + 1) + ". " + str(species_list[i]))
+                                data.append("<li style=\"font-family:helvetica;font-size:90%;word-break:break-all\">{}</li>".format(str(species_list[i])))
 
+                            data = "<ol>{}</ol>".format(str(data).strip("[]").replace("'", "").replace(",", ""))
 
                         termcolor.cprint("Limit is {}".format(limit), "green")
 
                     except ValueError:
-                        header_inf = "Invalid limit parameter. Please, try again with a number from 1 to {}.".format(str(len(species_list)))
+                        header_inf = "Error: invalid limit parameter. Please, try again with a number from 1 to {}.".format(str(len(species_list)))
                         data = ""
                         photo = "https://i.imgur.com/aKaXdU6.jpg"
 
@@ -104,14 +107,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 data = list()
 
                 for i in range(len(species_list)):
-                    data.append(str(i + 1) + ". " + str(species_list[i]))
+                    data.append("<li style=\"font-family:helvetica;font-size:90%;word-break:break-all\">{}</li>".format(str(species_list[i])))
+
+                data = "<ol>{}</ol>".format(str(data).strip("[]").replace("'", "").replace(",", ""))
 
             data = str(data).strip("[]").replace("'", "")
-
-            print("List of species from the .json file: ", species_list)
-            print("Lenght of the list: ", len(species_list))
-            print("Informative text to the user sent ro the server: ", header_inf)
-            print("Data sent to the server: ", data)
 
             with open("results.html", "r") as file:
                 content = file.read().replace("OPERATION", "LIST OF SPECIES").replace("IMAGE", photo).replace("HEADER", header_inf).replace("DATA", data).replace("COLOURCARD", "#6da4f9")
@@ -124,7 +124,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             data = list()
 
             if not specie.replace(" ", "").isalpha():
-                data = "I'm sorry to tell you that '{}' is not a specie. Try again.".format(specie)
+                data = "Error: '{}' is not a specie. Try again.".format(specie)
                 photo = "https://i.imgur.com/aKaXdU6.jpg"
 
             else:
@@ -145,13 +145,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
 
                 except KeyError:
-                    data = "Sorry, the specie '{}' is not available in the database.".format(specie.replace("_", " "))
+                    data = "Error: specie '{}' is not available in the database.".format(specie.replace("_", " "))
                     photo = "https://i.imgur.com/poj7xfa.jpg"
-
-            print("Specie input: ", specie_input)
-            print("Json retrieved from the ENSEMBL webpage: ", karyo)
-            print("Data sent to the server: ", data)
-            print()
 
             with open("results.html", "r") as file:
                 content = file.read().replace("OPERATION", "KARYOTYPE").replace("IMAGE", photo).replace("HEADER", str("Input specie: {}.".format(specie))).replace("DATA", data).replace("COLOURCARD", "#B7EC77")
@@ -184,7 +179,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             length = 'error'
 
                     if length == "error":
-                        data = "I'm sorry to tell you that '{}' is not a valid input chromosome. Check the 'Karyotype' page to know them".format(num)
+                        data = "Error '{}' is not a valid input chromosome. Check the 'Karyotype' page to know them".format(num)
                         photo = "https://i.imgur.com/aKaXdU6.jpg"
 
                     else:
@@ -202,7 +197,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         photo = "https://i.imgur.com/RuuZ4VG.jpg"
 
                     elif len(json_karyo)< int(num):
-                        data = "Chromosome not found. There are {} chromosomes available. Check the 'Karyotype' page to know them".format(str(len(json_karyo)))
+                        data = "Error: chromosome not found. There are {} chromosomes available. Check the 'Karyotype' page to know them".format(str(len(json_karyo)))
                         photo = "https://i.imgur.com/poj7xfa.jpg"
 
                 else:
@@ -223,7 +218,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             length = 'error'
 
                     if length == "error":
-                        data = "Chromosome not found. There are {} chromosomes available. Check the 'Karyotype' page to know them".format(str(len(json_karyo)))
+                        data = "Error: chromosome not found. There are {} chromosomes available. Check the 'Karyotype' page to know them".format(str(len(json_karyo)))
                         photo = "https://i.imgur.com/aKaXdU6.jpg"
 
                     else:
@@ -232,7 +227,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
 
             except KeyError:
-                data= "Karyotype for '{}' is not available.".format(specie.replace("_", " "))
+                data= "Error: karyotype for '{}' is not available.".format(specie.replace("_", " "))
                 photo = "https://i.imgur.com/poj7xfa.jpg"
 
             with open("results.html", "r") as file:
@@ -254,7 +249,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 photo = "https://i.imgur.com/Fhayqk0.jpg"
 
             except KeyError:
-                header = "Sorry, the gene '{}' was not found for Homo Sapiens specie.".format(gene_input)
+                header = "Error: '{}' is not a valid chromosome for Homo Sapiens specie.".format(gene_input)
                 data = ""
                 photo = "https://i.imgur.com/aKaXdU6.jpg"
 
@@ -278,7 +273,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 photo = "https://i.imgur.com/Fhayqk0.jpg"
 
             except KeyError:
-                header = "Sorry, the gene '{}' was not found for Homo Sapiens specie.".format(gene_input)
+                header = "Error: '{}' is not a valid chromosome for Homo Sapiens specie.".format(gene_input)
                 data = ""
                 photo = "https://i.imgur.com/poj7xfa.jpg"
 
@@ -304,12 +299,64 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 photo = "https://i.imgur.com/Fhayqk0.jpg"
 
             except KeyError:
-                header = "Sorry, the gene '{}' was not found for Homo Sapiens specie.".format(gene_input)
+                header = "Error: '{}' is not a valid chromosome for Homo Sapiens specie.".format(gene_input)
                 data = ""
                 photo = "https://i.imgur.com/aKaXdU6.jpg"
 
             with open("results.html", "r") as file:
                 content = file.read().replace("OPERATION", "GENE OPERATIONS").replace("IMAGE", photo).replace("HEADER", header).replace("DATA", data).replace("COLOURCARD", "#EC7789")
+                file.close()
+
+        elif "geneList" in path:
+            chromo_input = path[path.find("chromo=") + 7:path.find("&")]
+            start = path[path.find("start=") + 6:path.find("&end")]
+            end = path[path.find("end=") + 4:]
+
+            try:
+                chromo_data = get_json("/overlap/region/human/{}:{}-{}?content-type=application/json;feature=gene".format(chromo_input, start, end))
+
+                try:
+                    if int(start) >= int(end):
+                        header = "Error: the starting point '{}' can not be bigger than the ending point '{}'.".format(start, end)
+                        data = ""
+                        photo = "https://i.imgur.com/aKaXdU6.jpg"
+
+                    else:
+                        genes_list = list()
+
+                        for i in range(len(chromo_data)):
+                            genes_list.append("<li style=\"font-family:helvetica;font-size:90%;word-break:break-all\">{}</li>".format(chromo_data[i]['external_name']))
+
+                        genes_str = "<ol>{}</ol>".format(str(genes_list).strip("[]").replace("'", "").replace(",", ""))
+
+                        if len(genes_list) == 0:
+                            header = "No genes were found for '{}-{}' interval.".format(start, end)
+                            data = ""
+                            photo = "https://i.imgur.com/Fhayqk0.jpg"
+
+                        else:
+                            header = "{} gene(s) were found in chromosome '{}' from {} to {} position:".format(len(genes_list), chromo_input.upper(), start, end)
+                            data = "{}".format(genes_str)
+                            photo = "https://i.imgur.com/Fhayqk0.jpg"
+
+                except ValueError:
+                    header = "Error: Invalid start or end parameter."
+                    data = ""
+                    photo = "https://i.imgur.com/aKaXdU6.jpg"
+
+            except KeyError:
+                if "5000000" in chromo_data["error"]:
+                    header = "Error: {} is greater than the maximum allowed length interval of 5000000. Please, request smaller regions of sequence.".format(int(end)-int(start))
+                    data = ""
+                    photo = "https://i.imgur.com/aKaXdU6.jpg"
+
+                else:
+                    header = "Error: '{}' is not a valid chromosome for Homo Sapiens specie.".format(chromo_input)
+                    data = ""
+                    photo = "https://i.imgur.com/aKaXdU6.jpg"
+
+            with open("results.html", "r") as file:
+                content = file.read().replace("OPERATION", "GENE LIST").replace("IMAGE", photo).replace("HEADER", header).replace("DATA", data).replace("COLOURCARD", "#EC7789")
                 file.close()
 
         else:
