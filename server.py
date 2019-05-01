@@ -270,7 +270,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                 header = "Information for gene '{}' is: ".format(gene_input)
                 data = "<br>Gene ID: {}</br><br>Start: {}</br><br>End: {}</br><br>Lenght: {}</br><br>Chromosome where it belongs: {}</br>".format(gene_id, gene_start, gene_end, lenght, gen_chromo)
-                photo = "https://i.imgur.com/Fhayqk0.jpg"
+                photo = "https://i.imgur.com/IITsk3C.jpg"
 
             except KeyError:
                 header = "Error: '{}' is not a valid chromosome for Homo Sapiens specie.".format(gene_input)
@@ -319,7 +319,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     if int(start) >= int(end):
                         header = "Error: the starting point '{}' can not be bigger than the ending point '{}'.".format(start, end)
                         data = ""
-                        photo = "https://i.imgur.com/aKaXdU6.jpg"
+                        photo = "https://i.imgur.com/poj7xfa.jpg"
 
                     else:
                         genes_list = list()
@@ -332,12 +332,12 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         if len(genes_list) == 0:
                             header = "No genes were found for '{}-{}' interval.".format(start, end)
                             data = ""
-                            photo = "https://i.imgur.com/Fhayqk0.jpg"
+                            photo = "https://i.imgur.com/IITsk3C.jpg"
 
                         else:
                             header = "{} gene(s) were found in chromosome '{}' from {} to {} position:".format(len(genes_list), chromo_input.upper(), start, end)
                             data = "{}".format(genes_str)
-                            photo = "https://i.imgur.com/Fhayqk0.jpg"
+                            photo = "https://i.imgur.com/IITsk3C.jpg"
 
                 except ValueError:
                     header = "Error: Invalid start or end parameter."
@@ -348,7 +348,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 if "5000000" in chromo_data["error"]:
                     header = "Error: {} is greater than the maximum allowed length interval of 5000000. Please, request smaller regions of sequence.".format(int(end)-int(start))
                     data = ""
-                    photo = "https://i.imgur.com/aKaXdU6.jpg"
+                    photo = "https://i.imgur.com/poj7xfa.jpg"
 
                 else:
                     header = "Error: '{}' is not a valid chromosome for Homo Sapiens specie.".format(chromo_input)
