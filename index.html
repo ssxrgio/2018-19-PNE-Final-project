@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ensembl Data Retriever</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ensembl Data Retriever</title>
+</head>
 <style>
-* {
-  box-sizing: border-box;
-}
+* {box-sizing: border-box}
 
 html {
   background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
@@ -16,143 +15,153 @@ html {
   background-size: cover;
 }
 
+input[type=submit] {
+  font-weight: bold;
+  padding: 7px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 12px;
+  border: none;
+  cursor: pointer;
+}
+
+input[type=search] {
+  padding: 6px;
+  border: none;
+  font-size: 14px;
+}
+
 body, html {
+  margin: 30px;
   font-family: Helvetica;
 }
 
-.column {
+.tablink {
+  font-family: Courier;
+  font-weight:bold;
+  background-color: #d6d6d6;
+  color: black;
   float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 12px 16px;
+  font-size: 17px;
   width: 25%;
-  padding: 0 10px;
 }
 
-.row {margin: 0 -5px;}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
+.tablink:hover {
+  background-color: #999;
 }
 
-@media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-    display: block;
-    margin-bottom: 20px;
-  }
+.tabcontent {
+  color: black;
+  display: none;
+  padding: 80px 20px;
 }
 
-.card1:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-.card1{
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  padding: 16px;
-  text-align: center;
-  background-color: #6da4f9;
-}
-.card3{
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  padding: 16px;
-  text-align: center;
-  background-color: #ECE577;
-}
-.card2{
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  padding: 16px;
-  text-align: center;
-  background-color: #B7EC77;
-}
-.card4{
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  padding: 16px;
-  text-align: center;
-  background-color: #EC7789;
-}
+p {
+    font-family: Helvetica;
+    }
 
 h3 {
-  font-family: courier;
+  font-family: Courier;
   }
 
+#list {background-color: #6da4f9;}
+#karyo {background-color: #B7EC77;}
+#chromo {background-color: #ECE577;}
+#human {background-color: #EC7789;}
+
 </style>
-</head>
 <body>
+<h1 style="color:white;font-family:courier">ENSEMBL DATA RETRIEVER</h1>
+<p style="color:white;font-size:110%">Retrieve data from the Ensembl web database by performing the available operations below.</p>
+<button class="tablink" onclick="openPage('list', this, '#6da4f9')" id="defaultOpen">List of Species</button>
+<button class="tablink" onclick="openPage('karyo', this, '#B7EC77')">Karyotype</button>
+<button class="tablink" onclick="openPage('chromo', this, '#ECE577')">Chromosome Lenght</button>
+<button class="tablink" onclick="openPage('human', this, '#EC7789')">Human Gene Database.</button>
 
-<p style="color:white;font-size:250%;text-align:center;font-family:courier">ENSEMBL DATA RETRIEVER</p>
-<p style="color:white;font-size:100%;text-align:center;">Retrieve data from the Ensembl web database by performing the available operations below.</p>
-</br>
-<div class="row">
-  <div class="column">
-    <div class="card1">
-      <h3>List of species</h3>
-      <p>Generates a list with the species available in the ENSEMBL database.</p>
-      <p>If an specific number of species wants to be retrieved, write that number below.</p>
-      <p>If not, ignore the text box below and just click on 'Generate list of species'.</p>
-      <p>
-          <form action="listSpecies" method="get">
-            <br><input type="search" name="limit" size="30" placeholder="Type the number of species..."/></br>
-            <br><input type="submit" value="Generate list of species"/></br>
-          </form>
-      </p>
-    </div>
-  </div>
+<div id="list" class="tabcontent">
+        <h3>Generates a list with the species available in the ENSEMBL database.</h3>
+        <p>If an specific number of species wants to be retrieved, write that number below. If not, ignore the text box below and just click on 'Generate list of species'.</p>
+        <br>
+        <form action="listSpecies" method="get">
+            <br><input type="search" name="limit" size="60" placeholder="Type the number of species..."/>
+            <input type="submit" value="Generate list of species"/>
+        </form>
+</div>
 
-  <div class="column">
-    <div class="card2">
+<div id="karyo" class="tabcontent">
       <h3>Karyotype</h3>
-      <p>Returns information about the species <acronym title="Number and visual appearance of the chromosomes in the cell nuclei of an organism or species">karyotype.</acronym></p><br>
-        <form action="karyotype" method="get">
-            <br><input required type="search" name="specie" size="30" placeholder="Type the specie's karyotype..."/></br>
-            <br><input type="submit" value="Get karyotype"/></br>
-            </br>
-          </form>
-    </div>
-  </div>
+      <p>Returns information about the species <acronym title="Number and visual appearance of the chromosomes in the cell nuclei of an organism or species">karyotype.</acronym></p>
+      <br>
+      <form action="karyotype" method="get">
+          <input required type="search" name="specie" size="30" placeholder="Type the specie's karyotype..."/>
+          <input type="submit" value="Get karyotype"/>
+      </form>
+</div>
 
-  <div class="column">
-    <div class="card3">
+<div id="chromo" class="tabcontent">
       <h3>Chromosome lenght</h3>
       <p>Returns the length of the chromosome of the given specie.</p>
-      <p>
-        <form action="chromosomeLength" method="get">
-            <br><input required type="search" name="specie" size="30" placeholder="Type the specie..."/></br>
-            <br><input required type="search" name="chromo" size="30" placeholder="Type the chromosome number..."/></br>
-            <br><input type="submit" value="Get lenght"/></br>
-          </form>
-      </p>
-    </div>
-  </div>
+      <br>
+      <form action="chromosomeLength" method="get">
+           <input required type="search" name="specie" size="40" placeholder="Type the specie..."/>
+           <input required type="search" name="chromo" size="30" placeholder="Type the chromosome number..."/>
+           <input type="submit" value="Get lenght"/>
+      </form>
 
-  <div class="column">
-    <div class="card4">
-      <h3>Human gene database.</h3>
-        <h4>Gene</h4>
+</div>
+
+<div id="human" class="tabcontent">
+        <h3>Gene Sequence</h3>
         <p>Returns the sequence of a given human gene.</p>
           <form action="geneSeq" method="get">
-            <br><input required type="search" name="gene" size="30" placeholder="Type the gene..."/></br>
-            <br><input type="submit" value="Get Gene Sequence"/></br>
+            <input required type="search" name="gene" size="30" placeholder="Type the gene..."/>
+            <input type="submit" value="Get Gene Sequence"/>
           </form>
-      <h4>Gene info</h4>
+      <h3>Gene Information</h3>
         <p>Returns information about a human gene: start, end, Length, id and Chromosome.</p>
           <form action="geneInfo" method="get">
-            <br><input required type="search" name="gene" size="30" placeholder="Type the gene..."/></br>
-            <br><input type="submit" value="Get Gene Information"/></br>
+            <input required type="search" name="gene" size="30" placeholder="Type the gene..."/>
+            <input type="submit" value="Get Gene Information"/>
           </form>
-      <h4>Gene calculations</h4>
+      <h3>Gene calculations</h3>
         <p>Performs some calculations on the given human gene and returns the total length and the percentage of all its bases.</p>
           <form action="geneCalc" method="get">
-            <br><input required type="search" name="gene" size="30" placeholder="Type the gene..."/></br>
-            <br><input type="submit" value="Get Gene Operations"/></br>
+            <input required type="search" name="gene" size="30" placeholder="Type the gene..."/>
+            <input type="submit" value="Get Gene Operations"/>
           </form>
-
-    </div>
-  </div>
+          <br>
+      <h3>Gene List</h3>
+        <p>Return the names of the genes located in the chromosome "chromo" from the start to end positions.</p>
+          <form action="geneCalc" method="get">
+            <input required type="search" name="chromo" size="30" placeholder="Type the chromosome..."/>
+            <input required type="search" name="start" size="30" placeholder="Type the start..."/>
+            <input required type="search" name="end" size="30" placeholder="Type the end..."/>
+            <input type="submit" value="Get Chromosome List"/>
+          </form>
 </div>
+
+<script>
+function openPage(pageName,elmnt,color) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+  document.getElementById(pageName).style.display = "block";
+  elmnt.style.backgroundColor = color;
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
 
 </body>
 </html>

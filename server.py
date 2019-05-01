@@ -3,6 +3,7 @@ import http.server
 import termcolor
 import json
 from Seq import Seq
+import mimetypes
 
 PORT = 8000
 HOSTNAME = "rest.ensembl.org"
@@ -43,6 +44,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         if path == "/":
             with open("index.html", "r") as f:
                 content = f.read()
+
 
         elif "listSpecies" in path:
             json_species = list()
@@ -96,16 +98,24 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         data = ""
                         photo = "https://i.imgur.com/aKaXdU6.jpg"
 
-                data = str(data).strip("[]").replace("'", "")
+            else:
+                header_inf = "List of species: "
+                photo = "https://i.imgur.com/RMjXpq5.jpg"
+                data = list()
 
-                print("List of species from the .json file: ", species_list)
-                print("Lenght of the list: ", len(species_list))
-                print("Informative text to the user sent ro the server: ", header_inf)
-                print("Data sent to the server: ", data)
+                for i in range(len(species_list)):
+                    data.append(str(i + 1) + ". " + str(species_list[i]))
 
-                with open("listSpecies.html", "r") as file:
-                    content = file.read().replace("SPECIESIMAGE", photo).replace("SPECIESHEADER", header_inf).replace("SPECIESDATA", data)
-                    file.close()
+            data = str(data).strip("[]").replace("'", "")
+
+            print("List of species from the .json file: ", species_list)
+            print("Lenght of the list: ", len(species_list))
+            print("Informative text to the user sent ro the server: ", header_inf)
+            print("Data sent to the server: ", data)
+
+            with open("results.html", "r") as file:
+                content = file.read().replace("OPERATION", "LIST OF SPECIES").replace("IMAGE", photo).replace("HEADER", header_inf).replace("DATA", data).replace("COLOURCARD", "#6da4f9")
+                file.close()
 
         elif "karyotype" in path:
             specie_input = path[path.find("=") + 1:].lower().replace("+", "_").replace("/", "").lower()
@@ -143,8 +153,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             print("Data sent to the server: ", data)
             print()
 
-            with open("karyotype.html", "r") as file:
-                content = file.read().replace("KARYOIMAGE", photo).replace("KARYOHEADER", str("Input specie: {}.".format(specie))).replace("KARYODATA", data)
+            with open("results.html", "r") as file:
+                content = file.read().replace("OPERATION", "KARYOTYPE").replace("IMAGE", photo).replace("HEADER", str("Input specie: {}.".format(specie))).replace("DATA", data).replace("COLOURCARD", "#B7EC77")
                 file.close()
 
         elif "chromosomeLength" in path:
@@ -225,8 +235,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 data= "Karyotype for '{}' is not available.".format(specie.replace("_", " "))
                 photo = "https://i.imgur.com/poj7xfa.jpg"
 
-            with open("chromlength.html", "r") as file:
-                content = file.read().replace("LENIMAGE", photo).replace("LENHEADER", str(data))
+            with open("results.html", "r") as file:
+                content = file.read().replace("OPERATION", "CHROMOSOME LENGHT").replace("IMAGE", photo).replace("HEADER", str(data)).replace("DATA", "").replace("COLOURCARD", "#ECE577")
                 file.close()
 
         elif "geneSeq" in path:
@@ -244,12 +254,12 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 photo = "https://i.imgur.com/Fhayqk0.jpg"
 
             except KeyError:
-                header = ""
-                data = "Sorry, the gene '{}' was not found for Homo Sapiens specie.".format(gene_input)
+                header = "Sorry, the gene '{}' was not found for Homo Sapiens specie.".format(gene_input)
+                data = ""
                 photo = "https://i.imgur.com/aKaXdU6.jpg"
 
-            with open("gene.html", "r") as file:
-                content = file.read().replace("GENEOPERAT", "GENE SEQUENCE").replace("SEQIMAGE", photo).replace("SEQHEADER", header).replace("SEQDATA", data)
+            with open("results.html", "r") as file:
+                content = file.read().replace("OPERATION", "GENE SEQUENCE").replace("IMAGE", photo).replace("HEADER", header).replace("DATA", data).replace("COLOURCARD", "#EC7789")
                 file.close()
 
         elif "geneInfo" in path:
@@ -268,12 +278,12 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 photo = "https://i.imgur.com/Fhayqk0.jpg"
 
             except KeyError:
-                header = ""
-                data = "Sorry, the gene '{}' was not found for Homo Sapiens specie.".format(gene_input)
+                header = "Sorry, the gene '{}' was not found for Homo Sapiens specie.".format(gene_input)
+                data = ""
                 photo = "https://i.imgur.com/poj7xfa.jpg"
 
-            with open("gene.html", "r") as file:
-                content = file.read().replace("GENEOPERAT", "GENE INFORMATION").replace("SEQIMAGE", photo).replace("SEQHEADER", header).replace("SEQDATA", data)
+            with open("results.html", "r") as file:
+                content = file.read().replace("OPERATION", "GENE INFORMATION").replace("IMAGE", photo).replace("HEADER", header).replace("DATA", data).replace("COLOURCARD", "#EC7789")
                 file.close()
 
         elif "geneCalc" in path:
@@ -289,17 +299,17 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 percG = sequence.perc("G")
                 percT = sequence.perc("T")
 
-                header = "Information for gene '{}' is: ".format(gene_input)
+                header = "Calculations for gene '{}' is: ".format(gene_input)
                 data = "<br>Lenght: {}</br><br>Percentage of Adenine: {}</br><br>Percentage of Thymine: {}</br><br>Percentage of Cytosine: {}</br><br>Percentage of Guanine: {}</br>".format(lenght, percA, percT, percC, percG)
                 photo = "https://i.imgur.com/Fhayqk0.jpg"
 
             except KeyError:
-                header = ""
-                data = "Sorry, the gene '{}' was not found for Homo Sapiens specie.".format(gene_input)
+                header = "Sorry, the gene '{}' was not found for Homo Sapiens specie.".format(gene_input)
+                data = ""
                 photo = "https://i.imgur.com/aKaXdU6.jpg"
 
-            with open("gene.html", "r") as file:
-                content = file.read().replace("GENEOPERAT", "GENE OPERATIONS").replace("SEQIMAGE", photo).replace("SEQHEADER", header).replace("SEQDATA", data)
+            with open("results.html", "r") as file:
+                content = file.read().replace("OPERATION", "GENE OPERATIONS").replace("IMAGE", photo).replace("HEADER", header).replace("DATA", data).replace("COLOURCARD", "#EC7789")
                 file.close()
 
         else:
