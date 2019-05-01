@@ -1,0 +1,786 @@
+------------------------------------- localhost:8000/ ------------------------------------------------------------------
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Ensembl Data Retriever</title>
+        </head>
+        <style>
+        * {box-sizing: border-box}
+
+        html {
+          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+        input[type=submit] {
+          font-weight: bold;
+          padding: 7px;
+          margin-right: 16px;
+          background: #ddd;
+          font-size: 12px;
+          border: none;
+          cursor: pointer;
+        }
+
+        input[type=search] {
+          padding: 6px;
+          border: none;
+          font-size: 14px;
+        }
+
+        body, html {
+          margin: 30px;
+          font-family: Helvetica;
+        }
+
+        .tablink {
+          font-family: Courier;
+          font-weight:bold;
+          background-color: #d6d6d6;
+          color: black;
+          float: left;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          padding: 12px 16px;
+          font-size: 17px;
+          width: 25%;
+        }
+
+        .tablink:hover {
+          background-color: #999;
+        }
+
+        .tabcontent {
+          color: black;
+          display: none;
+          padding: 80px 20px;
+        }
+
+        p {
+            font-family: Helvetica;
+            }
+
+        h3 {
+          font-family: Courier;
+          }
+
+        #list {background-color: #6da4f9;}
+        #karyo {background-color: #B7EC77;}
+        #chromo {background-color: #ECE577;}
+        #human {background-color: #EC7789;}
+
+        </style>
+        <body>
+        <h1 style="color:white;font-family:courier">ENSEMBL DATA RETRIEVER</h1>
+        <p style="color:white;font-size:110%">Retrieve data from the Ensembl web database by performing the available operations below.</p>
+        <button class="tablink" onclick="openPage('list', this, '#6da4f9')" id="defaultOpen">List of Species</button>
+        <button class="tablink" onclick="openPage('karyo', this, '#B7EC77')">Karyotype</button>
+        <button class="tablink" onclick="openPage('chromo', this, '#ECE577')">Chromosome Lenght</button>
+        <button class="tablink" onclick="openPage('human', this, '#EC7789')">Human Gene Database.</button>
+
+        <div id="list" class="tabcontent">
+                <h3>Generates a list with the species available in the ENSEMBL database.</h3>
+                <p>If an specific number of species wants to be retrieved, write that number below. If not, ignore the text box below and just click on 'Generate list of species'.</p>
+                <br>
+                <form action="listSpecies" method="get">
+                    <br><input type="search" name="limit" size="60" placeholder="Type the number of species..."/>
+                    <input type="submit" value="Generate list of species"/>
+                </form>
+        </div>
+
+        <div id="karyo" class="tabcontent">
+              <h3>Karyotype</h3>
+              <p>Returns information about the species <acronym title="Number and visual appearance of the chromosomes in the cell nuclei of an organism or species">karyotype.</acronym></p>
+              <br>
+              <form action="karyotype" method="get">
+                  <input required type="search" name="specie" size="30" placeholder="Type the specie's karyotype..."/>
+                  <input type="submit" value="Get karyotype"/>
+              </form>
+        </div>
+
+        <div id="chromo" class="tabcontent">
+              <h3>Chromosome lenght</h3>
+              <p>Returns the length of the chromosome of the given specie.</p>
+              <br>
+              <form action="chromosomeLength" method="get">
+                   <input required type="search" name="specie" size="40" placeholder="Type the specie..."/>
+                   <input required type="search" name="chromo" size="30" placeholder="Type the chromosome number..."/>
+                   <input type="submit" value="Get lenght"/>
+              </form>
+
+        </div>
+
+        <div id="human" class="tabcontent">
+                <h3>Gene Sequence</h3>
+                <p>Returns the sequence of a given human gene.</p>
+                  <form action="geneSeq" method="get">
+                    <input required type="search" name="gene" size="30" placeholder="Type the gene..."/>
+                    <input type="submit" value="Get Gene Sequence"/>
+                  </form>
+              <h3>Gene Information</h3>
+                <p>Returns information about a human gene: start, end, Length, id and Chromosome.</p>
+                  <form action="geneInfo" method="get">
+                    <input required type="search" name="gene" size="30" placeholder="Type the gene..."/>
+                    <input type="submit" value="Get Gene Information"/>
+                  </form>
+              <h3>Gene calculations</h3>
+                <p>Performs some calculations on the given human gene and returns the total length and the percentage of all its bases.</p>
+                  <form action="geneCalc" method="get">
+                    <input required type="search" name="gene" size="30" placeholder="Type the gene..."/>
+                    <input type="submit" value="Get Gene Operations"/>
+                  </form>
+                  <br>
+              <h3>Gene List</h3>
+                <p>Return the names of the genes located in the chromosome "chromo" from the start to end positions.</p>
+                  <form action="geneCalc" method="get">
+                    <input required type="search" name="chromo" size="30" placeholder="Type the chromosome..."/>
+                    <input required type="search" name="start" size="30" placeholder="Type the start..."/>
+                    <input required type="search" name="end" size="30" placeholder="Type the end..."/>
+                    <input type="submit" value="Get Chromosome List"/>
+                  </form>
+        </div>
+
+        <script>
+        function openPage(pageName,elmnt,color) {
+          var i, tabcontent, tablinks;
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+          tablinks = document.getElementsByClassName("tablink");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+          }
+          document.getElementById(pageName).style.display = "block";
+          elmnt.style.backgroundColor = color;
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+        </script>
+
+        </body>
+        </html>
+
+------------------------------------- /listSpecies ----------------------------------------------------------------------
+-> No Limit:
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+        </head>
+        <style>
+        html {
+          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+        .card {
+          width: 80%;
+          border-radius: 5px;
+          background-color: #6da4f9;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        img {
+          border-radius: 5px 5px 0 0;
+        }
+
+        .container {
+          position: relative;
+          text-align:left
+          color:white;
+          padding: 8px;
+          margin-left: 20px;
+          margin-right:20px;
+          text-color:black;
+        }
+
+        </style>
+        <body>
+        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">LIST OF SPECIES</h1>
+        <div class="card">
+          <img src= "https://i.imgur.com/RMjXpq5.jpg" style="width:100%">
+          <div class="container">
+            <h3 style="font-family:courier;font-weight:bold">List of species: <b></b></h3>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all">1. Flycatcher, 2. American beaver, 3. C.intestinalis, 4. Central bearded dragon, 5. Golden-collared manakin, 6. Steppe mouse, 7. White-throated sparrow, 8. Kangaroo rat, 9. Gibbon, 10. Mouse FVB/NJ, 11. Mummichog, 12. Algerian mouse, 13. Guppy, 14. Clown anemonefish, 15. Mongolian gerbil, 16. Saccharomyces cerevisiae, 17. Paramormyrops kingsleyae, 18. Lesser Egyptian jerboa, 19. Mouse C3H/HeJ, 20. Orange clownfish, 21. Hedgehog, 22. Koala, 23. Spiny chromis, 24. Blue-crowned manakin, 25. American mink, 26. Guinea Pig, 27. Horse, 28. Armadillo, "29. Burtons mouthbrooder", 30. Crab-eating macaque, 31. Japanese quail, 32. Budgerigar, 33. Naked mole-rat male, "34. Mas night monkey", 35. Polar bear, 36. Greater bamboo lemur, 37. Sailfin molly, 38. Mangrove rivulus, 39. Great spotted kiwi, 40. Argentine black and white tegu, "41. Coquerels sifaka", 42. Donkey, 43. Brazilian guinea pig, 44. Duck, 45. Zebrafish, 46. Northern American deer mouse, 47. Common canary, 48. Golden Hamster, 49. Channel catfish, 50. Western mosquitofish, 51. Swamp eel, 52. Bengalese finch, 53. Cat, 54. Platypus, 55. Little spotted kiwi, 56. Tuatara, 57. Shortfin molly, 58. Drosophila melanogaster, 59. Tasmanian devil, 60. Zebra mbuna, 61. Mouse WSB/EiJ, 62. Ballan wrasse, 63. Great Tit, 64. Helmeted guineafowl, 65. Lamprey, 66. Spotted gar, 67. Monterrey platyfish, 68. Upper Galilee mountains blind mole rat, 69. Pika, 70. Sloth, 71. Chimpanzee, 72. Bolivian squirrel monkey, 73. Ferret, "74. Agassizs desert tortoise", 75. Arctic ground squirrel, 76. Mouse PWK/PhJ, 77. Japanese medaka HdrR, 78. Megabat, 79. Abingdon island giant tortoise, 80. Black snub-nosed monkey, 81. Mexican tetra, 82. Lyretail cichlid, 83. Mouse CAST/EiJ, 84. Lesser hedgehog tenrec, 85. Zebra Finch, 86. Elephant, 87. Capuchin, 88. Anole lizard, 89. Panda, 90. Daurian ground squirrel, 91. Pig, 92. Mouse, 93. Mouse NZO/HlLtJ, 94. Spoon-billed sandpiper, 95. Wallaby, 96. Tiger tail seahorse, 97. Cow, 98. American bison, 99. Mouse A/J, 100. Japanese medaka HSOK, 101. Bonobo, 102. Gorilla, 103. Emu, 104. Okarito brown kiwi, 105. Dog, 106. Chilean tinamou, 107. Sheepshead minnow, 108. Chinese hamster PICR, 109. Alpaca, 110. Blue tit, 111. Zig-zag eel, 112. Pig-tailed macaque, 113. Ryukyu mouse, 114. Angola colobus, 115. Sheep, 116. Drill, 117. Eastern happy, 118. Japanese medaka HNI, 119. Cod, 120. Hagfish, 121. Tarsier, 122. Indian medaka, 123. Sooty mangabey, 124. Stickleback, 125. Amazon molly, 126. Mouse DBA/2J, 127. Mouse C57BL/6NJ, 128. Dark-eyed junco, 129. Chinese hamster CHOK1GS, 130. Xenopus, 131. Dingo, 132. Dolphin, 133. Ugandan red Colobus, 134. Red-bellied piranha, 135. Mouse Lemur, 136. Midas cichlid, 137. Caenorhabditis elegans, 138. Tetraodon, 139. Makobe Island cichlid, 140. Platyfish, 141. Shrew mouse, 142. Chinese hamster CriGri, 143. Long-tailed chinchilla, 144. Hyrax, 145. Mouse BALB/cJ, 146. Naked mole-rat female, 147. Ruff, 148. Vervet-AGM, 149. Goat, 150. Bushbaby, 151. Coelacanth, 152. Pink-footed goose, 153. Macaque, 154. Marmoset, 155. Turbot, 156. Periophthalmus magnuspinnatus, 157. Chinese softshell turtle, 158. Leopard, 159. Degu, 160. Climbing perch, 161. Tongue sole, 162. Mainland tiger snake, 163. Mouse CBA/J, 164. Tilapia, 165. Gelada, 166. Prairie vole, 167. Fugu, 168. Australian saltwater crocodile, 169. Rabbit, 170. Wild yak, 171. Red fox, 172. Bicolor damselfish, 173. Shrew, 174. Mouse AKR/J, 175. Greater amberjack, 176. Chicken, 177. Mouse NOD/ShiLtJ, 178. Painted turtle, 179. Olive baboon, 180. Alpine marmot, 181. Orangutan, 182. Asian bonytongue, 183. Squirrel, 184. C.savignyi, 185. Golden snub-nosed monkey, 186. Northern pike, 187. Turkey, 188. Mouse LP/J, 189. Damara mole rat, 190. Tiger, 191. Yellowtail amberjack, 192. Ocean sunfish, 193. American black bear, 194. Tree Shrew, 195. Opossum, 196. Rat, 197. Mouse 129S1/SvImJ, 198. Human, 199. Microbat</p>
+          </div>
+        </div>
+        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+        </body>
+        </html>
+
+-> limit is a valid number: 34:
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+        </head>
+        <style>
+        html {
+          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+        .card {
+          width: 80%;
+          border-radius: 5px;
+          background-color: #6da4f9;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        img {
+          border-radius: 5px 5px 0 0;
+        }
+
+        .container {
+          position: relative;
+          text-align:left
+          color:white;
+          padding: 8px;
+          margin-left: 20px;
+          margin-right:20px;
+          text-color:black;
+        }
+
+        </style>
+        <body>
+        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">LIST OF SPECIES</h1>
+        <div class="card">
+          <img src= "https://i.imgur.com/wHk5lIk.jpg" style="width:100%">
+          <div class="container">
+            <h3 style="font-family:courier;font-weight:bold">Showing 34 species.<b></b></h3>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all">1. Golden Hamster, 2. Human, 3. Opossum, 4. Orange clownfish, 5. Cod, 6. Hyrax, 7. Armadillo, 8. Ocean sunfish, 9. Mouse C57BL/6NJ, 10. Polar bear, 11. Platypus, 12. Megabat, 13. Turbot, 14. Lesser hedgehog tenrec, "15. Mas night monkey", 16. Alpine marmot, 17. Arctic ground squirrel, 18. Platyfish, 19. Japanese medaka HSOK, 20. Ballan wrasse, 21. Northern pike, 22. Lamprey, 23. Climbing perch, 24. Chinese hamster CriGri, 25. Zebra mbuna, 26. Chinese hamster CHOK1GS, 27. Mongolian gerbil, 28. American beaver, 29. Little spotted kiwi, 30. Lyretail cichlid, 31. Monterrey platyfish, 32. Mouse WSB/EiJ, 33. Blue tit, 34. Bushbaby</p>
+          </div>
+        </div>
+        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+        </body>
+        </html>
+
+-> limit is a number greater than 199: 200:
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+        </head>
+        <style>
+        html {
+          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+        .card {
+          width: 80%;
+          border-radius: 5px;
+          background-color: #6da4f9;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        img {
+          border-radius: 5px 5px 0 0;
+        }
+
+        .container {
+          position: relative;
+          text-align:left
+          color:white;
+          padding: 8px;
+          margin-left: 20px;
+          margin-right:20px;
+          text-color:black;
+        }
+
+        </style>
+        <body>
+        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">LIST OF SPECIES</h1>
+        <div class="card">
+          <img src= "https://i.imgur.com/poj7xfa.jpg" style="width:100%">
+          <div class="container">
+            <h3 style="font-family:courier;font-weight:bold">Sorry, there are not that many species in the database<b></b></h3>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all">Please, choose a number from 1 to 199.</p>
+          </div>
+        </div>
+        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+        </body>
+        </html>
+
+-> limit is not a number: actggf:
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+        </head>
+        <style>
+        html {
+          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+        .card {
+          width: 80%;
+          border-radius: 5px;
+          background-color: #6da4f9;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        img {
+          border-radius: 5px 5px 0 0;
+        }
+
+        .container {
+          position: relative;
+          text-align:left
+          color:white;
+          padding: 8px;
+          margin-left: 20px;
+          margin-right:20px;
+          text-color:black;
+        }
+
+        </style>
+        <body>
+        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">LIST OF SPECIES</h1>
+        <div class="card">
+          <img src= "https://i.imgur.com/aKaXdU6.jpg" style="width:100%">
+          <div class="container">
+            <h3 style="font-family:courier;font-weight:bold">Invalid limit parameter. Please, try again with a number from 1 to 199.<b></b></h3>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
+          </div>
+        </div>
+        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+        </body>
+        </html>
+
+
+------------------------------------- /karyotype ------------------------------------------------------------------------
+
+-> specie is in the database: human: [http://localhost:8000/karyotype?specie=human]
+            <!DOCTYPE html>
+            <html>
+            <head>
+              <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+            </head>
+            <style>
+            html {
+              background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+              -webkit-background-size: cover;
+              -moz-background-size: cover;
+              -o-background-size: cover;
+              background-size: cover;
+            }
+
+            .card {
+              width: 80%;
+              border-radius: 5px;
+              background-color: #B7EC77;
+              margin-left: auto;
+              margin-right: auto;
+            }
+
+            img {
+              border-radius: 5px 5px 0 0;
+            }
+
+            .container {
+              position: relative;
+              text-align:left
+              color:white;
+              padding: 8px;
+              margin-left: 20px;
+              margin-right:20px;
+              text-color:black;
+            }
+
+            </style>
+            <body>
+            <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">KARYOTYPE</h1>
+            <div class="card">
+              <img src= "https://i.imgur.com/ihzq1ZU.jpg" style="width:100%">
+              <div class="container">
+                <h3 style="font-family:courier;font-weight:bold">Input specie: human.<b></b></h3>
+                <p style="font-family:helvetica;font-size:90%;word-break:break-all">Showing karyotype: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, X, Y, MT</p>
+              </div>
+            </div>
+            <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+            </body>
+            </html>
+
+-> specie is in the database but without karyotype: guinea pig: [http://localhost:8000/karyotype?specie=guinea+pig]
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+        </head>
+        <style>
+        html {
+          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+        .card {
+          width: 80%;
+          border-radius: 5px;
+          background-color: #B7EC77;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        img {
+          border-radius: 5px 5px 0 0;
+        }
+
+        .container {
+          position: relative;
+          text-align:left
+          color:white;
+          padding: 8px;
+          margin-left: 20px;
+          margin-right:20px;
+          text-color:black;
+        }
+
+        </style>
+        <body>
+        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">KARYOTYPE</h1>
+        <div class="card">
+          <img src= "https://i.imgur.com/ihzq1ZU.jpg" style="width:100%">
+          <div class="container">
+            <h3 style="font-family:courier;font-weight:bold">Input specie: guinea pig.<b></b></h3>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all">Showing karyotype: Karyotype not available in the database.</p>
+          </div>
+        </div>
+        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+        </body>
+        </html>
+
+-> input specie is not a word: 55: [http://localhost:8000/karyotype?specie=55]
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+        </head>
+        <style>
+        html {
+          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+        .card {
+          width: 80%;
+          border-radius: 5px;
+          background-color: #B7EC77;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        img {
+          border-radius: 5px 5px 0 0;
+        }
+
+        .container {
+          position: relative;
+          text-align:left
+          color:white;
+          padding: 8px;
+          margin-left: 20px;
+          margin-right:20px;
+          text-color:black;
+        }
+
+        </style>
+        <body>
+        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">KARYOTYPE</h1>
+        <div class="card">
+          <img src= "https://i.imgur.com/aKaXdU6.jpg" style="width:100%">
+          <div class="container">
+            <h3 style="font-family:courier;font-weight:bold">Input specie: 55.<b></b></h3>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all">I'm sorry to tell you that '55' is not a specie. Try again.</p>
+          </div>
+        </div>
+        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+        </body>
+        </html>
+
+------------------------------------- /chromosomeLenght ----------------------------------------------------------------
+
+-> valid specie and chromosome: human and 12: [http://localhost:8000/chromosomeLength?specie=human&chromo=12]
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+        </head>
+        <style>
+        html {
+          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+        .card {
+          width: 80%;
+          border-radius: 5px;
+          background-color: #ECE577;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        img {
+          border-radius: 5px 5px 0 0;
+        }
+
+        .container {
+          position: relative;
+          text-align:left
+          color:white;
+          padding: 8px;
+          margin-left: 20px;
+          margin-right:20px;
+          text-color:black;
+        }
+
+        </style>
+        <body>
+        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">CHROMOSOME LENGHT</h1>
+        <div class="card">
+          <img src= "https://i.imgur.com/RuuZ4VG.jpg" style="width:100%">
+          <div class="container">
+            <h3 style="font-family:courier;font-weight:bold">Length of chromosome '12' of the specie 'human' is 133275309 bp.<b></b></h3>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
+          </div>
+        </div>
+        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+        </body>
+
+-> valid specie without karyotype: guinea pig and 12: [http://localhost:8000/chromosomeLength?specie=guinea+pig&chromo=12]
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+        </head>
+        <style>
+        html {
+          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+        .card {
+          width: 80%;
+          border-radius: 5px;
+          background-color: #ECE577;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        img {
+          border-radius: 5px 5px 0 0;
+        }
+
+        .container {
+          position: relative;
+          text-align:left
+          color:white;
+          padding: 8px;
+          margin-left: 20px;
+          margin-right:20px;
+          text-color:black;
+        }
+
+        </style>
+        <body>
+        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">CHROMOSOME LENGHT</h1>
+        <div class="card">
+          <img src= "https://i.imgur.com/poj7xfa.jpg" style="width:100%">
+          <div class="container">
+            <h3 style="font-family:courier;font-weight:bold">Chromosome not found. There are 0 chromosomes available. Check the 'Karyotype' page to know them<b></b></h3>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
+          </div>
+        </div>
+        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+        </body>
+        </html>
+
+invalid specie/specie not in database without considering the chromosome (it is not relevant): duck and 12: [http://localhost:8000/chromosomeLength?specie=duck&chromo=12]
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+        </head>
+        <style>
+        html {
+          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+        .card {
+          width: 80%;
+          border-radius: 5px;
+          background-color: #ECE577;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        img {
+          border-radius: 5px 5px 0 0;
+        }
+
+        .container {
+          position: relative;
+          text-align:left
+          color:white;
+          padding: 8px;
+          margin-left: 20px;
+          margin-right:20px;
+          text-color:black;
+        }
+
+        </style>
+        <body>
+        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">CHROMOSOME LENGHT</h1>
+        <div class="card">
+          <img src= "https://i.imgur.com/poj7xfa.jpg" style="width:100%">
+          <div class="container">
+            <h3 style="font-family:courier;font-weight:bold">Karyotype for 'duck' is not available.<b></b></h3>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
+          </div>
+        </div>
+        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+        </body>
+        </html>
+
+-> valid specie with inavlid chromosome (I): human and 123: [http://localhost:8000/chromosomeLength?specie=human&chromo=123]
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+        </head>
+        <style>
+        html {
+          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+        .card {
+          width: 80%;
+          border-radius: 5px;
+          background-color: #ECE577;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        img {
+          border-radius: 5px 5px 0 0;
+        }
+
+        .container {
+          position: relative;
+          text-align:left
+          color:white;
+          padding: 8px;
+          margin-left: 20px;
+          margin-right:20px;
+          text-color:black;
+        }
+
+        </style>
+        <body>
+        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">CHROMOSOME LENGHT</h1>
+        <div class="card">
+          <img src= "https://i.imgur.com/poj7xfa.jpg" style="width:100%">
+          <div class="container">
+            <h3 style="font-family:courier;font-weight:bold">Chromosome not found. There are 25 chromosomes available. Check the 'Karyotype' page to know them<b></b></h3>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
+          </div>
+        </div>
+        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+        </body>
+        </html>
+
+-> valid specie with inavlid chromosome (II): human and abc: [http://localhost:8000/chromosomeLength?specie=human&chromo=abc]
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+        </head>
+        <style>
+        html {
+          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+        .card {
+          width: 80%;
+          border-radius: 5px;
+          background-color: #ECE577;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        img {
+          border-radius: 5px 5px 0 0;
+        }
+
+        .container {
+          position: relative;
+          text-align:left
+          color:white;
+          padding: 8px;
+          margin-left: 20px;
+          margin-right:20px;
+          text-color:black;
+        }
+
+        </style>
+        <body>
+        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">CHROMOSOME LENGHT</h1>
+        <div class="card">
+          <img src= "https://i.imgur.com/aKaXdU6.jpg" style="width:100%">
+          <div class="container">
+            <h3 style="font-family:courier;font-weight:bold">I'm sorry to tell you that 'ABC' is not a valid input chromosome. Check the 'Karyotype' page to know them<b></b></h3>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
+          </div>
+        </div>
+        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+        </body>
+        </html>
