@@ -8,7 +8,7 @@
 * {box-sizing: border-box}
 
 html {
-  background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+  background: url(https://i.imgur.com/dULNVat.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -29,6 +29,7 @@ input[type=search] {
   padding: 6px;
   border: none;
   font-size: 14px;
+  margin-bottom: 4px;
 }
 
 body, html {
@@ -46,8 +47,9 @@ body, html {
   outline: none;
   cursor: pointer;
   padding: 12px 16px;
-  font-size: 17px;
+  font-size: 1.1em;
   width: 25%;
+  height: 60px;
 }
 
 .tablink:hover {
@@ -57,7 +59,7 @@ body, html {
 .tabcontent {
   color: black;
   display: none;
-  padding: 80px 20px;
+  padding: 70px 20px;
 }
 
 p {
@@ -93,8 +95,7 @@ h3 {
 </div>
 
 <div id="karyo" class="tabcontent">
-      <h3>Karyotype</h3>
-      <p>Returns information about the species <acronym title="Number and visual appearance of the chromosomes in the cell nuclei of an organism or species">karyotype.</acronym></p>
+      <h3>Returns information about the species <acronym title="Number and visual appearance of the chromosomes in the cell nuclei of an organism or species">karyotype.</acronym></h3>
       <br>
       <form action="karyotype" method="get">
           <input required type="search" name="specie" size="30" placeholder="Type the specie's karyotype..."/>
@@ -103,8 +104,7 @@ h3 {
 </div>
 
 <div id="chromo" class="tabcontent">
-      <h3>Chromosome lenght</h3>
-      <p>Returns the length of the chromosome of the given specie.</p>
+      <h3>Returns the length of the chromosome of the given specie.</h3>
       <br>
       <form action="chromosomeLength" method="get">
            <input required type="search" name="specie" size="40" placeholder="Type the specie..."/>
@@ -135,8 +135,8 @@ h3 {
           </form>
           <br>
       <h3>Gene List</h3>
-        <p>Return the names of the genes located in the chromosome "chromo" from the start to end positions.</p>
-          <form action="geneCalc" method="get">
+        <p>Return the names of the genes located in the introduced chromosome from the start to end positions.</p>
+          <form action="geneList" method="get">
             <input required type="search" name="chromo" size="30" placeholder="Type the chromosome..."/>
             <input required type="search" name="start" size="30" placeholder="Type the start..."/>
             <input required type="search" name="end" size="30" placeholder="Type the end..."/>
