@@ -3,7 +3,6 @@ import http.server
 import termcolor
 import json
 from Seq import Seq
-import mimetypes
 
 PORT = 8000
 HOSTNAME = "rest.ensembl.org"
@@ -53,9 +52,13 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 json_species.append(i)
 
             species_list = list()
+            name_species_list = list()
 
             for i in range(len(json_species)):
                 species_list.append(json_species[i]["display_name"])
+                name_species_list.append(json_species[i]["name"])
+
+
 
             if "limit" in path:
                 limit = path[path.find("=") + 1:]
@@ -66,7 +69,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     data = list()
 
                     for i in range(len(species_list)):
-                        data.append("<li style=\"font-family:helvetica;font-size:90%;word-break:break-all\">{}</li>".format(str(species_list[i])))
+                        data.append("<li style=\"font-family:helvetica;font-size:90%;word-break:break-all\"><p style=\"font-weight:bold\">{}.</p> Binomial name: {}</li>".format(str(species_list[i]), str(name_species_list[i]).capitalize().replace("_", " ")))
 
                     data = "<ol>{}</ol>".format(str(data).strip("[]").replace("'", "").replace(",", ""))
 
@@ -325,7 +328,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         genes_list = list()
 
                         for i in range(len(chromo_data)):
-                            genes_list.append("<li style=\"font-family:helvetica;font-size:90%;word-break:break-all\">{}</li>".format(chromo_data[i]['external_name']))
+                            genes_list.append("<li style=\"font-family:helvetica;font-size:90%;word-break:break-all\"><p style=\"font-weight:bold\">{}</p> ID: {}</li>".format(chromo_data[i]['external_name'], chromo_data[i]['gene_id']))
 
                         genes_str = "<ol>{}</ol>".format(str(genes_list).strip("[]").replace("'", "").replace(",", ""))
 
