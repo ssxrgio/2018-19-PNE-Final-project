@@ -126,11 +126,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             specie = specie_input.replace("_", " ")
             data = list()
 
-            if not specie.replace(" ", "").isalpha():
-                data = "Error: '{}' is not a specie. Try again.".format(specie)
-                photo = "https://i.imgur.com/aKaXdU6.jpg"
-
-            else:
+            try:
                 try:
                     karyotype = karyo["karyotype"]
 
@@ -150,6 +146,10 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 except KeyError:
                     data = "Error: specie '{}' is not available in the database.".format(specie.replace("_", " "))
                     photo = "https://i.imgur.com/poj7xfa.jpg"
+
+            except ValueError:
+                data = "Error: '{}' is not a specie. Try again.".format(specie)
+                photo = "https://i.imgur.com/aKaXdU6.jpg"
 
             with open("results.html", "r") as file:
                 content = file.read().replace("OPERATION", "KARYOTYPE").replace("IMAGE", photo).replace("HEADER", str("Input specie: {}.".format(specie))).replace("DATA", data).replace("COLOURCARD", "#B7EC77")
@@ -252,7 +252,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 photo = "https://i.imgur.com/Fhayqk0.jpg"
 
             except KeyError:
-                header = "Error: '{}' is not a valid chromosome for Homo Sapiens specie.".format(gene_input)
+                header = "Error: '{}' is not a valid gene for Homo Sapiens specie.".format(gene_input)
                 data = ""
                 photo = "https://i.imgur.com/aKaXdU6.jpg"
 
@@ -276,7 +276,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 photo = "https://i.imgur.com/IITsk3C.jpg"
 
             except KeyError:
-                header = "Error: '{}' is not a valid chromosome for Homo Sapiens specie.".format(gene_input)
+                header = "Error: '{}' is not a valid gene for Homo Sapiens specie.".format(gene_input)
                 data = ""
                 photo = "https://i.imgur.com/poj7xfa.jpg"
 
@@ -302,7 +302,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 photo = "https://i.imgur.com/Fhayqk0.jpg"
 
             except KeyError:
-                header = "Error: '{}' is not a valid chromosome for Homo Sapiens specie.".format(gene_input)
+                header = "Error: '{}' is not a valid gene for Homo Sapiens specie.".format(gene_input)
                 data = ""
                 photo = "https://i.imgur.com/aKaXdU6.jpg"
 
