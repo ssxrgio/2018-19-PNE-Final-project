@@ -93,7 +93,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             photo = "https://i.imgur.com/wHk5lIk.jpg"
 
                             for i in range(limit):
-                                data.append("<li style=\"font-family:helvetica;font-size:90%;word-break:break-all\">{}</li>".format(str(species_list[i])))
+                                data.append("<li style=\"font-family:helvetica;font-size:90%;word-break:break-all\"><p style=\"font-weight:bold\">{}.</p> Binomial name: {}</li>".format(str(species_list[i]), str(name_species_list[i]).capitalize().replace("_", " ")))
 
                             data = "<ol>{}</ol>".format(str(data).strip("[]").replace("'", "").replace(",", ""))
 
@@ -110,7 +110,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 data = list()
 
                 for i in range(len(species_list)):
-                    data.append("<li style=\"font-family:helvetica;font-size:90%;word-break:break-all\">{}</li>".format(str(species_list[i])))
+                    data.append("<li style=\"font-family:helvetica;font-size:90%;word-break:break-all\"><p style=\"font-weight:bold\">{}.</p> Binomial name: {}</li>".format(str(species_list[i]), str(name_species_list[i]).capitalize().replace("_", " ")))
 
                 data = "<ol>{}</ol>".format(str(data).strip("[]").replace("'", "").replace(",", ""))
 
