@@ -1493,7 +1493,7 @@ document.getElementById("defaultOpen").click();
             "error": "specie 'fish' is not available in the database."
         }
 
--> specie introduced is something absurd: number 2:
+-> specie introduced is something absurd: number 2: http://localhost:8000/karyotype?specie=2&json=1
         {
             "error": "specie '2' is not available in the database."
         }
