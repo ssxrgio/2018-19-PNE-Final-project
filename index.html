@@ -126,18 +126,24 @@ h3 {
           <form action="geneSeq" method="get">
             <input required type="search" name="gene" size="30" placeholder="Type the gene..."/>
             <input type="submit" value="Get Gene Sequence"/>
+            <br>
+            <br><input type="checkbox" name ="json" value="1" /> Retrieve data in .json format
           </form>
       <h3>Gene Information</h3>
         <p>Returns information about a human gene: start, end, Length, id and Chromosome.</p>
           <form action="geneInfo" method="get">
             <input required type="search" name="gene" size="30" placeholder="Type the gene..."/>
             <input type="submit" value="Get Gene Information"/>
+            <br>
+            <br><input type="checkbox" name ="json" value="1" /> Retrieve data in .json format
           </form>
       <h3>Gene calculations</h3>
         <p>Performs some calculations on the given human gene and returns the total length and the percentage of all its bases.</p>
           <form action="geneCalc" method="get">
             <input required type="search" name="gene" size="30" placeholder="Type the gene..."/>
             <input type="submit" value="Get Gene Operations"/>
+            <br>
+            <br><input type="checkbox" name ="json" value="1" /> Retrieve data in .json format
           </form>
           <br>
       <h3>Gene List</h3>
@@ -147,6 +153,8 @@ h3 {
             <input required type="search" name="start" size="30" placeholder="Type the start..."/>
             <input required type="search" name="end" size="30" placeholder="Type the end..."/>
             <input type="submit" value="Get Chromosome List"/>
+            <br>
+            <br><input type="checkbox" name ="json" value="1" /> Retrieve data in .json format
           </form>
 </div>
 
