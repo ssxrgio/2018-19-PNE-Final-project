@@ -1242,3 +1242,606 @@ document.getElementById("defaultOpen").click();
         {
         "error": "invalid limit parameter. Please, try again with a number from 1 to 199."
         }
+
+-------------------------------------------- ENDPOINT: /karyotype ------------------------------------------------------
+
+-> specie is in the database: mouse: http://localhost:8000/karyotype?specie=mouse
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+          <title>Data Retrieved Results</title>
+        </head>
+        <style>
+        html {
+          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+        .card {
+          width: 80%;
+          border-radius: 5px;
+          background-color: #B7EC77;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        img {
+          border-radius: 5px 5px 0 0;
+        }
+
+        .container {
+          position: relative;
+          text-align:left
+          color:white;
+          padding: 8px;
+          margin-left: 20px;
+          margin-right:20px;
+          text-color:black;
+        }
+
+        </style>
+        <body>
+        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">KARYOTYPE</h1>
+        <div class="card">
+          <img src= "https://i.imgur.com/ihzq1ZU.jpg" style="width:100%">
+          <div class="container">
+            <h3 style="font-family:courier;font-weight:bold">Input specie: mouse.<b></b></h3>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all">Showing karyotype: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, X, Y, MT</p>
+          </div>
+        </div>
+        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+        </body>
+        </html>
+
+-> specie is in the database but has not karyotype: tiger: http://localhost:8000/karyotype?specie=tiger
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+          <title>Data Retrieved Results</title>
+        </head>
+        <style>
+        html {
+          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+        .card {
+          width: 80%;
+          border-radius: 5px;
+          background-color: #B7EC77;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        img {
+          border-radius: 5px 5px 0 0;
+        }
+
+        .container {
+          position: relative;
+          text-align:left
+          color:white;
+          padding: 8px;
+          margin-left: 20px;
+          margin-right:20px;
+          text-color:black;
+        }
+
+        </style>
+        <body>
+        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">KARYOTYPE</h1>
+        <div class="card">
+          <img src= "https://i.imgur.com/poj7xfa.jpg" style="width:100%">
+          <div class="container">
+            <h3 style="font-family:courier;font-weight:bold">Input specie: tiger.<b></b></h3>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all">Karyotype not available in the database.</p>
+          </div>
+        </div>
+        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+        </body>
+        </html>
+
+-> specie is not in the database: fish: http://localhost:8000/karyotype?specie=fish
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+          <title>Data Retrieved Results</title>
+        </head>
+        <style>
+        html {
+          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+        .card {
+          width: 80%;
+          border-radius: 5px;
+          background-color: #B7EC77;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        img {
+          border-radius: 5px 5px 0 0;
+        }
+
+        .container {
+          position: relative;
+          text-align:left
+          color:white;
+          padding: 8px;
+          margin-left: 20px;
+          margin-right:20px;
+          text-color:black;
+        }
+
+        </style>
+        <body>
+        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">KARYOTYPE</h1>
+        <div class="card">
+          <img src= "https://i.imgur.com/poj7xfa.jpg" style="width:100%">
+          <div class="container">
+            <h3 style="font-family:courier;font-weight:bold">Input specie: fish.<b></b></h3>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all">Error: specie 'fish' is not available in the database.</p>
+          </div>
+        </div>
+        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+        </body>
+        </html>
+
+-> specie introduced is something absurd: number 2: http://localhost:8000/karyotype?specie=2
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+          <title>Data Retrieved Results</title>
+        </head>
+        <style>
+        html {
+          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+        .card {
+          width: 80%;
+          border-radius: 5px;
+          background-color: #B7EC77;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        img {
+          border-radius: 5px 5px 0 0;
+        }
+
+        .container {
+          position: relative;
+          text-align:left
+          color:white;
+          padding: 8px;
+          margin-left: 20px;
+          margin-right:20px;
+          text-color:black;
+        }
+
+        </style>
+        <body>
+        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">KARYOTYPE</h1>
+        <div class="card">
+          <img src= "https://i.imgur.com/poj7xfa.jpg" style="width:100%">
+          <div class="container">
+            <h3 style="font-family:courier;font-weight:bold">Input specie: 2.<b></b></h3>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all">Error: specie '2' is not available in the database.</p>
+          </div>
+        </div>
+        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+        </body>
+        </html>
+
+                                    RETRIEVING DATA IN .json FORMAT
+
+-> specie is in the database: mouse: http://localhost:8000/karyotype?specie=mouse&json=1
+        {
+            "karyotype for mouse": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "X",
+            "Y",
+            "MT"
+            ]
+        }
+
+-> specie is in the database but has not karyotype: tiger: http://localhost:8000/karyotype?specie=tiger&json=1
+        {
+            "error": "specie 'tiger' is not available in the database."
+        }
+
+-> specie is not in the database: fish: http://localhost:8000/karyotype?specie=fish&json=1
+        {
+            "error": "specie 'fish' is not available in the database."
+        }
+
+-> specie introduced is something absurd: number 2:
+        {
+            "error": "specie '2' is not available in the database."
+        }
+
+------------------------------------- endpoint: /chromosomeLength ------------------------------------------------------
+
+                                       RETRIEVING DATA IN HTML
+
+-> specie is in the database and chromosome belongs to the specie: mouse and 18: http://localhost:8000/chromosomeLength?specie=mouse&chromo=18
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+          <title>Data Retrieved Results</title>
+        </head>
+        <style>
+        html {
+          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+        .card {
+          width: 80%;
+          border-radius: 5px;
+          background-color: #ECE577;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        img {
+          border-radius: 5px 5px 0 0;
+        }
+
+        .container {
+          position: relative;
+          text-align:left
+          color:white;
+          padding: 8px;
+          margin-left: 20px;
+          margin-right:20px;
+          text-color:black;
+        }
+
+        </style>
+        <body>
+        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">CHROMOSOME LENGHT</h1>
+        <div class="card">
+          <img src= "https://i.imgur.com/RuuZ4VG.jpg" style="width:100%">
+          <div class="container">
+            <h3 style="font-family:courier;font-weight:bold">Length of chromosome '18' of the specie 'mouse' is 90702639 bp.<b></b></h3>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
+          </div>
+        </div>
+        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+        </body>
+        </html>
+
+-> specie is in the database without karyotype with any chromosome: tiger and 12: http://localhost:8000/chromosomeLength?specie=tiger&chromo=12
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+          <title>Data Retrieved Results</title>
+        </head>
+        <style>
+        html {
+          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+        .card {
+          width: 80%;
+          border-radius: 5px;
+          background-color: #ECE577;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        img {
+          border-radius: 5px 5px 0 0;
+        }
+
+        .container {
+          position: relative;
+          text-align:left
+          color:white;
+          padding: 8px;
+          margin-left: 20px;
+          margin-right:20px;
+          text-color:black;
+        }
+
+        </style>
+        <body>
+        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">CHROMOSOME LENGHT</h1>
+        <div class="card">
+          <img src= "https://i.imgur.com/poj7xfa.jpg" style="width:100%">
+          <div class="container">
+            <h3 style="font-family:courier;font-weight:bold">Error: chromosome not found. There are 0 chromosomes available. Check the 'Karyotype' page to know them<b></b></h3>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
+          </div>
+        </div>
+        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+        </body>
+        </html>
+
+-> specie is not in the database with any chromosome: fish and 1: http://localhost:8000/chromosomeLength?specie=fish&chromo=1
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+          <title>Data Retrieved Results</title>
+        </head>
+        <style>
+        html {
+          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+        .card {
+          width: 80%;
+          border-radius: 5px;
+          background-color: #ECE577;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        img {
+          border-radius: 5px 5px 0 0;
+        }
+
+        .container {
+          position: relative;
+          text-align:left
+          color:white;
+          padding: 8px;
+          margin-left: 20px;
+          margin-right:20px;
+          text-color:black;
+        }
+
+        </style>
+        <body>
+        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">CHROMOSOME LENGHT</h1>
+        <div class="card">
+          <img src= "https://i.imgur.com/poj7xfa.jpg" style="width:100%">
+          <div class="container">
+            <h3 style="font-family:courier;font-weight:bold">Error: karyotype for 'fish' is not available.<b></b></h3>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
+          </div>
+        </div>
+        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+        </body>
+        </html>
+
+-> specie is something absurd with any chromosome: hello and 1: http://localhost:8000/chromosomeLength?specie=hello&chromo=1
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+          <title>Data Retrieved Results</title>
+        </head>
+        <style>
+        html {
+          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+        .card {
+          width: 80%;
+          border-radius: 5px;
+          background-color: #ECE577;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        img {
+          border-radius: 5px 5px 0 0;
+        }
+
+        .container {
+          position: relative;
+          text-align:left
+          color:white;
+          padding: 8px;
+          margin-left: 20px;
+          margin-right:20px;
+          text-color:black;
+        }
+
+        </style>
+        <body>
+        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">CHROMOSOME LENGHT</h1>
+        <div class="card">
+          <img src= "https://i.imgur.com/poj7xfa.jpg" style="width:100%">
+          <div class="container">
+            <h3 style="font-family:courier;font-weight:bold">Error: karyotype for 'hello' is not available.<b></b></h3>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
+          </div>
+        </div>
+        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+        </body>
+        </html>
+
+-> specie is in the database but chromosome does not belong to the specie: human and 30: http://localhost:8000/chromosomeLength?specie=human&chromo=30
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+          <title>Data Retrieved Results</title>
+        </head>
+        <style>
+        html {
+          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+        .card {
+          width: 80%;
+          border-radius: 5px;
+          background-color: #ECE577;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        img {
+          border-radius: 5px 5px 0 0;
+        }
+
+        .container {
+          position: relative;
+          text-align:left
+          color:white;
+          padding: 8px;
+          margin-left: 20px;
+          margin-right:20px;
+          text-color:black;
+        }
+
+        </style>
+        <body>
+        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">CHROMOSOME LENGHT</h1>
+        <div class="card">
+          <img src= "https://i.imgur.com/poj7xfa.jpg" style="width:100%">
+          <div class="container">
+            <h3 style="font-family:courier;font-weight:bold">Error: chromosome not found. Check the 'Karyotype' page to know them<b></b></h3>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
+          </div>
+        </div>
+        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+        </body>
+        </html>
+
+-> chromosome is something absurd: human and asdf: http://localhost:8000/chromosomeLength?specie=human&chromo=asdf
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+          <title>Data Retrieved Results</title>
+        </head>
+        <style>
+        html {
+          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+        .card {
+          width: 80%;
+          border-radius: 5px;
+          background-color: #ECE577;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        img {
+          border-radius: 5px 5px 0 0;
+        }
+
+        .container {
+          position: relative;
+          text-align:left
+          color:white;
+          padding: 8px;
+          margin-left: 20px;
+          margin-right:20px;
+          text-color:black;
+        }
+
+        </style>
+        <body>
+        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">CHROMOSOME LENGHT</h1>
+        <div class="card">
+          <img src= "https://i.imgur.com/aKaXdU6.jpg" style="width:100%">
+          <div class="container">
+            <h3 style="font-family:courier;font-weight:bold">Error 'ASDF' is not a valid input chromosome. Check the 'Karyotype' page to know them<b></b></h3>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
+          </div>
+        </div>
+        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+        </body>
+        </html>
+
+                                                 RETRIEVING DATA IN .json FORMAT
+
+-> specie is in the database and chromosome belongs to the specie: mouse and 18: http://localhost:8000/chromosomeLength?specie=mouse&chromo=18&json=1
+        {
+            "length of chromosome 18 for mouse": 90702639
+        }
+
+-> specie is in the database without karyotype with any chromosome: tiger and 12:
+        {
+            "error": "chromosome not found"
+        }
+
+-> specie is not in the database with any chromosome: fish and 1: http://localhost:8000/chromosomeLength?specie=fish&chromo=1&json=1
+        {
+            "error": "karyotype for fish is not available."
+        }
+
+-> specie is something absurd with any chromosome: hello and 1: http://localhost:8000/chromosomeLength?specie=hello&chromo=1&json=1
+        {
+            "error": "karyotype for hello is not available."
+        }
+
+-> specie is in the database but chromosome does not belong to the specie: human and 30: http://localhost:8000/chromosomeLength?specie=human&chromo=30&json=1
+        {
+            "error": "chromosome not found"
+        }
+
+-> chromosome is something absurd: human and asdf: human and asdf: http://localhost:8000/chromosomeLength?specie=human&chromo=asdf&json=1
+        {
+            "error": "chromosome not found"
+        }
