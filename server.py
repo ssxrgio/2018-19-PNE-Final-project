@@ -336,7 +336,13 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 file.close()
 
         elif "geneSeq" in path:
-            gene_input = path[path.find("gene=") + 5:].upper()
+
+            if "&json=1" in path:
+                gene_input = path[path.find("gene=") + 5:path.find("&")].upper()
+
+            else:
+                gene_input = path[path.find("gene=") + 5:].upper()
+
             print(gene_input)
 
             try:
@@ -349,17 +355,26 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 data = gene_seq
                 photo = "https://i.imgur.com/Fhayqk0.jpg"
 
+                json_data = {"sequence for {}".format(gene_input): gene_seq}
+
+
             except KeyError:
                 header = "Error: '{}' is not a valid gene for Homo Sapiens specie.".format(gene_input)
                 data = ""
                 photo = "https://i.imgur.com/aKaXdU6.jpg"
+
+                json_data = {"error": "there is no {} gene for homo sapiens".format(gene_input)}
 
             with open("results.html", "r") as file:
                 content = file.read().replace("OPERATION", "GENE SEQUENCE").replace("IMAGE", photo).replace("HEADER", header).replace("DATA", data).replace("COLOURCARD", "#EC7789")
                 file.close()
 
         elif "geneInfo" in path:
-            gene_input = path[path.find("gene=") + 5:].upper()
+
+            if "&json=1" in path:
+                gene_input = path[path.find("gene=") + 5:path.find("&")].upper()
+            else:
+                gene_input = path[path.find("gene=") + 5:].upper()
 
             try:
                 gene = get_json("/lookup/symbol/homo_sapiens/" + gene_input + "?expand=1;content-type=application/json")
@@ -373,17 +388,26 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 data = "<br>Gene ID: {}</br><br>Start: {}</br><br>End: {}</br><br>Lenght: {}</br><br>Chromosome where it belongs: {}</br>".format(gene_id, gene_start, gene_end, lenght, gen_chromo)
                 photo = "https://i.imgur.com/IITsk3C.jpg"
 
+                json_data = {"information for {}".format(gene_input):
+                                 {"gene_id": gene_id, "lenght": lenght, "start": gene_start, "end": gene_end, "chromosome": gen_chromo}}
+
             except KeyError:
                 header = "Error: '{}' is not a valid gene for Homo Sapiens specie.".format(gene_input)
                 data = ""
                 photo = "https://i.imgur.com/poj7xfa.jpg"
+
+                json_data = {"error": "there is no {} gene for homo sapiens".format(gene_input)}
 
             with open("results.html", "r") as file:
                 content = file.read().replace("OPERATION", "GENE INFORMATION").replace("IMAGE", photo).replace("HEADER", header).replace("DATA", data).replace("COLOURCARD", "#EC7789")
                 file.close()
 
         elif "geneCalc" in path:
-            gene_input = path[path.find("gene=") + 5:].upper()
+
+            if "&json=1" in path:
+                gene_input = path[path.find("gene=") + 5:path.find("&")].upper()
+            else:
+                gene_input = path[path.find("gene=") + 5:].upper()
 
             try:
                 gene_id = get_json("/lookup/symbol/homo_sapiens/" + gene_input + "?expand=1;content-type=application/json")["id"]
@@ -399,10 +423,16 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 data = "<br>Lenght: {}</br><br>Percentage of Adenine: {}</br><br>Percentage of Thymine: {}</br><br>Percentage of Cytosine: {}</br><br>Percentage of Guanine: {}</br>".format(lenght, percA, percT, percC, percG)
                 photo = "https://i.imgur.com/Fhayqk0.jpg"
 
+                json_data = {"calculations for {}".format(gene_input):
+                                 {"lenght": lenght, "percentage of A": percA, "percentage of C": percC, "percentage of G": percG,
+                                  "percentage of T": percT}}
+
             except KeyError:
                 header = "Error: '{}' is not a valid gene for Homo Sapiens specie.".format(gene_input)
                 data = ""
                 photo = "https://i.imgur.com/aKaXdU6.jpg"
+
+                json_data = {"error": "there is no {} gene for homo sapiens".format(gene_input)}
 
             with open("results.html", "r") as file:
                 content = file.read().replace("OPERATION", "GENE OPERATIONS").replace("IMAGE", photo).replace("HEADER", header).replace("DATA", data).replace("COLOURCARD", "#EC7789")
