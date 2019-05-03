@@ -1,178 +1,190 @@
-------------------------------------- localhost:8000/ ------------------------------------------------------------------
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>Ensembl Data Retriever</title>
-        </head>
-        <style>
-        * {box-sizing: border-box}
+--------------------------------------------- endpoint: / --------------------------------------------------------------
 
-        html {
-          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
-          -webkit-background-size: cover;
-          -moz-background-size: cover;
-          -o-background-size: cover;
-          background-size: cover;
-        }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ensembl Data Retriever</title>
+</head>
+<style>
+* {box-sizing: border-box}
 
-        input[type=submit] {
-          font-weight: bold;
-          padding: 7px;
-          margin-right: 16px;
-          background: #ddd;
-          font-size: 12px;
-          border: none;
-          cursor: pointer;
-        }
+html {
+  background: url(https://i.imgur.com/dULNVat.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 
-        input[type=search] {
-          padding: 6px;
-          border: none;
-          font-size: 14px;
-        }
+input[type=submit] {
+  font-weight: bold;
+  padding: 7px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 12px;
+  border: none;
+  cursor: pointer;
+}
 
-        body, html {
-          margin: 30px;
-          font-family: Helvetica;
-        }
+input[type=search] {
+  padding: 6px;
+  border: none;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
 
-        .tablink {
-          font-family: Courier;
-          font-weight:bold;
-          background-color: #d6d6d6;
-          color: black;
-          float: left;
-          border: none;
-          outline: none;
-          cursor: pointer;
-          padding: 12px 16px;
-          font-size: 17px;
-          width: 25%;
-        }
+body, html {
+  margin: 30px;
+  font-family: Helvetica;
+}
 
-        .tablink:hover {
-          background-color: #999;
-        }
+.tablink {
+  font-family: Courier;
+  font-weight:bold;
+  background-color: #d6d6d6;
+  color: black;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 12px 16px;
+  font-size: 1.1em;
+  width: 25%;
+  height: 60px;
+}
 
-        .tabcontent {
-          color: black;
-          display: none;
-          padding: 80px 20px;
-        }
+.tablink:hover {
+  background-color: #999;
+}
 
-        p {
-            font-family: Helvetica;
-            }
+.tabcontent {
+  color: black;
+  display: none;
+  padding: 70px 20px;
+}
 
-        h3 {
-          font-family: Courier;
-          }
+p {
+    font-family: Helvetica;
+    }
 
-        #list {background-color: #6da4f9;}
-        #karyo {background-color: #B7EC77;}
-        #chromo {background-color: #ECE577;}
-        #human {background-color: #EC7789;}
+h3 {
+  font-family: Courier;
+  }
 
-        </style>
-        <body>
-        <h1 style="color:white;font-family:courier">ENSEMBL DATA RETRIEVER</h1>
-        <p style="color:white;font-size:110%">Retrieve data from the Ensembl web database by performing the available operations below.</p>
-        <button class="tablink" onclick="openPage('list', this, '#6da4f9')" id="defaultOpen">List of Species</button>
-        <button class="tablink" onclick="openPage('karyo', this, '#B7EC77')">Karyotype</button>
-        <button class="tablink" onclick="openPage('chromo', this, '#ECE577')">Chromosome Lenght</button>
-        <button class="tablink" onclick="openPage('human', this, '#EC7789')">Human Gene Database.</button>
+#list {background-color: #6da4f9;}
+#karyo {background-color: #B7EC77;}
+#chromo {background-color: #ECE577;}
+#human {background-color: #EC7789;}
 
-        <div id="list" class="tabcontent">
-                <h3>Generates a list with the species available in the ENSEMBL database.</h3>
-                <p>If an specific number of species wants to be retrieved, write that number below. If not, ignore the text box below and just click on 'Generate list of species'.</p>
-                <br>
-                <form action="listSpecies" method="get">
-                    <br><input type="search" name="limit" size="60" placeholder="Type the number of species..."/>
-                    <input type="submit" value="Generate list of species"/>
-                </form>
-        </div>
+</style>
+<body>
+<h1 style="color:white;font-family:courier">ENSEMBL DATA RETRIEVER</h1>
+<p style="color:white;font-size:110%">Retrieve data from the Ensembl web database by performing the available operations below.</p>
+<button class="tablink" onclick="openPage('list', this, '#6da4f9')" id="defaultOpen">List of Species</button>
+<button class="tablink" onclick="openPage('karyo', this, '#B7EC77')">Karyotype</button>
+<button class="tablink" onclick="openPage('chromo', this, '#ECE577')">Chromosome Lenght</button>
+<button class="tablink" onclick="openPage('human', this, '#EC7789')">Human Gene Database.</button>
 
-        <div id="karyo" class="tabcontent">
-              <h3>Karyotype</h3>
-              <p>Returns information about the species <acronym title="Number and visual appearance of the chromosomes in the cell nuclei of an organism or species">karyotype.</acronym></p>
-              <br>
-              <form action="karyotype" method="get">
-                  <input required type="search" name="specie" size="30" placeholder="Type the specie's karyotype..."/>
-                  <input type="submit" value="Get karyotype"/>
-              </form>
-        </div>
+<div id="list" class="tabcontent">
+        <h3>Generates a list with the species available in the ENSEMBL database.</h3>
+        <p>If an specific number of species wants to be retrieved, write that number below. If not, ignore the text box below and just click on 'Generate list of species'.</p>
+        <br>
+        <form action="listSpecies" method="get">
+            <br><input type="search" name="limit" size="60" placeholder="Type the number of species..."/>
+            <input type="submit" value="Generate list of species"/>
+            <br>
+            <br><input type="checkbox" name ="json" value="1" /> Retrieve data in .json format
+        </form>
+</div>
 
-        <div id="chromo" class="tabcontent">
-              <h3>Chromosome lenght</h3>
-              <p>Returns the length of the chromosome of the given specie.</p>
-              <br>
-              <form action="chromosomeLength" method="get">
-                   <input required type="search" name="specie" size="40" placeholder="Type the specie..."/>
-                   <input required type="search" name="chromo" size="30" placeholder="Type the chromosome number..."/>
-                   <input type="submit" value="Get lenght"/>
-              </form>
+<div id="karyo" class="tabcontent">
+      <h3>Returns information about the species <acronym title="Number and visual appearance of the chromosomes in the cell nuclei of an organism or species">karyotype.</acronym></h3>
+      <br>
+      <form action="karyotype" method="get">
+          <input required type="search" name="specie" size="30" placeholder="Type the specie's karyotype..."/>
+          <input type="submit" value="Get karyotype"/>
+          <br>
+          <br><input type="checkbox" name ="json" value="1" /> Retrieve data in .json format
+      </form>
+</div>
 
-        </div>
+<div id="chromo" class="tabcontent">
+      <h3>Returns the length of the chromosome of the given specie.</h3>
+      <br>
+      <form action="chromosomeLength" method="get">
+           <input required type="search" name="specie" size="40" placeholder="Type the specie..."/>
+           <input required type="search" name="chromo" size="30" placeholder="Type the chromosome number..."/>
+           <input type="submit" value="Get lenght"/>
+           <br>
+           <br><input type="checkbox" name ="json" value="1" /> Retrieve data in .json format
+      </form>
 
-        <div id="human" class="tabcontent">
-                <h3>Gene Sequence</h3>
-                <p>Returns the sequence of a given human gene.</p>
-                  <form action="geneSeq" method="get">
-                    <input required type="search" name="gene" size="30" placeholder="Type the gene..."/>
-                    <input type="submit" value="Get Gene Sequence"/>
-                  </form>
-              <h3>Gene Information</h3>
-                <p>Returns information about a human gene: start, end, Length, id and Chromosome.</p>
-                  <form action="geneInfo" method="get">
-                    <input required type="search" name="gene" size="30" placeholder="Type the gene..."/>
-                    <input type="submit" value="Get Gene Information"/>
-                  </form>
-              <h3>Gene calculations</h3>
-                <p>Performs some calculations on the given human gene and returns the total length and the percentage of all its bases.</p>
-                  <form action="geneCalc" method="get">
-                    <input required type="search" name="gene" size="30" placeholder="Type the gene..."/>
-                    <input type="submit" value="Get Gene Operations"/>
-                  </form>
-                  <br>
-              <h3>Gene List</h3>
-                <p>Return the names of the genes located in the chromosome "chromo" from the start to end positions.</p>
-                  <form action="geneCalc" method="get">
-                    <input required type="search" name="chromo" size="30" placeholder="Type the chromosome..."/>
-                    <input required type="search" name="start" size="30" placeholder="Type the start..."/>
-                    <input required type="search" name="end" size="30" placeholder="Type the end..."/>
-                    <input type="submit" value="Get Chromosome List"/>
-                  </form>
-        </div>
+</div>
 
-        <script>
-        function openPage(pageName,elmnt,color) {
-          var i, tabcontent, tablinks;
-          tabcontent = document.getElementsByClassName("tabcontent");
-          for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-          }
-          tablinks = document.getElementsByClassName("tablink");
-          for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].style.backgroundColor = "";
-          }
-          document.getElementById(pageName).style.display = "block";
-          elmnt.style.backgroundColor = color;
-        }
+<div id="human" class="tabcontent">
+        <h3>Gene Sequence</h3>
+        <p>Returns the sequence of a given human gene.</p>
+          <form action="geneSeq" method="get">
+            <input required type="search" name="gene" size="30" placeholder="Type the gene..."/>
+            <input type="submit" value="Get Gene Sequence"/>
+          </form>
+      <h3>Gene Information</h3>
+        <p>Returns information about a human gene: start, end, Length, id and Chromosome.</p>
+          <form action="geneInfo" method="get">
+            <input required type="search" name="gene" size="30" placeholder="Type the gene..."/>
+            <input type="submit" value="Get Gene Information"/>
+          </form>
+      <h3>Gene calculations</h3>
+        <p>Performs some calculations on the given human gene and returns the total length and the percentage of all its bases.</p>
+          <form action="geneCalc" method="get">
+            <input required type="search" name="gene" size="30" placeholder="Type the gene..."/>
+            <input type="submit" value="Get Gene Operations"/>
+          </form>
+          <br>
+      <h3>Gene List</h3>
+        <p>Return the names of the genes located in the introduced chromosome from the start to end positions.</p>
+          <form action="geneList" method="get">
+            <input required type="search" name="chromo" size="30" placeholder="Type the chromosome..."/>
+            <input required type="search" name="start" size="30" placeholder="Type the start..."/>
+            <input required type="search" name="end" size="30" placeholder="Type the end..."/>
+            <input type="submit" value="Get Chromosome List"/>
+          </form>
+</div>
 
-        // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpen").click();
-        </script>
+<script>
+function openPage(pageName,elmnt,color) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+  document.getElementById(pageName).style.display = "block";
+  elmnt.style.backgroundColor = color;
+}
 
-        </body>
-        </html>
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
 
-------------------------------------- /listSpecies ----------------------------------------------------------------------
--> No Limit:
+</body>
+</html>
+
+
+-------------------------------------------- ENDPOINT: /listSpecies ----------------------------------------------------
+
+                                            RETRIEVING THE HTML PAGE
+
+-> No limit: http://localhost:8000/listSpecies?limit= or http://localhost:8000/listSpecies
         <!DOCTYPE html>
         <html>
         <head>
           <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+          <title>Data Retrieved Results</title>
         </head>
         <style>
         html {
@@ -212,18 +224,19 @@
           <img src= "https://i.imgur.com/RMjXpq5.jpg" style="width:100%">
           <div class="container">
             <h3 style="font-family:courier;font-weight:bold">List of species: <b></b></h3>
-            <p style="font-family:helvetica;font-size:90%;word-break:break-all">1. Flycatcher, 2. American beaver, 3. C.intestinalis, 4. Central bearded dragon, 5. Golden-collared manakin, 6. Steppe mouse, 7. White-throated sparrow, 8. Kangaroo rat, 9. Gibbon, 10. Mouse FVB/NJ, 11. Mummichog, 12. Algerian mouse, 13. Guppy, 14. Clown anemonefish, 15. Mongolian gerbil, 16. Saccharomyces cerevisiae, 17. Paramormyrops kingsleyae, 18. Lesser Egyptian jerboa, 19. Mouse C3H/HeJ, 20. Orange clownfish, 21. Hedgehog, 22. Koala, 23. Spiny chromis, 24. Blue-crowned manakin, 25. American mink, 26. Guinea Pig, 27. Horse, 28. Armadillo, "29. Burtons mouthbrooder", 30. Crab-eating macaque, 31. Japanese quail, 32. Budgerigar, 33. Naked mole-rat male, "34. Mas night monkey", 35. Polar bear, 36. Greater bamboo lemur, 37. Sailfin molly, 38. Mangrove rivulus, 39. Great spotted kiwi, 40. Argentine black and white tegu, "41. Coquerels sifaka", 42. Donkey, 43. Brazilian guinea pig, 44. Duck, 45. Zebrafish, 46. Northern American deer mouse, 47. Common canary, 48. Golden Hamster, 49. Channel catfish, 50. Western mosquitofish, 51. Swamp eel, 52. Bengalese finch, 53. Cat, 54. Platypus, 55. Little spotted kiwi, 56. Tuatara, 57. Shortfin molly, 58. Drosophila melanogaster, 59. Tasmanian devil, 60. Zebra mbuna, 61. Mouse WSB/EiJ, 62. Ballan wrasse, 63. Great Tit, 64. Helmeted guineafowl, 65. Lamprey, 66. Spotted gar, 67. Monterrey platyfish, 68. Upper Galilee mountains blind mole rat, 69. Pika, 70. Sloth, 71. Chimpanzee, 72. Bolivian squirrel monkey, 73. Ferret, "74. Agassizs desert tortoise", 75. Arctic ground squirrel, 76. Mouse PWK/PhJ, 77. Japanese medaka HdrR, 78. Megabat, 79. Abingdon island giant tortoise, 80. Black snub-nosed monkey, 81. Mexican tetra, 82. Lyretail cichlid, 83. Mouse CAST/EiJ, 84. Lesser hedgehog tenrec, 85. Zebra Finch, 86. Elephant, 87. Capuchin, 88. Anole lizard, 89. Panda, 90. Daurian ground squirrel, 91. Pig, 92. Mouse, 93. Mouse NZO/HlLtJ, 94. Spoon-billed sandpiper, 95. Wallaby, 96. Tiger tail seahorse, 97. Cow, 98. American bison, 99. Mouse A/J, 100. Japanese medaka HSOK, 101. Bonobo, 102. Gorilla, 103. Emu, 104. Okarito brown kiwi, 105. Dog, 106. Chilean tinamou, 107. Sheepshead minnow, 108. Chinese hamster PICR, 109. Alpaca, 110. Blue tit, 111. Zig-zag eel, 112. Pig-tailed macaque, 113. Ryukyu mouse, 114. Angola colobus, 115. Sheep, 116. Drill, 117. Eastern happy, 118. Japanese medaka HNI, 119. Cod, 120. Hagfish, 121. Tarsier, 122. Indian medaka, 123. Sooty mangabey, 124. Stickleback, 125. Amazon molly, 126. Mouse DBA/2J, 127. Mouse C57BL/6NJ, 128. Dark-eyed junco, 129. Chinese hamster CHOK1GS, 130. Xenopus, 131. Dingo, 132. Dolphin, 133. Ugandan red Colobus, 134. Red-bellied piranha, 135. Mouse Lemur, 136. Midas cichlid, 137. Caenorhabditis elegans, 138. Tetraodon, 139. Makobe Island cichlid, 140. Platyfish, 141. Shrew mouse, 142. Chinese hamster CriGri, 143. Long-tailed chinchilla, 144. Hyrax, 145. Mouse BALB/cJ, 146. Naked mole-rat female, 147. Ruff, 148. Vervet-AGM, 149. Goat, 150. Bushbaby, 151. Coelacanth, 152. Pink-footed goose, 153. Macaque, 154. Marmoset, 155. Turbot, 156. Periophthalmus magnuspinnatus, 157. Chinese softshell turtle, 158. Leopard, 159. Degu, 160. Climbing perch, 161. Tongue sole, 162. Mainland tiger snake, 163. Mouse CBA/J, 164. Tilapia, 165. Gelada, 166. Prairie vole, 167. Fugu, 168. Australian saltwater crocodile, 169. Rabbit, 170. Wild yak, 171. Red fox, 172. Bicolor damselfish, 173. Shrew, 174. Mouse AKR/J, 175. Greater amberjack, 176. Chicken, 177. Mouse NOD/ShiLtJ, 178. Painted turtle, 179. Olive baboon, 180. Alpine marmot, 181. Orangutan, 182. Asian bonytongue, 183. Squirrel, 184. C.savignyi, 185. Golden snub-nosed monkey, 186. Northern pike, 187. Turkey, 188. Mouse LP/J, 189. Damara mole rat, 190. Tiger, 191. Yellowtail amberjack, 192. Ocean sunfish, 193. American black bear, 194. Tree Shrew, 195. Opossum, 196. Rat, 197. Mouse 129S1/SvImJ, 198. Human, 199. Microbat</p>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all"><ol><li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mouse.</p> Binomial name: Mus musculus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Human.</p> Binomial name: Homo sapiens</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Guinea Pig.</p> Binomial name: Cavia porcellus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mouse CBA/J.</p> Binomial name: Mus musculus cbaj</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Midas cichlid.</p> Binomial name: Amphilophus citrinellus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Anole lizard.</p> Binomial name: Anolis carolinensis</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Capuchin.</p> Binomial name: Cebus capucinus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Ballan wrasse.</p> Binomial name: Labrus bergylta</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Leopard.</p> Binomial name: Panthera pardus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Fugu.</p> Binomial name: Takifugu rubripes</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Black snub-nosed monkey.</p> Binomial name: Rhinopithecus bieti</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Zig-zag eel.</p> Binomial name: Mastacembelus armatus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Blue-crowned manakin.</p> Binomial name: Lepidothrix coronata</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Damara mole rat.</p> Binomial name: Fukomys damarensis</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Opossum.</p> Binomial name: Monodelphis domestica</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Donkey.</p> Binomial name: Equus asinus asinus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Platyfish.</p> Binomial name: Xiphophorus maculatus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Little spotted kiwi.</p> Binomial name: Apteryx owenii</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Ruff.</p> Binomial name: Calidris pugnax</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Stickleback.</p> Binomial name: Gasterosteus aculeatus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Chinese hamster PICR.</p> Binomial name: Cricetulus griseus picr</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Steppe mouse.</p> Binomial name: Mus spicilegus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Indian medaka.</p> Binomial name: Oryzias melastigma</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Upper Galilee mountains blind mole rat.</p> Binomial name: Nannospalax galili</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Abingdon island giant tortoise.</p> Binomial name: Chelonoidis abingdonii</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Spiny chromis.</p> Binomial name: Acanthochromis polyacanthus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Asian bonytongue.</p> Binomial name: Scleropages formosus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Tasmanian devil.</p> Binomial name: Sarcophilus harrisii</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Chicken.</p> Binomial name: Gallus gallus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Coelacanth.</p> Binomial name: Latimeria chalumnae</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Helmeted guineafowl.</p> Binomial name: Numida meleagris</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mouse A/J.</p> Binomial name: Mus musculus aj</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Sailfin molly.</p> Binomial name: Poecilia latipinna</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Koala.</p> Binomial name: Phascolarctos cinereus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mouse FVB/NJ.</p> Binomial name: Mus musculus fvbnj</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Chinese hamster CHOK1GS.</p> Binomial name: Cricetulus griseus chok1gshd</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mouse LP/J.</p> Binomial name: Mus musculus lpj</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Naked mole-rat female.</p> Binomial name: Heterocephalus glaber female</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Spoon-billed sandpiper.</p> Binomial name: Calidris pygmaea</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Duck.</p> Binomial name: Anas platyrhynchos platyrhynchos</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Bolivian squirrel monkey.</p> Binomial name: Saimiri boliviensis boliviensis</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Bengalese finch.</p> Binomial name: Lonchura striata domestica</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Marmoset.</p> Binomial name: Callithrix jacchus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Sheep.</p> Binomial name: Ovis aries</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Olive baboon.</p> Binomial name: Papio anubis</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Crab-eating macaque.</p> Binomial name: Macaca fascicularis</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mainland tiger snake.</p> Binomial name: Notechis scutatus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Goat.</p> Binomial name: Capra hircus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mummichog.</p> Binomial name: Fundulus heteroclitus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">American black bear.</p> Binomial name: Ursus americanus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mouse NZO/HlLtJ.</p> Binomial name: Mus musculus nzohlltj</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Wallaby.</p> Binomial name: Notamacropus eugenii</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Dolphin.</p> Binomial name: Tursiops truncatus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Western mosquitofish.</p> Binomial name: Gambusia affinis</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Cat.</p> Binomial name: Felis catus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Bonobo.</p> Binomial name: Pan paniscus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Gibbon.</p> Binomial name: Nomascus leucogenys</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Vervet-AGM.</p> Binomial name: Chlorocebus sabaeus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Cow.</p> Binomial name: Bos taurus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Clown anemonefish.</p> Binomial name: Amphiprion ocellaris</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Shrew mouse.</p> Binomial name: Mus pahari</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Japanese quail.</p> Binomial name: Coturnix japonica</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Tarsier.</p> Binomial name: Carlito syrichta</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Great spotted kiwi.</p> Binomial name: Apteryx haastii</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Pig-tailed macaque.</p> Binomial name: Macaca nemestrina</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Tuatara.</p> Binomial name: Sphenodon punctatus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Pink-footed goose.</p> Binomial name: Anser brachyrhynchus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Climbing perch.</p> Binomial name: Anabas testudineus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Spotted gar.</p> Binomial name: Lepisosteus oculatus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Golden snub-nosed monkey.</p> Binomial name: Rhinopithecus roxellana</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Daurian ground squirrel.</p> Binomial name: Spermophilus dauricus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Amazon molly.</p> Binomial name: Poecilia formosa</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Turbot.</p> Binomial name: Scophthalmus maximus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Algerian mouse.</p> Binomial name: Mus spretus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Lamprey.</p> Binomial name: Petromyzon marinus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Xenopus.</p> Binomial name: Xenopus tropicalis</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Agassiz\s desert tortoise.</p> Binomial name: Gopherus agassizii</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">American bison.</p> Binomial name: Bison bison bison</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mouse 129S1/SvImJ.</p> Binomial name: Mus musculus 129s1svimj</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Channel catfish.</p> Binomial name: Ictalurus punctatus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Degu.</p> Binomial name: Octodon degus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Angola colobus.</p> Binomial name: Colobus angolensis palliatus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Golden-collared manakin.</p> Binomial name: Manacus vitellinus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Eastern happy.</p> Binomial name: Astatotilapia calliptera</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Greater bamboo lemur.</p> Binomial name: Prolemur simus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mouse WSB/EiJ.</p> Binomial name: Mus musculus wsbeij</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Armadillo.</p> Binomial name: Dasypus novemcinctus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mangrove rivulus.</p> Binomial name: Kryptolebias marmoratus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mouse DBA/2J.</p> Binomial name: Mus musculus dba2j</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Arctic ground squirrel.</p> Binomial name: Urocitellus parryii</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Gorilla.</p> Binomial name: Gorilla gorilla</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mouse Lemur.</p> Binomial name: Microcebus murinus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Drill.</p> Binomial name: Mandrillus leucophaeus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Central bearded dragon.</p> Binomial name: Pogona vitticeps</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">American mink.</p> Binomial name: Neovison vison</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Great Tit.</p> Binomial name: Parus major</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Macaque.</p> Binomial name: Macaca mulatta</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Platypus.</p> Binomial name: Ornithorhynchus anatinus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Japanese medaka HNI.</p> Binomial name: Oryzias latipes hni</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Hagfish.</p> Binomial name: Eptatretus burgeri</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Dingo.</p> Binomial name: Canis lupus dingo</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Zebrafish.</p> Binomial name: Danio rerio</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mouse NOD/ShiLtJ.</p> Binomial name: Mus musculus nodshiltj</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Bicolor damselfish.</p> Binomial name: Stegastes partitus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Long-tailed chinchilla.</p> Binomial name: Chinchilla lanigera</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mouse C57BL/6NJ.</p> Binomial name: Mus musculus c57bl6nj</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mexican tetra.</p> Binomial name: Astyanax mexicanus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Squirrel.</p> Binomial name: Ictidomys tridecemlineatus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Alpaca.</p> Binomial name: Vicugna pacos</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Australian saltwater crocodile.</p> Binomial name: Crocodylus porosus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">White-throated sparrow.</p> Binomial name: Zonotrichia albicollis</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Orange clownfish.</p> Binomial name: Amphiprion percula</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Tiger.</p> Binomial name: Panthera tigris altaica</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Turkey.</p> Binomial name: Meleagris gallopavo</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Ugandan red Colobus.</p> Binomial name: Piliocolobus tephrosceles</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Alpine marmot.</p> Binomial name: Marmota marmota marmota</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Common canary.</p> Binomial name: Serinus canaria</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Okarito brown kiwi.</p> Binomial name: Apteryx rowi</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Argentine black and white tegu.</p> Binomial name: Salvator merianae</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Sloth.</p> Binomial name: Choloepus hoffmanni</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Ryukyu mouse.</p> Binomial name: Mus caroli</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Shrew.</p> Binomial name: Sorex araneus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Zebra Finch.</p> Binomial name: Taeniopygia guttata</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Gelada.</p> Binomial name: Theropithecus gelada</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Tiger tail seahorse.</p> Binomial name: Hippocampus comes</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Brazilian guinea pig.</p> Binomial name: Cavia aperea</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Periophthalmus magnuspinnatus.</p> Binomial name: Periophthalmus magnuspinnatus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Ma\s night monkey.</p> Binomial name: Aotus nancymaae</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Microbat.</p> Binomial name: Myotis lucifugus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Pig.</p> Binomial name: Sus scrofa</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Coquerel\s sifaka.</p> Binomial name: Propithecus coquereli</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Drosophila melanogaster.</p> Binomial name: Drosophila melanogaster</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Makobe Island cichlid.</p> Binomial name: Pundamilia nyererei</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Lesser hedgehog tenrec.</p> Binomial name: Echinops telfairi</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Dark-eyed junco.</p> Binomial name: Junco hyemalis</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Red fox.</p> Binomial name: Vulpes vulpes</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Chimpanzee.</p> Binomial name: Pan troglodytes</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Chinese hamster CriGri.</p> Binomial name: Cricetulus griseus crigri</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Greater amberjack.</p> Binomial name: Seriola dumerili</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Hedgehog.</p> Binomial name: Erinaceus europaeus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Elephant.</p> Binomial name: Loxodonta africana</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Lyretail cichlid.</p> Binomial name: Neolamprologus brichardi</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Chinese softshell turtle.</p> Binomial name: Pelodiscus sinensis</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Prairie vole.</p> Binomial name: Microtus ochrogaster</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Ocean sunfish.</p> Binomial name: Mola mola</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Polar bear.</p> Binomial name: Ursus maritimus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Emu.</p> Binomial name: Dromaius novaehollandiae</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Rabbit.</p> Binomial name: Oryctolagus cuniculus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Monterrey platyfish.</p> Binomial name: Xiphophorus couchianus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Sheepshead minnow.</p> Binomial name: Cyprinodon variegatus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">C.intestinalis.</p> Binomial name: Ciona intestinalis</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Red-bellied piranha.</p> Binomial name: Pygocentrus nattereri</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Northern pike.</p> Binomial name: Esox lucius</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Pika.</p> Binomial name: Ochotona princeps</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Ferret.</p> Binomial name: Mustela putorius furo</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">C.savignyi.</p> Binomial name: Ciona savignyi</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mongolian gerbil.</p> Binomial name: Meriones unguiculatus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Paramormyrops kingsleyae.</p> Binomial name: Paramormyrops kingsleyae</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Lesser Egyptian jerboa.</p> Binomial name: Jaculus jaculus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Kangaroo rat.</p> Binomial name: Dipodomys ordii</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Sooty mangabey.</p> Binomial name: Cercocebus atys</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Tilapia.</p> Binomial name: Oreochromis niloticus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Orangutan.</p> Binomial name: Pongo abelii</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Painted turtle.</p> Binomial name: Chrysemys picta bellii</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Zebra mbuna.</p> Binomial name: Maylandia zebra</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Horse.</p> Binomial name: Equus caballus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Golden Hamster.</p> Binomial name: Mesocricetus auratus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Megabat.</p> Binomial name: Pteropus vampyrus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Yellowtail amberjack.</p> Binomial name: Seriola lalandi dorsalis</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Blue tit.</p> Binomial name: Cyanistes caeruleus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mouse PWK/PhJ.</p> Binomial name: Mus musculus pwkphj</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Cod.</p> Binomial name: Gadus morhua</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Burton\s mouthbrooder.</p> Binomial name: Haplochromis burtoni</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Saccharomyces cerevisiae.</p> Binomial name: Saccharomyces cerevisiae</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Tongue sole.</p> Binomial name: Cynoglossus semilaevis</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Dog.</p> Binomial name: Canis familiaris</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Swamp eel.</p> Binomial name: Monopterus albus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Panda.</p> Binomial name: Ailuropoda melanoleuca</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">American beaver.</p> Binomial name: Castor canadensis</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Budgerigar.</p> Binomial name: Melopsittacus undulatus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Northern American deer mouse.</p> Binomial name: Peromyscus maniculatus bairdii</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Flycatcher.</p> Binomial name: Ficedula albicollis</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Wild yak.</p> Binomial name: Bos mutus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mouse BALB/cJ.</p> Binomial name: Mus musculus balbcj</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mouse CAST/EiJ.</p> Binomial name: Mus musculus casteij</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Rat.</p> Binomial name: Rattus norvegicus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Bushbaby.</p> Binomial name: Otolemur garnettii</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Naked mole-rat male.</p> Binomial name: Heterocephalus glaber male</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Caenorhabditis elegans.</p> Binomial name: Caenorhabditis elegans</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Guppy.</p> Binomial name: Poecilia reticulata</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Japanese medaka HSOK.</p> Binomial name: Oryzias latipes hsok</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Tetraodon.</p> Binomial name: Tetraodon nigroviridis</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Chilean tinamou.</p> Binomial name: Nothoprocta perdicaria</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Tree Shrew.</p> Binomial name: Tupaia belangeri</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mouse C3H/HeJ.</p> Binomial name: Mus musculus c3hhej</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Shortfin molly.</p> Binomial name: Poecilia mexicana</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Japanese medaka HdrR.</p> Binomial name: Oryzias latipes</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Hyrax.</p> Binomial name: Procavia capensis</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mouse AKR/J.</p> Binomial name: Mus musculus akrj</li></ol></p>
           </div>
         </div>
         <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
         </body>
         </html>
 
--> limit is a valid number: 34:
+-> limit = 10: http://localhost:8000/listSpecies?limit=10
         <!DOCTYPE html>
         <html>
         <head>
           <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+          <title>Data Retrieved Results</title>
         </head>
         <style>
         html {
@@ -262,19 +275,20 @@
         <div class="card">
           <img src= "https://i.imgur.com/wHk5lIk.jpg" style="width:100%">
           <div class="container">
-            <h3 style="font-family:courier;font-weight:bold">Showing 34 species.<b></b></h3>
-            <p style="font-family:helvetica;font-size:90%;word-break:break-all">1. Golden Hamster, 2. Human, 3. Opossum, 4. Orange clownfish, 5. Cod, 6. Hyrax, 7. Armadillo, 8. Ocean sunfish, 9. Mouse C57BL/6NJ, 10. Polar bear, 11. Platypus, 12. Megabat, 13. Turbot, 14. Lesser hedgehog tenrec, "15. Mas night monkey", 16. Alpine marmot, 17. Arctic ground squirrel, 18. Platyfish, 19. Japanese medaka HSOK, 20. Ballan wrasse, 21. Northern pike, 22. Lamprey, 23. Climbing perch, 24. Chinese hamster CriGri, 25. Zebra mbuna, 26. Chinese hamster CHOK1GS, 27. Mongolian gerbil, 28. American beaver, 29. Little spotted kiwi, 30. Lyretail cichlid, 31. Monterrey platyfish, 32. Mouse WSB/EiJ, 33. Blue tit, 34. Bushbaby</p>
+            <h3 style="font-family:courier;font-weight:bold">Showing 10 species.<b></b></h3>
+            <p style="font-family:helvetica;font-size:90%;word-break:break-all"><ol><li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mouse.</p> Binomial name: Mus musculus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Human.</p> Binomial name: Homo sapiens</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Guinea Pig.</p> Binomial name: Cavia porcellus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Mouse CBA/J.</p> Binomial name: Mus musculus cbaj</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Midas cichlid.</p> Binomial name: Amphilophus citrinellus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Anole lizard.</p> Binomial name: Anolis carolinensis</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Capuchin.</p> Binomial name: Cebus capucinus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Ballan wrasse.</p> Binomial name: Labrus bergylta</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Leopard.</p> Binomial name: Panthera pardus</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">Fugu.</p> Binomial name: Takifugu rubripes</li></ol></p>
           </div>
         </div>
         <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
         </body>
         </html>
 
--> limit is a number greater than 199: 200:
+-> limit is a number out of range: 1345: http://localhost:8000/listSpecies?limit=1345
         <!DOCTYPE html>
         <html>
         <head>
           <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+          <title>Data Retrieved Results</title>
         </head>
         <style>
         html {
@@ -321,11 +335,12 @@
         </body>
         </html>
 
--> limit is not a number: actggf:
+-> limit is something absurd: the letter 'a': http://localhost:8000/listSpecies?limit=a
         <!DOCTYPE html>
         <html>
         <head>
           <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+          <title>Data Retrieved Results</title>
         </head>
         <style>
         html {
@@ -364,7 +379,7 @@
         <div class="card">
           <img src= "https://i.imgur.com/aKaXdU6.jpg" style="width:100%">
           <div class="container">
-            <h3 style="font-family:courier;font-weight:bold">Invalid limit parameter. Please, try again with a number from 1 to 199.<b></b></h3>
+            <h3 style="font-family:courier;font-weight:bold">Error: invalid limit parameter. Please, try again with a number from 1 to 199.<b></b></h3>
             <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
           </div>
         </div>
@@ -372,415 +387,858 @@
         </body>
         </html>
 
+                                        RETRIEVING IN .json FORMAT
 
-------------------------------------- /karyotype ------------------------------------------------------------------------
-
--> specie is in the database: human: [http://localhost:8000/karyotype?specie=human]
-            <!DOCTYPE html>
-            <html>
-            <head>
-              <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
-            </head>
-            <style>
-            html {
-              background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
-              -webkit-background-size: cover;
-              -moz-background-size: cover;
-              -o-background-size: cover;
-              background-size: cover;
-            }
-
-            .card {
-              width: 80%;
-              border-radius: 5px;
-              background-color: #B7EC77;
-              margin-left: auto;
-              margin-right: auto;
-            }
-
-            img {
-              border-radius: 5px 5px 0 0;
-            }
-
-            .container {
-              position: relative;
-              text-align:left
-              color:white;
-              padding: 8px;
-              margin-left: 20px;
-              margin-right:20px;
-              text-color:black;
-            }
-
-            </style>
-            <body>
-            <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">KARYOTYPE</h1>
-            <div class="card">
-              <img src= "https://i.imgur.com/ihzq1ZU.jpg" style="width:100%">
-              <div class="container">
-                <h3 style="font-family:courier;font-weight:bold">Input specie: human.<b></b></h3>
-                <p style="font-family:helvetica;font-size:90%;word-break:break-all">Showing karyotype: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, X, Y, MT</p>
-              </div>
-            </div>
-            <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
-            </body>
-            </html>
-
--> specie is in the database but without karyotype: guinea pig: [http://localhost:8000/karyotype?specie=guinea+pig]
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
-        </head>
-        <style>
-        html {
-          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
-          -webkit-background-size: cover;
-          -moz-background-size: cover;
-          -o-background-size: cover;
-          background-size: cover;
+-> no limit: http://localhost:8000/listSpecies?limit=&json=1 or http://localhost:8000/listSpecies&json=1
+        {
+        "specie 1": {
+        "name": "Flycatcher",
+        "binomial name": "ficedula_albicollis"
+        },
+        "specie 2": {
+        "name": "American beaver",
+        "binomial name": "castor_canadensis"
+        },
+        "specie 3": {
+        "name": "C.intestinalis",
+        "binomial name": "ciona_intestinalis"
+        },
+        "specie 4": {
+        "name": "Central bearded dragon",
+        "binomial name": "pogona_vitticeps"
+        },
+        "specie 5": {
+        "name": "Golden-collared manakin",
+        "binomial name": "manacus_vitellinus"
+        },
+        "specie 6": {
+        "name": "Steppe mouse",
+        "binomial name": "mus_spicilegus"
+        },
+        "specie 7": {
+        "name": "White-throated sparrow",
+        "binomial name": "zonotrichia_albicollis"
+        },
+        "specie 8": {
+        "name": "Kangaroo rat",
+        "binomial name": "dipodomys_ordii"
+        },
+        "specie 9": {
+        "name": "Gibbon",
+        "binomial name": "nomascus_leucogenys"
+        },
+        "specie 10": {
+        "name": "Mouse FVB/NJ",
+        "binomial name": "mus_musculus_fvbnj"
+        },
+        "specie 11": {
+        "name": "Mummichog",
+        "binomial name": "fundulus_heteroclitus"
+        },
+        "specie 12": {
+        "name": "Algerian mouse",
+        "binomial name": "mus_spretus"
+        },
+        "specie 13": {
+        "name": "Guppy",
+        "binomial name": "poecilia_reticulata"
+        },
+        "specie 14": {
+        "name": "Clown anemonefish",
+        "binomial name": "amphiprion_ocellaris"
+        },
+        "specie 15": {
+        "name": "Mongolian gerbil",
+        "binomial name": "meriones_unguiculatus"
+        },
+        "specie 16": {
+        "name": "Saccharomyces cerevisiae",
+        "binomial name": "saccharomyces_cerevisiae"
+        },
+        "specie 17": {
+        "name": "Paramormyrops kingsleyae",
+        "binomial name": "paramormyrops_kingsleyae"
+        },
+        "specie 18": {
+        "name": "Lesser Egyptian jerboa",
+        "binomial name": "jaculus_jaculus"
+        },
+        "specie 19": {
+        "name": "Mouse C3H/HeJ",
+        "binomial name": "mus_musculus_c3hhej"
+        },
+        "specie 20": {
+        "name": "Orange clownfish",
+        "binomial name": "amphiprion_percula"
+        },
+        "specie 21": {
+        "name": "Hedgehog",
+        "binomial name": "erinaceus_europaeus"
+        },
+        "specie 22": {
+        "name": "Koala",
+        "binomial name": "phascolarctos_cinereus"
+        },
+        "specie 23": {
+        "name": "Spiny chromis",
+        "binomial name": "acanthochromis_polyacanthus"
+        },
+        "specie 24": {
+        "name": "Blue-crowned manakin",
+        "binomial name": "lepidothrix_coronata"
+        },
+        "specie 25": {
+        "name": "American mink",
+        "binomial name": "neovison_vison"
+        },
+        "specie 26": {
+        "name": "Guinea Pig",
+        "binomial name": "cavia_porcellus"
+        },
+        "specie 27": {
+        "name": "Horse",
+        "binomial name": "equus_caballus"
+        },
+        "specie 28": {
+        "name": "Armadillo",
+        "binomial name": "dasypus_novemcinctus"
+        },
+        "specie 29": {
+        "name": "Burton's mouthbrooder",
+        "binomial name": "haplochromis_burtoni"
+        },
+        "specie 30": {
+        "name": "Crab-eating macaque",
+        "binomial name": "macaca_fascicularis"
+        },
+        "specie 31": {
+        "name": "Japanese quail",
+        "binomial name": "coturnix_japonica"
+        },
+        "specie 32": {
+        "name": "Budgerigar",
+        "binomial name": "melopsittacus_undulatus"
+        },
+        "specie 33": {
+        "name": "Naked mole-rat male",
+        "binomial name": "heterocephalus_glaber_male"
+        },
+        "specie 34": {
+        "name": "Ma's night monkey",
+        "binomial name": "aotus_nancymaae"
+        },
+        "specie 35": {
+        "name": "Polar bear",
+        "binomial name": "ursus_maritimus"
+        },
+        "specie 36": {
+        "name": "Greater bamboo lemur",
+        "binomial name": "prolemur_simus"
+        },
+        "specie 37": {
+        "name": "Sailfin molly",
+        "binomial name": "poecilia_latipinna"
+        },
+        "specie 38": {
+        "name": "Mangrove rivulus",
+        "binomial name": "kryptolebias_marmoratus"
+        },
+        "specie 39": {
+        "name": "Great spotted kiwi",
+        "binomial name": "apteryx_haastii"
+        },
+        "specie 40": {
+        "name": "Argentine black and white tegu",
+        "binomial name": "salvator_merianae"
+        },
+        "specie 41": {
+        "name": "Coquerel's sifaka",
+        "binomial name": "propithecus_coquereli"
+        },
+        "specie 42": {
+        "name": "Donkey",
+        "binomial name": "equus_asinus_asinus"
+        },
+        "specie 43": {
+        "name": "Brazilian guinea pig",
+        "binomial name": "cavia_aperea"
+        },
+        "specie 44": {
+        "name": "Duck",
+        "binomial name": "anas_platyrhynchos_platyrhynchos"
+        },
+        "specie 45": {
+        "name": "Zebrafish",
+        "binomial name": "danio_rerio"
+        },
+        "specie 46": {
+        "name": "Northern American deer mouse",
+        "binomial name": "peromyscus_maniculatus_bairdii"
+        },
+        "specie 47": {
+        "name": "Common canary",
+        "binomial name": "serinus_canaria"
+        },
+        "specie 48": {
+        "name": "Golden Hamster",
+        "binomial name": "mesocricetus_auratus"
+        },
+        "specie 49": {
+        "name": "Channel catfish",
+        "binomial name": "ictalurus_punctatus"
+        },
+        "specie 50": {
+        "name": "Western mosquitofish",
+        "binomial name": "gambusia_affinis"
+        },
+        "specie 51": {
+        "name": "Swamp eel",
+        "binomial name": "monopterus_albus"
+        },
+        "specie 52": {
+        "name": "Bengalese finch",
+        "binomial name": "lonchura_striata_domestica"
+        },
+        "specie 53": {
+        "name": "Cat",
+        "binomial name": "felis_catus"
+        },
+        "specie 54": {
+        "name": "Platypus",
+        "binomial name": "ornithorhynchus_anatinus"
+        },
+        "specie 55": {
+        "name": "Little spotted kiwi",
+        "binomial name": "apteryx_owenii"
+        },
+        "specie 56": {
+        "name": "Tuatara",
+        "binomial name": "sphenodon_punctatus"
+        },
+        "specie 57": {
+        "name": "Shortfin molly",
+        "binomial name": "poecilia_mexicana"
+        },
+        "specie 58": {
+        "name": "Drosophila melanogaster",
+        "binomial name": "drosophila_melanogaster"
+        },
+        "specie 59": {
+        "name": "Tasmanian devil",
+        "binomial name": "sarcophilus_harrisii"
+        },
+        "specie 60": {
+        "name": "Zebra mbuna",
+        "binomial name": "maylandia_zebra"
+        },
+        "specie 61": {
+        "name": "Mouse WSB/EiJ",
+        "binomial name": "mus_musculus_wsbeij"
+        },
+        "specie 62": {
+        "name": "Ballan wrasse",
+        "binomial name": "labrus_bergylta"
+        },
+        "specie 63": {
+        "name": "Great Tit",
+        "binomial name": "parus_major"
+        },
+        "specie 64": {
+        "name": "Helmeted guineafowl",
+        "binomial name": "numida_meleagris"
+        },
+        "specie 65": {
+        "name": "Lamprey",
+        "binomial name": "petromyzon_marinus"
+        },
+        "specie 66": {
+        "name": "Spotted gar",
+        "binomial name": "lepisosteus_oculatus"
+        },
+        "specie 67": {
+        "name": "Monterrey platyfish",
+        "binomial name": "xiphophorus_couchianus"
+        },
+        "specie 68": {
+        "name": "Upper Galilee mountains blind mole rat",
+        "binomial name": "nannospalax_galili"
+        },
+        "specie 69": {
+        "name": "Pika",
+        "binomial name": "ochotona_princeps"
+        },
+        "specie 70": {
+        "name": "Sloth",
+        "binomial name": "choloepus_hoffmanni"
+        },
+        "specie 71": {
+        "name": "Chimpanzee",
+        "binomial name": "pan_troglodytes"
+        },
+        "specie 72": {
+        "name": "Bolivian squirrel monkey",
+        "binomial name": "saimiri_boliviensis_boliviensis"
+        },
+        "specie 73": {
+        "name": "Ferret",
+        "binomial name": "mustela_putorius_furo"
+        },
+        "specie 74": {
+        "name": "Agassiz's desert tortoise",
+        "binomial name": "gopherus_agassizii"
+        },
+        "specie 75": {
+        "name": "Arctic ground squirrel",
+        "binomial name": "urocitellus_parryii"
+        },
+        "specie 76": {
+        "name": "Mouse PWK/PhJ",
+        "binomial name": "mus_musculus_pwkphj"
+        },
+        "specie 77": {
+        "name": "Japanese medaka HdrR",
+        "binomial name": "oryzias_latipes"
+        },
+        "specie 78": {
+        "name": "Megabat",
+        "binomial name": "pteropus_vampyrus"
+        },
+        "specie 79": {
+        "name": "Abingdon island giant tortoise",
+        "binomial name": "chelonoidis_abingdonii"
+        },
+        "specie 80": {
+        "name": "Black snub-nosed monkey",
+        "binomial name": "rhinopithecus_bieti"
+        },
+        "specie 81": {
+        "name": "Mexican tetra",
+        "binomial name": "astyanax_mexicanus"
+        },
+        "specie 82": {
+        "name": "Lyretail cichlid",
+        "binomial name": "neolamprologus_brichardi"
+        },
+        "specie 83": {
+        "name": "Mouse CAST/EiJ",
+        "binomial name": "mus_musculus_casteij"
+        },
+        "specie 84": {
+        "name": "Lesser hedgehog tenrec",
+        "binomial name": "echinops_telfairi"
+        },
+        "specie 85": {
+        "name": "Zebra Finch",
+        "binomial name": "taeniopygia_guttata"
+        },
+        "specie 86": {
+        "name": "Elephant",
+        "binomial name": "loxodonta_africana"
+        },
+        "specie 87": {
+        "name": "Capuchin",
+        "binomial name": "cebus_capucinus"
+        },
+        "specie 88": {
+        "name": "Anole lizard",
+        "binomial name": "anolis_carolinensis"
+        },
+        "specie 89": {
+        "name": "Panda",
+        "binomial name": "ailuropoda_melanoleuca"
+        },
+        "specie 90": {
+        "name": "Daurian ground squirrel",
+        "binomial name": "spermophilus_dauricus"
+        },
+        "specie 91": {
+        "name": "Pig",
+        "binomial name": "sus_scrofa"
+        },
+        "specie 92": {
+        "name": "Mouse",
+        "binomial name": "mus_musculus"
+        },
+        "specie 93": {
+        "name": "Mouse NZO/HlLtJ",
+        "binomial name": "mus_musculus_nzohlltj"
+        },
+        "specie 94": {
+        "name": "Spoon-billed sandpiper",
+        "binomial name": "calidris_pygmaea"
+        },
+        "specie 95": {
+        "name": "Wallaby",
+        "binomial name": "notamacropus_eugenii"
+        },
+        "specie 96": {
+        "name": "Tiger tail seahorse",
+        "binomial name": "hippocampus_comes"
+        },
+        "specie 97": {
+        "name": "Cow",
+        "binomial name": "bos_taurus"
+        },
+        "specie 98": {
+        "name": "American bison",
+        "binomial name": "bison_bison_bison"
+        },
+        "specie 99": {
+        "name": "Mouse A/J",
+        "binomial name": "mus_musculus_aj"
+        },
+        "specie 100": {
+        "name": "Japanese medaka HSOK",
+        "binomial name": "oryzias_latipes_hsok"
+        },
+        "specie 101": {
+        "name": "Bonobo",
+        "binomial name": "pan_paniscus"
+        },
+        "specie 102": {
+        "name": "Gorilla",
+        "binomial name": "gorilla_gorilla"
+        },
+        "specie 103": {
+        "name": "Emu",
+        "binomial name": "dromaius_novaehollandiae"
+        },
+        "specie 104": {
+        "name": "Okarito brown kiwi",
+        "binomial name": "apteryx_rowi"
+        },
+        "specie 105": {
+        "name": "Dog",
+        "binomial name": "canis_familiaris"
+        },
+        "specie 106": {
+        "name": "Chilean tinamou",
+        "binomial name": "nothoprocta_perdicaria"
+        },
+        "specie 107": {
+        "name": "Sheepshead minnow",
+        "binomial name": "cyprinodon_variegatus"
+        },
+        "specie 108": {
+        "name": "Chinese hamster PICR",
+        "binomial name": "cricetulus_griseus_picr"
+        },
+        "specie 109": {
+        "name": "Alpaca",
+        "binomial name": "vicugna_pacos"
+        },
+        "specie 110": {
+        "name": "Blue tit",
+        "binomial name": "cyanistes_caeruleus"
+        },
+        "specie 111": {
+        "name": "Zig-zag eel",
+        "binomial name": "mastacembelus_armatus"
+        },
+        "specie 112": {
+        "name": "Pig-tailed macaque",
+        "binomial name": "macaca_nemestrina"
+        },
+        "specie 113": {
+        "name": "Ryukyu mouse",
+        "binomial name": "mus_caroli"
+        },
+        "specie 114": {
+        "name": "Angola colobus",
+        "binomial name": "colobus_angolensis_palliatus"
+        },
+        "specie 115": {
+        "name": "Sheep",
+        "binomial name": "ovis_aries"
+        },
+        "specie 116": {
+        "name": "Drill",
+        "binomial name": "mandrillus_leucophaeus"
+        },
+        "specie 117": {
+        "name": "Eastern happy",
+        "binomial name": "astatotilapia_calliptera"
+        },
+        "specie 118": {
+        "name": "Japanese medaka HNI",
+        "binomial name": "oryzias_latipes_hni"
+        },
+        "specie 119": {
+        "name": "Cod",
+        "binomial name": "gadus_morhua"
+        },
+        "specie 120": {
+        "name": "Hagfish",
+        "binomial name": "eptatretus_burgeri"
+        },
+        "specie 121": {
+        "name": "Tarsier",
+        "binomial name": "carlito_syrichta"
+        },
+        "specie 122": {
+        "name": "Indian medaka",
+        "binomial name": "oryzias_melastigma"
+        },
+        "specie 123": {
+        "name": "Sooty mangabey",
+        "binomial name": "cercocebus_atys"
+        },
+        "specie 124": {
+        "name": "Stickleback",
+        "binomial name": "gasterosteus_aculeatus"
+        },
+        "specie 125": {
+        "name": "Amazon molly",
+        "binomial name": "poecilia_formosa"
+        },
+        "specie 126": {
+        "name": "Mouse DBA/2J",
+        "binomial name": "mus_musculus_dba2j"
+        },
+        "specie 127": {
+        "name": "Mouse C57BL/6NJ",
+        "binomial name": "mus_musculus_c57bl6nj"
+        },
+        "specie 128": {
+        "name": "Dark-eyed junco",
+        "binomial name": "junco_hyemalis"
+        },
+        "specie 129": {
+        "name": "Chinese hamster CHOK1GS",
+        "binomial name": "cricetulus_griseus_chok1gshd"
+        },
+        "specie 130": {
+        "name": "Xenopus",
+        "binomial name": "xenopus_tropicalis"
+        },
+        "specie 131": {
+        "name": "Dingo",
+        "binomial name": "canis_lupus_dingo"
+        },
+        "specie 132": {
+        "name": "Dolphin",
+        "binomial name": "tursiops_truncatus"
+        },
+        "specie 133": {
+        "name": "Ugandan red Colobus",
+        "binomial name": "piliocolobus_tephrosceles"
+        },
+        "specie 134": {
+        "name": "Red-bellied piranha",
+        "binomial name": "pygocentrus_nattereri"
+        },
+        "specie 135": {
+        "name": "Mouse Lemur",
+        "binomial name": "microcebus_murinus"
+        },
+        "specie 136": {
+        "name": "Midas cichlid",
+        "binomial name": "amphilophus_citrinellus"
+        },
+        "specie 137": {
+        "name": "Caenorhabditis elegans",
+        "binomial name": "caenorhabditis_elegans"
+        },
+        "specie 138": {
+        "name": "Tetraodon",
+        "binomial name": "tetraodon_nigroviridis"
+        },
+        "specie 139": {
+        "name": "Makobe Island cichlid",
+        "binomial name": "pundamilia_nyererei"
+        },
+        "specie 140": {
+        "name": "Platyfish",
+        "binomial name": "xiphophorus_maculatus"
+        },
+        "specie 141": {
+        "name": "Shrew mouse",
+        "binomial name": "mus_pahari"
+        },
+        "specie 142": {
+        "name": "Chinese hamster CriGri",
+        "binomial name": "cricetulus_griseus_crigri"
+        },
+        "specie 143": {
+        "name": "Long-tailed chinchilla",
+        "binomial name": "chinchilla_lanigera"
+        },
+        "specie 144": {
+        "name": "Hyrax",
+        "binomial name": "procavia_capensis"
+        },
+        "specie 145": {
+        "name": "Mouse BALB/cJ",
+        "binomial name": "mus_musculus_balbcj"
+        },
+        "specie 146": {
+        "name": "Naked mole-rat female",
+        "binomial name": "heterocephalus_glaber_female"
+        },
+        "specie 147": {
+        "name": "Ruff",
+        "binomial name": "calidris_pugnax"
+        },
+        "specie 148": {
+        "name": "Vervet-AGM",
+        "binomial name": "chlorocebus_sabaeus"
+        },
+        "specie 149": {
+        "name": "Goat",
+        "binomial name": "capra_hircus"
+        },
+        "specie 150": {
+        "name": "Bushbaby",
+        "binomial name": "otolemur_garnettii"
+        },
+        "specie 151": {
+        "name": "Coelacanth",
+        "binomial name": "latimeria_chalumnae"
+        },
+        "specie 152": {
+        "name": "Pink-footed goose",
+        "binomial name": "anser_brachyrhynchus"
+        },
+        "specie 153": {
+        "name": "Macaque",
+        "binomial name": "macaca_mulatta"
+        },
+        "specie 154": {
+        "name": "Marmoset",
+        "binomial name": "callithrix_jacchus"
+        },
+        "specie 155": {
+        "name": "Turbot",
+        "binomial name": "scophthalmus_maximus"
+        },
+        "specie 156": {
+        "name": "Periophthalmus magnuspinnatus",
+        "binomial name": "periophthalmus_magnuspinnatus"
+        },
+        "specie 157": {
+        "name": "Chinese softshell turtle",
+        "binomial name": "pelodiscus_sinensis"
+        },
+        "specie 158": {
+        "name": "Leopard",
+        "binomial name": "panthera_pardus"
+        },
+        "specie 159": {
+        "name": "Degu",
+        "binomial name": "octodon_degus"
+        },
+        "specie 160": {
+        "name": "Climbing perch",
+        "binomial name": "anabas_testudineus"
+        },
+        "specie 161": {
+        "name": "Tongue sole",
+        "binomial name": "cynoglossus_semilaevis"
+        },
+        "specie 162": {
+        "name": "Mainland tiger snake",
+        "binomial name": "notechis_scutatus"
+        },
+        "specie 163": {
+        "name": "Mouse CBA/J",
+        "binomial name": "mus_musculus_cbaj"
+        },
+        "specie 164": {
+        "name": "Tilapia",
+        "binomial name": "oreochromis_niloticus"
+        },
+        "specie 165": {
+        "name": "Gelada",
+        "binomial name": "theropithecus_gelada"
+        },
+        "specie 166": {
+        "name": "Prairie vole",
+        "binomial name": "microtus_ochrogaster"
+        },
+        "specie 167": {
+        "name": "Fugu",
+        "binomial name": "takifugu_rubripes"
+        },
+        "specie 168": {
+        "name": "Australian saltwater crocodile",
+        "binomial name": "crocodylus_porosus"
+        },
+        "specie 169": {
+        "name": "Rabbit",
+        "binomial name": "oryctolagus_cuniculus"
+        },
+        "specie 170": {
+        "name": "Wild yak",
+        "binomial name": "bos_mutus"
+        },
+        "specie 171": {
+        "name": "Red fox",
+        "binomial name": "vulpes_vulpes"
+        },
+        "specie 172": {
+        "name": "Bicolor damselfish",
+        "binomial name": "stegastes_partitus"
+        },
+        "specie 173": {
+        "name": "Shrew",
+        "binomial name": "sorex_araneus"
+        },
+        "specie 174": {
+        "name": "Mouse AKR/J",
+        "binomial name": "mus_musculus_akrj"
+        },
+        "specie 175": {
+        "name": "Greater amberjack",
+        "binomial name": "seriola_dumerili"
+        },
+        "specie 176": {
+        "name": "Chicken",
+        "binomial name": "gallus_gallus"
+        },
+        "specie 177": {
+        "name": "Mouse NOD/ShiLtJ",
+        "binomial name": "mus_musculus_nodshiltj"
+        },
+        "specie 178": {
+        "name": "Painted turtle",
+        "binomial name": "chrysemys_picta_bellii"
+        },
+        "specie 179": {
+        "name": "Olive baboon",
+        "binomial name": "papio_anubis"
+        },
+        "specie 180": {
+        "name": "Alpine marmot",
+        "binomial name": "marmota_marmota_marmota"
+        },
+        "specie 181": {
+        "name": "Orangutan",
+        "binomial name": "pongo_abelii"
+        },
+        "specie 182": {
+        "name": "Asian bonytongue",
+        "binomial name": "scleropages_formosus"
+        },
+        "specie 183": {
+        "name": "Squirrel",
+        "binomial name": "ictidomys_tridecemlineatus"
+        },
+        "specie 184": {
+        "name": "C.savignyi",
+        "binomial name": "ciona_savignyi"
+        },
+        "specie 185": {
+        "name": "Golden snub-nosed monkey",
+        "binomial name": "rhinopithecus_roxellana"
+        },
+        "specie 186": {
+        "name": "Northern pike",
+        "binomial name": "esox_lucius"
+        },
+        "specie 187": {
+        "name": "Turkey",
+        "binomial name": "meleagris_gallopavo"
+        },
+        "specie 188": {
+        "name": "Mouse LP/J",
+        "binomial name": "mus_musculus_lpj"
+        },
+        "specie 189": {
+        "name": "Damara mole rat",
+        "binomial name": "fukomys_damarensis"
+        },
+        "specie 190": {
+        "name": "Tiger",
+        "binomial name": "panthera_tigris_altaica"
+        },
+        "specie 191": {
+        "name": "Yellowtail amberjack",
+        "binomial name": "seriola_lalandi_dorsalis"
+        },
+        "specie 192": {
+        "name": "Ocean sunfish",
+        "binomial name": "mola_mola"
+        },
+        "specie 193": {
+        "name": "American black bear",
+        "binomial name": "ursus_americanus"
+        },
+        "specie 194": {
+        "name": "Tree Shrew",
+        "binomial name": "tupaia_belangeri"
+        },
+        "specie 195": {
+        "name": "Opossum",
+        "binomial name": "monodelphis_domestica"
+        },
+        "specie 196": {
+        "name": "Rat",
+        "binomial name": "rattus_norvegicus"
+        },
+        "specie 197": {
+        "name": "Mouse 129S1/SvImJ",
+        "binomial name": "mus_musculus_129s1svimj"
+        },
+        "specie 198": {
+        "name": "Human",
+        "binomial name": "homo_sapiens"
+        },
+        "specie 199": {
+        "name": "Microbat",
+        "binomial name": "myotis_lucifugus"
+        }
         }
 
-        .card {
-          width: 80%;
-          border-radius: 5px;
-          background-color: #B7EC77;
-          margin-left: auto;
-          margin-right: auto;
+-> limit = 10: http://localhost:8000/listSpecies?limit=10&json=1
+        {
+        "specie 1": {
+        "name": "Mouse",
+        "binomial name": "mus_musculus"
+        },
+        "specie 2": {
+        "name": "Human",
+        "binomial name": "homo_sapiens"
+        },
+        "specie 3": {
+        "name": "Guinea Pig",
+        "binomial name": "cavia_porcellus"
+        },
+        "specie 4": {
+        "name": "Mouse CBA/J",
+        "binomial name": "mus_musculus_cbaj"
+        },
+        "specie 5": {
+        "name": "Midas cichlid",
+        "binomial name": "amphilophus_citrinellus"
+        },
+        "specie 6": {
+        "name": "Anole lizard",
+        "binomial name": "anolis_carolinensis"
+        },
+        "specie 7": {
+        "name": "Capuchin",
+        "binomial name": "cebus_capucinus"
+        },
+        "specie 8": {
+        "name": "Ballan wrasse",
+        "binomial name": "labrus_bergylta"
+        },
+        "specie 9": {
+        "name": "Leopard",
+        "binomial name": "panthera_pardus"
+        },
+        "specie 10": {
+        "name": "Fugu",
+        "binomial name": "takifugu_rubripes"
+        }
         }
 
-        img {
-          border-radius: 5px 5px 0 0;
+-> limit is out of range: 1345: http://localhost:8000/listSpecies?limit=1345&json=1
+        {
+        "error": "there are not that many species in the database. Please, choose a number from 1 to 199."
         }
 
-        .container {
-          position: relative;
-          text-align:left
-          color:white;
-          padding: 8px;
-          margin-left: 20px;
-          margin-right:20px;
-          text-color:black;
+-> limit is something absurd: the letter 'a': http://localhost:8000/listSpecies?limit=a&json=1
+        {
+        "error": "invalid limit parameter. Please, try again with a number from 1 to 199."
         }
-
-        </style>
-        <body>
-        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">KARYOTYPE</h1>
-        <div class="card">
-          <img src= "https://i.imgur.com/ihzq1ZU.jpg" style="width:100%">
-          <div class="container">
-            <h3 style="font-family:courier;font-weight:bold">Input specie: guinea pig.<b></b></h3>
-            <p style="font-family:helvetica;font-size:90%;word-break:break-all">Showing karyotype: Karyotype not available in the database.</p>
-          </div>
-        </div>
-        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
-        </body>
-        </html>
-
--> input specie is not a word: 55: [http://localhost:8000/karyotype?specie=55]
-
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
-        </head>
-        <style>
-        html {
-          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
-          -webkit-background-size: cover;
-          -moz-background-size: cover;
-          -o-background-size: cover;
-          background-size: cover;
-        }
-
-        .card {
-          width: 80%;
-          border-radius: 5px;
-          background-color: #B7EC77;
-          margin-left: auto;
-          margin-right: auto;
-        }
-
-        img {
-          border-radius: 5px 5px 0 0;
-        }
-
-        .container {
-          position: relative;
-          text-align:left
-          color:white;
-          padding: 8px;
-          margin-left: 20px;
-          margin-right:20px;
-          text-color:black;
-        }
-
-        </style>
-        <body>
-        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">KARYOTYPE</h1>
-        <div class="card">
-          <img src= "https://i.imgur.com/aKaXdU6.jpg" style="width:100%">
-          <div class="container">
-            <h3 style="font-family:courier;font-weight:bold">Input specie: 55.<b></b></h3>
-            <p style="font-family:helvetica;font-size:90%;word-break:break-all">I'm sorry to tell you that '55' is not a specie. Try again.</p>
-          </div>
-        </div>
-        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
-        </body>
-        </html>
-
-------------------------------------- /chromosomeLenght ----------------------------------------------------------------
-
--> valid specie and chromosome: human and 12: [http://localhost:8000/chromosomeLength?specie=human&chromo=12]
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
-        </head>
-        <style>
-        html {
-          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
-          -webkit-background-size: cover;
-          -moz-background-size: cover;
-          -o-background-size: cover;
-          background-size: cover;
-        }
-
-        .card {
-          width: 80%;
-          border-radius: 5px;
-          background-color: #ECE577;
-          margin-left: auto;
-          margin-right: auto;
-        }
-
-        img {
-          border-radius: 5px 5px 0 0;
-        }
-
-        .container {
-          position: relative;
-          text-align:left
-          color:white;
-          padding: 8px;
-          margin-left: 20px;
-          margin-right:20px;
-          text-color:black;
-        }
-
-        </style>
-        <body>
-        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">CHROMOSOME LENGHT</h1>
-        <div class="card">
-          <img src= "https://i.imgur.com/RuuZ4VG.jpg" style="width:100%">
-          <div class="container">
-            <h3 style="font-family:courier;font-weight:bold">Length of chromosome '12' of the specie 'human' is 133275309 bp.<b></b></h3>
-            <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
-          </div>
-        </div>
-        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
-        </body>
-
--> valid specie without karyotype: guinea pig and 12: [http://localhost:8000/chromosomeLength?specie=guinea+pig&chromo=12]
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
-        </head>
-        <style>
-        html {
-          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
-          -webkit-background-size: cover;
-          -moz-background-size: cover;
-          -o-background-size: cover;
-          background-size: cover;
-        }
-
-        .card {
-          width: 80%;
-          border-radius: 5px;
-          background-color: #ECE577;
-          margin-left: auto;
-          margin-right: auto;
-        }
-
-        img {
-          border-radius: 5px 5px 0 0;
-        }
-
-        .container {
-          position: relative;
-          text-align:left
-          color:white;
-          padding: 8px;
-          margin-left: 20px;
-          margin-right:20px;
-          text-color:black;
-        }
-
-        </style>
-        <body>
-        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">CHROMOSOME LENGHT</h1>
-        <div class="card">
-          <img src= "https://i.imgur.com/poj7xfa.jpg" style="width:100%">
-          <div class="container">
-            <h3 style="font-family:courier;font-weight:bold">Chromosome not found. There are 0 chromosomes available. Check the 'Karyotype' page to know them<b></b></h3>
-            <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
-          </div>
-        </div>
-        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
-        </body>
-        </html>
-
-invalid specie/specie not in database without considering the chromosome (it is not relevant): duck and 12: [http://localhost:8000/chromosomeLength?specie=duck&chromo=12]
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
-        </head>
-        <style>
-        html {
-          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
-          -webkit-background-size: cover;
-          -moz-background-size: cover;
-          -o-background-size: cover;
-          background-size: cover;
-        }
-
-        .card {
-          width: 80%;
-          border-radius: 5px;
-          background-color: #ECE577;
-          margin-left: auto;
-          margin-right: auto;
-        }
-
-        img {
-          border-radius: 5px 5px 0 0;
-        }
-
-        .container {
-          position: relative;
-          text-align:left
-          color:white;
-          padding: 8px;
-          margin-left: 20px;
-          margin-right:20px;
-          text-color:black;
-        }
-
-        </style>
-        <body>
-        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">CHROMOSOME LENGHT</h1>
-        <div class="card">
-          <img src= "https://i.imgur.com/poj7xfa.jpg" style="width:100%">
-          <div class="container">
-            <h3 style="font-family:courier;font-weight:bold">Karyotype for 'duck' is not available.<b></b></h3>
-            <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
-          </div>
-        </div>
-        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
-        </body>
-        </html>
-
--> valid specie with inavlid chromosome (I): human and 123: [http://localhost:8000/chromosomeLength?specie=human&chromo=123]
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
-        </head>
-        <style>
-        html {
-          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
-          -webkit-background-size: cover;
-          -moz-background-size: cover;
-          -o-background-size: cover;
-          background-size: cover;
-        }
-
-        .card {
-          width: 80%;
-          border-radius: 5px;
-          background-color: #ECE577;
-          margin-left: auto;
-          margin-right: auto;
-        }
-
-        img {
-          border-radius: 5px 5px 0 0;
-        }
-
-        .container {
-          position: relative;
-          text-align:left
-          color:white;
-          padding: 8px;
-          margin-left: 20px;
-          margin-right:20px;
-          text-color:black;
-        }
-
-        </style>
-        <body>
-        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">CHROMOSOME LENGHT</h1>
-        <div class="card">
-          <img src= "https://i.imgur.com/poj7xfa.jpg" style="width:100%">
-          <div class="container">
-            <h3 style="font-family:courier;font-weight:bold">Chromosome not found. There are 25 chromosomes available. Check the 'Karyotype' page to know them<b></b></h3>
-            <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
-          </div>
-        </div>
-        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
-        </body>
-        </html>
-
--> valid specie with inavlid chromosome (II): human and abc: [http://localhost:8000/chromosomeLength?specie=human&chromo=abc]
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
-        </head>
-        <style>
-        html {
-          background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
-          -webkit-background-size: cover;
-          -moz-background-size: cover;
-          -o-background-size: cover;
-          background-size: cover;
-        }
-
-        .card {
-          width: 80%;
-          border-radius: 5px;
-          background-color: #ECE577;
-          margin-left: auto;
-          margin-right: auto;
-        }
-
-        img {
-          border-radius: 5px 5px 0 0;
-        }
-
-        .container {
-          position: relative;
-          text-align:left
-          color:white;
-          padding: 8px;
-          margin-left: 20px;
-          margin-right:20px;
-          text-color:black;
-        }
-
-        </style>
-        <body>
-        <h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">CHROMOSOME LENGHT</h1>
-        <div class="card">
-          <img src= "https://i.imgur.com/aKaXdU6.jpg" style="width:100%">
-          <div class="container">
-            <h3 style="font-family:courier;font-weight:bold">I'm sorry to tell you that 'ABC' is not a valid input chromosome. Check the 'Karyotype' page to know them<b></b></h3>
-            <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
-          </div>
-        </div>
-        <a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
-        </body>
-        </html>
