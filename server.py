@@ -29,9 +29,22 @@ def get_json(ENDPOINT):
     print('Json retrieved', json_info)
     return json_info
 
+def dict_species(limit, list_1, list_2):
+    if str(limit).isdigit() and limit > 0 and limit <= len(list_1):
+        json_dict = dict()
+
+        for i in range(limit):
+            json_dict["specie {}".format(str(i+1))] = {
+                "name" : list_1[i], "binomial name" : list_2[i]
+            }
+
+        return json_dict
+
+
 class TestHandler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
+        global json_data
         path = self.path
 
         termcolor.cprint("GET Received", "green")
@@ -58,12 +71,17 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 species_list.append(json_species[i]["display_name"])
                 name_species_list.append(json_species[i]["name"])
 
-
-
             if "limit" in path:
-                limit = path[path.find("=") + 1:]
+
+                if "&json=1" in path:
+                    limit = path[path.find("=") + 1:path.find("&")]
+                    print(limit)
+
+                else:
+                    limit = path[path.find("=") + 1:]
 
                 if limit == "":
+                    limit = len(species_list)
                     header_inf = "List of species: "
                     photo = "https://i.imgur.com/RMjXpq5.jpg"
                     data = list()
@@ -72,6 +90,9 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         data.append("<li style=\"font-family:helvetica;font-size:90%;word-break:break-all\"><p style=\"font-weight:bold\">{}.</p> Binomial name: {}</li>".format(str(species_list[i]), str(name_species_list[i]).capitalize().replace("_", " ")))
 
                     data = "<ol>{}</ol>".format(str(data).strip("[]").replace("'", "").replace(",", ""))
+
+                    json_data = dict_species(limit, species_list, name_species_list)
+                    termcolor.cprint(json_data, "green")
 
                 else:
                     try:
@@ -82,10 +103,19 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             data = "Please, choose a number from 1 to {}.".format(str(len(species_list)))
                             photo = "https://i.imgur.com/poj7xfa.jpg"
 
+                            json_data = dict()
+                            json_data["error"] = "there are not that many species in the database. Please, choose a number from 1 to {}.".format(str(len(species_list)))
+
+                            termcolor.cprint(json_data, 'red')
+
                         elif limit <= 0:
-                            header_inf = "Error: invalid limit parameter. Please, try again with a number from 1 to {}.".format(str(len(species_list)))
+                            header_inf = "Error: Invalid limit parameter. Please, try again with a number from 1 to {}.".format(str(len(species_list)))
                             data = ""
                             photo = "https://i.imgur.com/poj7xfa.jpg"
+
+                            json_data = dict()
+                            json_data["error"] = "invalid limit parameter. Please, try again with a number from 1 to {}.".format(str(len(species_list)))
+                            termcolor.cprint(json_data, "blue")
 
                         else:
                             header_inf = "Showing {} species.".format(str(limit))
@@ -97,6 +127,9 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                             data = "<ol>{}</ol>".format(str(data).strip("[]").replace("'", "").replace(",", ""))
 
+                            json_data = dict_species(limit, species_list, name_species_list)
+                            termcolor.cprint(json_data, "yellow")
+
                         termcolor.cprint("Limit is {}".format(limit), "green")
 
                     except ValueError:
@@ -104,7 +137,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         data = ""
                         photo = "https://i.imgur.com/aKaXdU6.jpg"
 
+                        json_data = {"error": "invalid limit parameter. Please, try again with a number from 1 to {}.".format(str(len(species_list)))}
+                        termcolor.cprint(json_data, "yellow")
+
             else:
+                limit = len(species_list)
                 header_inf = "List of species: "
                 photo = "https://i.imgur.com/RMjXpq5.jpg"
                 data = list()
@@ -115,6 +152,9 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 data = "<ol>{}</ol>".format(str(data).strip("[]").replace("'", "").replace(",", ""))
 
             data = str(data).strip("[]").replace("'", "")
+
+            json_data = dict_species(limit, species_list, name_species_list)
+            print(json_data)
 
             with open("results.html", "r") as file:
                 content = file.read().replace("OPERATION", "LIST OF SPECIES").replace("IMAGE", photo).replace("HEADER", header_inf).replace("DATA", data).replace("COLOURCARD", "#6da4f9")
@@ -367,14 +407,27 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 content = file.read()
                 file.close()
 
-        self.send_response(200)
+        if "json=1" in path:
+            content = json.dumps(json_data)
+            print(content)
 
-        self.send_header('Content-Type', 'text/html')
-        self.send_header('Content-Length', len(str.encode(content)))
+            self.send_response(200)
 
-        self.end_headers()
+            self.send_header('Content-Type', 'application/json')
+            self.send_header('Content-Length', len(str.encode(content)))
+            self.end_headers()
 
-        self.wfile.write(str.encode(content))
+            self.wfile.write(str.encode(content))
+
+        else:
+            self.send_response(200)
+
+            self.send_header('Content-Type', 'text/html')
+            self.send_header('Content-Length', len(str.encode(content)))
+
+            self.end_headers()
+
+            self.wfile.write(str.encode(content))
 
 Handler = TestHandler
 
