@@ -26,7 +26,8 @@ def get_json(ENDPOINT):
     conn.close()
     json_info = json.loads(text_json)
 
-    print('Json retrieved', json_info)
+    print('Json retrieved:', json_info)
+
     return json_info
 
 def dict_species(limit, list_1, list_2):
@@ -50,6 +51,20 @@ def dict_species(limit, list_1, list_2):
 
     return json_dict
 
+def dict_karyotype(limit, specie, data):
+    if limit == 'key':
+        json_dict = {"error": "specie '{}' is not available in the database.".format(specie.replace("_", " "))}
+
+    elif limit == 'value':
+        json_dict = {"error" : "'{}' is not a specie. Try again.".format(specie)}
+
+    else:
+        json_dict = dict()
+
+        for i in range(limit):
+            json_dict["karyotype for {}".format(specie)] = data
+
+    return json_dict
 
 class TestHandler(http.server.BaseHTTPRequestHandler):
 
@@ -66,7 +81,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         if path == "/":
             with open("index.html", "r") as f:
                 content = f.read()
-
 
         elif "listSpecies" in path:
             json_species = list()
@@ -101,9 +115,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                     data = "<ol>{}</ol>".format(str(data).strip("[]").replace("'", "").replace(",", ""))
 
-                    json_data = dict_species(limit, species_list, name_species_list)
-                    termcolor.cprint(json_data, "green")
-
                 else:
                     try:
                         limit = int(limit)
@@ -113,16 +124,10 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             data = "Please, choose a number from 1 to {}.".format(str(len(species_list)))
                             photo = "https://i.imgur.com/poj7xfa.jpg"
 
-                            json_data = dict_species(limit, species_list, name_species_list)
-                            termcolor.cprint(json_data, 'red')
-
                         elif limit <= 0:
                             header_inf = "Error: Invalid limit parameter. Please, try again with a number from 1 to {}.".format(str(len(species_list)))
                             data = ""
                             photo = "https://i.imgur.com/poj7xfa.jpg"
-
-                            json_data = dict_species(limit, species_list, name_species_list)
-                            termcolor.cprint(json_data, "blue")
 
                         else:
                             header_inf = "Showing {} species.".format(str(limit))
@@ -134,18 +139,10 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                             data = "<ol>{}</ol>".format(str(data).strip("[]").replace("'", "").replace(",", ""))
 
-                            json_data = dict_species(limit, species_list, name_species_list)
-                            termcolor.cprint(json_data, "yellow")
-
-                        termcolor.cprint("Limit is {}".format(limit), "green")
-
                     except ValueError:
                         header_inf = "Error: invalid limit parameter. Please, try again with a number from 1 to {}.".format(str(len(species_list)))
                         data = ""
                         photo = "https://i.imgur.com/aKaXdU6.jpg"
-
-                        json_data = dict_species(limit, species_list, name_species_list)
-                        termcolor.cprint(json_data, "yellow")
 
             else:
                 limit = len(species_list)
@@ -161,17 +158,23 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             data = str(data).strip("[]").replace("'", "")
 
             json_data = dict_species(limit, species_list, name_species_list)
-            print(json_data)
+
 
             with open("results.html", "r") as file:
                 content = file.read().replace("OPERATION", "LIST OF SPECIES").replace("IMAGE", photo).replace("HEADER", header_inf).replace("DATA", data).replace("COLOURCARD", "#6da4f9")
                 file.close()
 
         elif "karyotype" in path:
-            specie_input = path[path.find("=") + 1:].lower().replace("+", "_").replace("/", "").lower()
+
+            if "json=1" in path:
+                specie_input = path[path.find("=") + 1:path.find("&")].lower().replace("+", "_").replace("/", "").lower()
+
+            else:
+                specie_input = path[path.find("=") + 1:].lower().replace("+", "_").replace("/", "").lower()
+
             karyo = get_json("/info/assembly/" + specie_input + "?content-type=application/json")
             specie = specie_input.replace("_", " ")
-            data = list()
+            data_list = list()
 
             try:
                 try:
@@ -181,22 +184,31 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         data = "Karyotype not available in the database."
                         photo = "https://i.imgur.com/poj7xfa.jpg"
 
-
                     else:
                         for i in range(len(karyotype)):
-                            data.append(karyotype[i])
+                            data_list.append(karyotype[i])
 
-                    data = "Showing karyotype: {}".format(str(data).strip("[]").replace("'", ""))
+                    data = "Showing karyotype: {}".format(str(data_list).strip("[]").replace("'", ""))
                     photo = "https://i.imgur.com/ihzq1ZU.jpg"
 
+                    DATA = data_list
+                    LIMIT = len(karyotype)
 
                 except KeyError:
                     data = "Error: specie '{}' is not available in the database.".format(specie.replace("_", " "))
                     photo = "https://i.imgur.com/poj7xfa.jpg"
 
+                    DATA = None
+                    LIMIT = "key"
+
             except ValueError:
                 data = "Error: '{}' is not a specie. Try again.".format(specie)
                 photo = "https://i.imgur.com/aKaXdU6.jpg"
+
+                DATA = None
+                LIMIT = "value"
+
+            json_data = dict_karyotype(LIMIT, specie, DATA)
 
             with open("results.html", "r") as file:
                 content = file.read().replace("OPERATION", "KARYOTYPE").replace("IMAGE", photo).replace("HEADER", str("Input specie: {}.".format(specie))).replace("DATA", data).replace("COLOURCARD", "#B7EC77")
