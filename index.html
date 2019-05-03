@@ -91,6 +91,8 @@ h3 {
         <form action="listSpecies" method="get">
             <br><input type="search" name="limit" size="60" placeholder="Type the number of species..."/>
             <input type="submit" value="Generate list of species"/>
+            <br>
+            <br><input type="checkbox" name ="json" value="1" /> Retrieve data in .json format
         </form>
 </div>
 
@@ -100,6 +102,8 @@ h3 {
       <form action="karyotype" method="get">
           <input required type="search" name="specie" size="30" placeholder="Type the specie's karyotype..."/>
           <input type="submit" value="Get karyotype"/>
+          <br>
+          <br><input type="checkbox" name ="json" value="1" /> Retrieve data in .json format
       </form>
 </div>
 
@@ -110,6 +114,8 @@ h3 {
            <input required type="search" name="specie" size="40" placeholder="Type the specie..."/>
            <input required type="search" name="chromo" size="30" placeholder="Type the chromosome number..."/>
            <input type="submit" value="Get lenght"/>
+           <br>
+           <br><input type="checkbox" name ="json" value="1" /> Retrieve data in .json format
       </form>
 
 </div>
