@@ -66,6 +66,18 @@ def dict_karyotype(limit, specie, data):
 
     return json_dict
 
+def dict_length(chromo, specie, length):
+    if chromo == "key":
+        json_dict = {"error": "chromosome not found"}
+
+    elif chromo == "specie":
+        json_dict = {"error": "karyotype for {} is not available.".format(specie)}
+
+    else:
+        json_dict = {"length of chromosome {} for {}".format(chromo, specie): length}
+
+    return json_dict
+
 class TestHandler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
@@ -159,14 +171,13 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
             json_data = dict_species(limit, species_list, name_species_list)
 
-
             with open("results.html", "r") as file:
                 content = file.read().replace("OPERATION", "LIST OF SPECIES").replace("IMAGE", photo).replace("HEADER", header_inf).replace("DATA", data).replace("COLOURCARD", "#6da4f9")
                 file.close()
 
         elif "karyotype" in path:
 
-            if "json=1" in path:
+            if "&json=1" in path:
                 specie_input = path[path.find("=") + 1:path.find("&")].lower().replace("+", "_").replace("/", "").lower()
 
             else:
@@ -188,11 +199,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         for i in range(len(karyotype)):
                             data_list.append(karyotype[i])
 
-                    data = "Showing karyotype: {}".format(str(data_list).strip("[]").replace("'", ""))
-                    photo = "https://i.imgur.com/ihzq1ZU.jpg"
+                        data = "Showing karyotype: {}".format(str(data_list).strip("[]").replace("'", ""))
+                        photo = "https://i.imgur.com/ihzq1ZU.jpg"
 
-                    DATA = data_list
-                    LIMIT = len(karyotype)
+                    DATA = None
+                    LIMIT = "key"
 
                 except KeyError:
                     data = "Error: specie '{}' is not available in the database.".format(specie.replace("_", " "))
@@ -222,17 +233,18 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 json_karyo = karyo["karyotype"]
                 karyotype = karyo["top_level_region"]
 
-                print("Karyotype is", karyotype)
+                if "&json=1" in path:
+                    num = path[path.find("chromo=") + 7: path.find("&json=1")]
 
-                num = path[path.find("chromo=") + 7:]
+                else:
+                    num = path[path.find("chromo=") + 7:]
+
                 print(num, type(num))
 
                 if num.isalpha():
                     num = str(num.upper())
 
                     for i in karyotype:
-                        print(i["name"])
-
                         if num == i["name"]:
                             length = i["length"]
                             break
@@ -244,12 +256,27 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         data = "Error '{}' is not a valid input chromosome. Check the 'Karyotype' page to know them".format(num)
                         photo = "https://i.imgur.com/aKaXdU6.jpg"
 
+                        NUM = "key"
+                        LENGTH = None
+
+
                     else:
                         data = "Length of chromosome '{}' of the specie '{}' is {} bp.".format(num, specie.replace("_", " "), str(length))
                         photo = "https://i.imgur.com/RuuZ4VG.jpg"
 
+                        NUM = num
+                        LENGTH = length
+
                 elif num.isdigit():
-                    if len(json_karyo) >= int(num):
+                    json_karyo_digit = list()
+
+                    for e in json_karyo:
+                        if e.isdigit():
+                            json_karyo_digit.append(e)
+
+                    print(len(json_karyo_digit), int(num))
+
+                    if len(json_karyo_digit) >= int(num):
                         for e in karyotype:
                             if num == e['name']:
                                 length = e['length']
@@ -258,20 +285,22 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         data = "Length of chromosome '{}' of the specie '{}' is {} bp.".format(num, specie.replace("_", " "), str(length))
                         photo = "https://i.imgur.com/RuuZ4VG.jpg"
 
-                    elif len(json_karyo)< int(num):
-                        data = "Error: chromosome not found. There are {} chromosomes available. Check the 'Karyotype' page to know them".format(str(len(json_karyo)))
+                        NUM = num
+                        LENGTH = length
+
+                    else:
+                        data = "Error: chromosome not found. Check the 'Karyotype' page to know them".format(str(len(json_karyo)))
                         photo = "https://i.imgur.com/poj7xfa.jpg"
+
+                        NUM = "key"
+                        LENGTH = None
 
                 else:
                     for e in num:
                         if e.isalpha():
                             num = num.replace(e, e.upper())
 
-                    print(num)
-
                     for i in karyotype:
-                        print(i["name"])
-
                         if num == i["name"]:
                             length = i["length"]
                             break
@@ -283,14 +312,24 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         data = "Error: chromosome not found. There are {} chromosomes available. Check the 'Karyotype' page to know them".format(str(len(json_karyo)))
                         photo = "https://i.imgur.com/aKaXdU6.jpg"
 
+                        NUM = "key"
+                        LENGTH = None
+
                     else:
                         data = "Length of chromosome '{}' of the specie '{}' is {} bp.".format(num, specie.replace("_", " "), str(length))
                         photo = "https://i.imgur.com/RuuZ4VG.jpg"
 
+                        NUM = num
+                        LENGTH = length
 
             except KeyError:
-                data= "Error: karyotype for '{}' is not available.".format(specie.replace("_", " "))
+                data = "Error: karyotype for '{}' is not available.".format(specie.replace("_", " "))
                 photo = "https://i.imgur.com/poj7xfa.jpg"
+
+                NUM = "specie"
+                LENGTH = None
+
+            json_data = dict_length(NUM, specie, LENGTH)
 
             with open("results.html", "r") as file:
                 content = file.read().replace("OPERATION", "CHROMOSOME LENGHT").replace("IMAGE", photo).replace("HEADER", str(data)).replace("DATA", "").replace("COLOURCARD", "#ECE577")
