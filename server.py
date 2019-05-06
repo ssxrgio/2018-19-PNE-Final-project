@@ -541,7 +541,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
             json_data = {"error": "page not found"}
 
-            response = 400
+            response = 404
 
         if "json=1" in path:
             content = json.dumps(json_data)
