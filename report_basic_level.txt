@@ -533,7 +533,7 @@ img {
 </body>
 </html>
 
--> specie does not exists independently on the chromosome input: /chromosomeLength?specie=fish&chromo=33
+-> specie does not exists independently of the chromosome input: /chromosomeLength?specie=fish&chromo=33
 
 <!DOCTYPE html>
 <html>
