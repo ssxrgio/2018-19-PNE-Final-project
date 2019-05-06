@@ -1,0 +1,590 @@
+------------------------------------------ endpoint = geneSeq --------------------------------------------------------------------
+
+-> gene exists: /geneSeq?gene=frat1
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+  <title>Data Retrieved Results</title>
+</head>
+<style>
+html {
+  background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.card {
+  width: 80%;
+  border-radius: 5px;
+  background-color: #EC7789;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+}
+
+.container {
+  position: relative;
+  text-align:left
+  color:white;
+  padding: 8px;
+  margin-left: 20px;
+  margin-right:20px;
+  text-color:black;
+}
+
+</style>
+<body>
+<h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">GENE SEQUENCE</h1>
+<div class="card">
+  <img src= "https://i.imgur.com/Fhayqk0.jpg" style="width:100%">
+  <div class="container">
+    <h3 style="font-family:courier;font-weight:bold">The sequence for 'FRAT1' is: <b></b></h3>
+    <p style="font-family:helvetica;font-size:90%;word-break:break-all">ATTCCGGCTCCCGCGGCTGCAGGCGCGCGGCTAGAGTGCCTGGCGGGCTCCGGCTTCCGCGTCCGCCCCGGCCCCGGTCCAGACTTAGTCTTCAGCTCCGCGCCCGCTCCGCCGCGGCCCACCGCGCCCGCCGGCAGCCGAGCCCCCAGCGACGCCCGCACAGCTCCGGGTGCCCAGACAGGGGGCCATGCCGTGCCGGAGGGAGGAGGAAGAGGAAGCCGGCGAGGAGGCGGAGGGGGAGGAAGAGGAGGAGGACAGCTTCCTCCTACTGCAGCAGTCAGTGGCGCTGGGCAGCTCGGGCGAGGTGGACCGGCTGGTGGCCCAGATCGGCGAGACGCTGCAGCTGGACGCGGCGCAGCACAGCCCGGCCTCGCCGTGCGGGCCCCCGGGGGCGCCGCTGCGGGCCCCGGGGCCCCTGGCTGCGGCGGTGCCGGCGGACAAGGCCAGGTCCCCGGCGGTGCCGCTGCTGCTGCCGCCCGCGTTGGCGGAGACTGTGGGCCCGGCGCCCCCTGGGGTCCTGCGCTGCGCCCTGGGGGACCGCGGCCGCGTGCGGGGCCGCGCTGCGCCCTACTGCGTGGCCGAGCTCGCCACAGGCCCCAGCGCGCTGTCCCCACTGCCCCCTCAGGCCGACCTTGATGGGCCTCCGGGAGCTGGCAAGCAGGGCATCCCGCAGCCGCTGTCGGGTCCGTGCCGGCGAGGATGGCTCCGGGGCGCCGCCGCCTCCCGCCGCCTGCAGCAGCGACGCGGGTCCCAACCAGAAACCCGCACAGGCGACGACGACCCGCACCGGCTTCTGCAGCAGCTAGTGCTCTCTGGAAACCTCATCAAGGAGGCCGTGCGAAGGCTTCATTCGCGACGGCTGCAGTTACGTGCAAAGCTTCCCCAACGCCCGCTCCTGGGACCTCTGTCGGCCCCGGTGCATGAACCCCCTTCGCCTCGCAGCCCTCGCGCGGCCTGCAGTGACCCTGGCGCCTCCGGGAGGGCGCAGCTCAGAACTGGCGACGGCGTTCTTGTGCCTGGCAGCTAACACGCCCGGGGTGGCCACAGCGCCAGCCTCAGACTGGAGGGCAAGGGGTTCCCTTGAGGGCTGCAGTTCTACTCAGGCTGGTGGAGAACTCTGGCTTTTGGAAGCGAGAGTAAAAAGCTAATGACGAGGAACCGAAAAATCGCGAGTGTTTCGCGGGTAACTGGGGTTGAGGGCCAAAATATTTGGAATGAAGGACTTTGGCCCTATTTAAGGCAGATTTTACAGAGCGCACCTCAAACGTACAAGTCAGTAGGACTCCTTATTTGGCGTGACCCGACCTGGCCGCGGAGCCTGCATTTCCTCGCAGCCTCTCAGTGCCCTCCAGCCCCGCGACCATGTGGCCACAATCCACGCTTCTCCGGATCGCGGTGCGCCGGAACCACGGAGGATGATGCCAGTTACTTGCTTTACCTTTTCAGGGCTGGCTCCTGATCCACTTTGGGGGAGGAGAACATGAGTAGATAATTTCAGGGTGCAGCCCAATCTGCCAGACTTAAAAAAACCATCTTGTGTCTTTGGAGGTGCTGCTTAATACCAAACATGCGGTGCCATGAAGGGACCCTTTGGGGGTTGAATAGGAGTTAACCCCTGCGCTCTCTTTGCAACTGTCTCTCTTCTCAGAGTGGTGGGGGAAGGCTGTACGACACGGGTGGGGAAAGGAGGTGGGGGCGGGGAGTATTGAATGGTGGTGGAAGGGTAGAGAGGCGCGGAGTGAACCCCACGCCCTGTCTAAAGTGTATTTTCAGAGCCGGCCCGCCTCTCCTCGGTTCAAGGTCACTGTTTCCTGGGCACGCACTGGGTTGCGGGACAGAGTAGCCAGGTTCTGCCGGTGCTCGGAGAAGAGCGCAGTGTTTTGCAAGTGCTGGAGTCTCCTGAGGACACGCGCGTCGCCGCCACCGCGGGTGTGGGAAAGCGCGGACGTGCTGGGCGGCTGTGCTTCGGTAGGCGACCACCGCCCCTGGCCGCGCTCCGGGCTTTCACGGAAACTCCCGAGACCGGGCCCTGGGTTCCTCCTCTCCTACTCGGCTCTGCAGTCCTACTCAAGCGGGTGGCTCTGGGATCCTGGGGGCCTGGGTTGGGGGCTAGGGAGACGCCATGTGATGGACACTCCAGGGACACACAGCCTAGCACAGCAGCTTATAATGGGCTCTCCGGGGCCATTTGCAATAACAGCTGCAATTCCCTGGATAGACGAGTTGATTTCCTCCCTCTGCCCCTCCCCCAGCCATGCCAGCTGGCCTTTGTAAGTGCAGGAAACCGAGTAGAAAATGTGACCCTCCAAATGGAGAAGCTGCAGGCTTTGCCATTGTGAACCATGGTGAAGTGCTTGGAACATACTGTTCACTCACTCTAAAGGCGCTGAGACTGTGCTGTTGTTCTCGTTTTTATAGTCAATGGCTTGTTCATCATCCAGATGTGGCTACTGACATATCTACACTTCGCACCGGAGTGTCTGGAATTGTGGCTATCCTGATTATAGGATTTTAACTTAACTGAAATGCCTGCTTTGAATAAATGTGTTGGGTTTTTTGTTTGGTTTTATTTTATACTTGCCATCAGTGAAAAAGATGTACAGAACACATTTCTCTGATCTCCATAAACATGAAAACACTTGAAATCTC</p>
+  </div>
+</div>
+<a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+</body>
+</html>
+
+-> gene does not exists or is sth absurd: /geneSeq?gene=fat5
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+  <title>Data Retrieved Results</title>
+</head>
+<style>
+html {
+  background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.card {
+  width: 80%;
+  border-radius: 5px;
+  background-color: #EC7789;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+}
+
+.container {
+  position: relative;
+  text-align:left
+  color:white;
+  padding: 8px;
+  margin-left: 20px;
+  margin-right:20px;
+  text-color:black;
+}
+
+</style>
+<body>
+<h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">GENE SEQUENCE</h1>
+<div class="card">
+  <img src= "https://i.imgur.com/aKaXdU6.jpg" style="width:100%">
+  <div class="container">
+    <h3 style="font-family:courier;font-weight:bold">Error: 'FAT5' is not a valid gene for Homo Sapiens specie.<b></b></h3>
+    <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
+  </div>
+</div>
+<a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+</body>
+</html>
+
+------------------------------------------ endpoint = geneInfo --------------------------------------------------------------------
+
+-> gene exists: /geneInfo?gene=FRAT1
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+  <title>Data Retrieved Results</title>
+</head>
+<style>
+html {
+  background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.card {
+  width: 80%;
+  border-radius: 5px;
+  background-color: #EC7789;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+}
+
+.container {
+  position: relative;
+  text-align:left
+  color:white;
+  padding: 8px;
+  margin-left: 20px;
+  margin-right:20px;
+  text-color:black;
+}
+
+</style>
+<body>
+<h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">GENE INFORMATION</h1>
+<div class="card">
+  <img src= "https://i.imgur.com/IITsk3C.jpg" style="width:100%">
+  <div class="container">
+    <h3 style="font-family:courier;font-weight:bold">Information for gene 'FRAT1' is: <b></b></h3>
+    <p style="font-family:helvetica;font-size:90%;word-break:break-all"><br>Gene ID: ENSG00000165879</br><br>Start: 97319267</br><br>End: 97321915</br><br>Lenght: 2649</br><br>Chromosome where it belongs: 10</br></p>
+  </div>
+</div>
+<a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+</body>
+</html>
+
+-> gene does not exists or is sth absurd: /geneInfo?gene=frat3
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+  <title>Data Retrieved Results</title>
+</head>
+<style>
+html {
+  background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.card {
+  width: 80%;
+  border-radius: 5px;
+  background-color: #EC7789;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+}
+
+.container {
+  position: relative;
+  text-align:left
+  color:white;
+  padding: 8px;
+  margin-left: 20px;
+  margin-right:20px;
+  text-color:black;
+}
+
+</style>
+<body>
+<h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">GENE INFORMATION</h1>
+<div class="card">
+  <img src= "https://i.imgur.com/poj7xfa.jpg" style="width:100%">
+  <div class="container">
+    <h3 style="font-family:courier;font-weight:bold">Error: 'FRAT3' is not a valid gene for Homo Sapiens specie.<b></b></h3>
+    <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
+  </div>
+</div>
+<a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+</body>
+</html>
+
+------------------------------------------ endpoint = geneCalc --------------------------------------------------------------------
+
+-> gene exists: /geneCalc?gene=FRAT1
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+  <title>Data Retrieved Results</title>
+</head>
+<style>
+html {
+  background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.card {
+  width: 80%;
+  border-radius: 5px;
+  background-color: #EC7789;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+}
+
+.container {
+  position: relative;
+  text-align:left
+  color:white;
+  padding: 8px;
+  margin-left: 20px;
+  margin-right:20px;
+  text-color:black;
+}
+
+</style>
+<body>
+<h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">GENE OPERATIONS</h1>
+<div class="card">
+  <img src= "https://i.imgur.com/Fhayqk0.jpg" style="width:100%">
+  <div class="container">
+    <h3 style="font-family:courier;font-weight:bold">Calculations for gene 'FRAT1' is: <b></b></h3>
+    <p style="font-family:helvetica;font-size:90%;word-break:break-all"><br>Lenght: 2649</br><br>Percentage of Adenine: 18.04 %</br><br>Percentage of Thymine: 19.71 %</br><br>Percentage of Cytosine: 30.2 %</br><br>Percentage of Guanine: 32.05 %</br></p>
+  </div>
+</div>
+<a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+</body>
+</html>
+
+-> gene does not exists or is sth absurd: /geneCalc?gene=frat3
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+  <title>Data Retrieved Results</title>
+</head>
+<style>
+html {
+  background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.card {
+  width: 80%;
+  border-radius: 5px;
+  background-color: #EC7789;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+}
+
+.container {
+  position: relative;
+  text-align:left
+  color:white;
+  padding: 8px;
+  margin-left: 20px;
+  margin-right:20px;
+  text-color:black;
+}
+
+</style>
+<body>
+<h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">GENE OPERATIONS</h1>
+<div class="card">
+  <img src= "https://i.imgur.com/aKaXdU6.jpg" style="width:100%">
+  <div class="container">
+    <h3 style="font-family:courier;font-weight:bold">Error: 'FRAT3' is not a valid gene for Homo Sapiens specie.<b></b></h3>
+    <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
+  </div>
+</div>
+<a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+</body>
+</html>
+
+------------------------------------------ endpoint = geneList --------------------------------------------------------------------
+
+-> gene exists with correct start and end: /geneList?chromo=1&start=0&end=30000
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+  <title>Data Retrieved Results</title>
+</head>
+<style>
+html {
+  background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.card {
+  width: 80%;
+  border-radius: 5px;
+  background-color: #EC7789;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+}
+
+.container {
+  position: relative;
+  text-align:left
+  color:white;
+  padding: 8px;
+  margin-left: 20px;
+  margin-right:20px;
+  text-color:black;
+}
+
+</style>
+<body>
+<h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">GENE LIST</h1>
+<div class="card">
+  <img src= "https://i.imgur.com/IITsk3C.jpg" style="width:100%">
+  <div class="container">
+    <h3 style="font-family:courier;font-weight:bold">4 gene(s) were found in chromosome '1' from 0 to 30000 position:<b></b></h3>
+    <p style="font-family:helvetica;font-size:90%;word-break:break-all"><ol><li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">DDX11L1</p> ID: ENSG00000223972</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">WASH7P</p> ID: ENSG00000227232</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">MIR6859-1</p> ID: ENSG00000278267</li> <li style="font-family:helvetica;font-size:90%;word-break:break-all"><p style="font-weight:bold">MIR1302-2HG</p> ID: ENSG00000243485</li></ol></p>
+  </div>
+</div>
+<a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+</body>
+</html>
+
+-> gene does not exist or is absurd INDEPENDENTLY of the start and end points: /geneList?chromo=abcd&start=12000&end=130000
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+  <title>Data Retrieved Results</title>
+</head>
+<style>
+html {
+  background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.card {
+  width: 80%;
+  border-radius: 5px;
+  background-color: #EC7789;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+}
+
+.container {
+  position: relative;
+  text-align:left
+  color:white;
+  padding: 8px;
+  margin-left: 20px;
+  margin-right:20px;
+  text-color:black;
+}
+
+</style>
+<body>
+<h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">GENE LIST</h1>
+<div class="card">
+  <img src= "https://i.imgur.com/aKaXdU6.jpg" style="width:100%">
+  <div class="container">
+    <h3 style="font-family:courier;font-weight:bold">Error: 'abcd' is not a valid chromosome for Homo Sapiens specie.<b></b></h3>
+    <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
+  </div>
+</div>
+<a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+</body>
+</html>
+
+-> starting point is bigger than ending point with existing chromosome: /geneList?chromo=1&start=20&end=15
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+  <title>Data Retrieved Results</title>
+</head>
+<style>
+html {
+  background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.card {
+  width: 80%;
+  border-radius: 5px;
+  background-color: #EC7789;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+}
+
+.container {
+  position: relative;
+  text-align:left
+  color:white;
+  padding: 8px;
+  margin-left: 20px;
+  margin-right:20px;
+  text-color:black;
+}
+
+</style>
+<body>
+<h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">GENE LIST</h1>
+<div class="card">
+  <img src= "https://i.imgur.com/poj7xfa.jpg" style="width:100%">
+  <div class="container">
+    <h3 style="font-family:courier;font-weight:bold">Error: the starting point '20' can not be bigger than the ending point '15'.<b></b></h3>
+    <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
+  </div>
+</div>
+<a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+</body>
+</html>
+
+-> existing chromosome but the interval is bigger than the one allowed by Ensembl: /geneList?chromo=1&start=1234&end=7654321
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+  <title>Data Retrieved Results</title>
+</head>
+<style>
+html {
+  background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.card {
+  width: 80%;
+  border-radius: 5px;
+  background-color: #EC7789;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+}
+
+.container {
+  position: relative;
+  text-align:left
+  color:white;
+  padding: 8px;
+  margin-left: 20px;
+  margin-right:20px;
+  text-color:black;
+}
+
+</style>
+<body>
+<h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">GENE LIST</h1>
+<div class="card">
+  <img src= "https://i.imgur.com/poj7xfa.jpg" style="width:100%">
+  <div class="container">
+    <h3 style="font-family:courier;font-weight:bold">Error: 7653087 is greater than the maximum allowed length interval of 5000000. Please, request smaller regions of sequence.<b></b></h3>
+    <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
+  </div>
+</div>
+<a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+</body>
+</html>
+
+-> chromosome exists but start or end points (or both) are absurd: /geneList?chromo=y&start=1&end=a
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" content="HTML, CSS">
+  <title>Data Retrieved Results</title>
+</head>
+<style>
+html {
+  background: url(https://i.imgur.com/x1ENyh8.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.card {
+  width: 80%;
+  border-radius: 5px;
+  background-color: #EC7789;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+}
+
+.container {
+  position: relative;
+  text-align:left
+  color:white;
+  padding: 8px;
+  margin-left: 20px;
+  margin-right:20px;
+  text-color:black;
+}
+
+</style>
+<body>
+<h1 style="text-align:center;font-size:250%;font-family:courier;font-weight:bold;color:white">GENE LIST</h1>
+<div class="card">
+  <img src= "https://i.imgur.com/aKaXdU6.jpg" style="width:100%">
+  <div class="container">
+    <h3 style="font-family:courier;font-weight:bold">Error: Invalid start or end parameter.<b></b></h3>
+    <p style="font-family:helvetica;font-size:90%;word-break:break-all"></p>
+  </div>
+</div>
+<a href="/" style="color:white"><p style="text-align:center;font-family:courier">Return to the Home Page</p></a>
+</body>
+</html>
