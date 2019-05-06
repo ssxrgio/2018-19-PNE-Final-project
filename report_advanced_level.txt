@@ -1,0 +1,1051 @@
+
+This text file report provides the information retrieved in .json format using the different endpoints the server can
+handle. These also are the same endpoints as the ones given in the other file reports and the ones that are on the
+client to load as well.
+
+Please keep in mind that they were copied from Chrome using the extension JSON Formatter, so the format may vary between
+browsers, but the content is the same.
+
+---------------------------------------------- endpoint = listSpecies ---------------------------------------------------------
+-> no limit: /listSpecies?limit=&json=1 or /listSpecies&json=1
+
+{
+"specie 1": {
+"name": "Mouse",
+"binomial name": "mus_musculus"
+},
+"specie 2": {
+"name": "Human",
+"binomial name": "homo_sapiens"
+},
+"specie 3": {
+"name": "Guinea Pig",
+"binomial name": "cavia_porcellus"
+},
+"specie 4": {
+"name": "Mouse CBA/J",
+"binomial name": "mus_musculus_cbaj"
+},
+"specie 5": {
+"name": "Midas cichlid",
+"binomial name": "amphilophus_citrinellus"
+},
+"specie 6": {
+"name": "Anole lizard",
+"binomial name": "anolis_carolinensis"
+},
+"specie 7": {
+"name": "Capuchin",
+"binomial name": "cebus_capucinus"
+},
+"specie 8": {
+"name": "Ballan wrasse",
+"binomial name": "labrus_bergylta"
+},
+"specie 9": {
+"name": "Leopard",
+"binomial name": "panthera_pardus"
+},
+"specie 10": {
+"name": "Fugu",
+"binomial name": "takifugu_rubripes"
+},
+"specie 11": {
+"name": "Black snub-nosed monkey",
+"binomial name": "rhinopithecus_bieti"
+},
+"specie 12": {
+"name": "Zig-zag eel",
+"binomial name": "mastacembelus_armatus"
+},
+"specie 13": {
+"name": "Blue-crowned manakin",
+"binomial name": "lepidothrix_coronata"
+},
+"specie 14": {
+"name": "Damara mole rat",
+"binomial name": "fukomys_damarensis"
+},
+"specie 15": {
+"name": "Opossum",
+"binomial name": "monodelphis_domestica"
+},
+"specie 16": {
+"name": "Donkey",
+"binomial name": "equus_asinus_asinus"
+},
+"specie 17": {
+"name": "Platyfish",
+"binomial name": "xiphophorus_maculatus"
+},
+"specie 18": {
+"name": "Little spotted kiwi",
+"binomial name": "apteryx_owenii"
+},
+"specie 19": {
+"name": "Ruff",
+"binomial name": "calidris_pugnax"
+},
+"specie 20": {
+"name": "Stickleback",
+"binomial name": "gasterosteus_aculeatus"
+},
+"specie 21": {
+"name": "Chinese hamster PICR",
+"binomial name": "cricetulus_griseus_picr"
+},
+"specie 22": {
+"name": "Steppe mouse",
+"binomial name": "mus_spicilegus"
+},
+"specie 23": {
+"name": "Indian medaka",
+"binomial name": "oryzias_melastigma"
+},
+"specie 24": {
+"name": "Upper Galilee mountains blind mole rat",
+"binomial name": "nannospalax_galili"
+},
+"specie 25": {
+"name": "Abingdon island giant tortoise",
+"binomial name": "chelonoidis_abingdonii"
+},
+"specie 26": {
+"name": "Spiny chromis",
+"binomial name": "acanthochromis_polyacanthus"
+},
+"specie 27": {
+"name": "Asian bonytongue",
+"binomial name": "scleropages_formosus"
+},
+"specie 28": {
+"name": "Tasmanian devil",
+"binomial name": "sarcophilus_harrisii"
+},
+"specie 29": {
+"name": "Chicken",
+"binomial name": "gallus_gallus"
+},
+"specie 30": {
+"name": "Coelacanth",
+"binomial name": "latimeria_chalumnae"
+},
+"specie 31": {
+"name": "Helmeted guineafowl",
+"binomial name": "numida_meleagris"
+},
+"specie 32": {
+"name": "Mouse A/J",
+"binomial name": "mus_musculus_aj"
+},
+"specie 33": {
+"name": "Sailfin molly",
+"binomial name": "poecilia_latipinna"
+},
+"specie 34": {
+"name": "Koala",
+"binomial name": "phascolarctos_cinereus"
+},
+"specie 35": {
+"name": "Mouse FVB/NJ",
+"binomial name": "mus_musculus_fvbnj"
+},
+"specie 36": {
+"name": "Chinese hamster CHOK1GS",
+"binomial name": "cricetulus_griseus_chok1gshd"
+},
+"specie 37": {
+"name": "Mouse LP/J",
+"binomial name": "mus_musculus_lpj"
+},
+"specie 38": {
+"name": "Naked mole-rat female",
+"binomial name": "heterocephalus_glaber_female"
+},
+"specie 39": {
+"name": "Spoon-billed sandpiper",
+"binomial name": "calidris_pygmaea"
+},
+"specie 40": {
+"name": "Duck",
+"binomial name": "anas_platyrhynchos_platyrhynchos"
+},
+"specie 41": {
+"name": "Bolivian squirrel monkey",
+"binomial name": "saimiri_boliviensis_boliviensis"
+},
+"specie 42": {
+"name": "Bengalese finch",
+"binomial name": "lonchura_striata_domestica"
+},
+"specie 43": {
+"name": "Marmoset",
+"binomial name": "callithrix_jacchus"
+},
+"specie 44": {
+"name": "Sheep",
+"binomial name": "ovis_aries"
+},
+"specie 45": {
+"name": "Olive baboon",
+"binomial name": "papio_anubis"
+},
+"specie 46": {
+"name": "Crab-eating macaque",
+"binomial name": "macaca_fascicularis"
+},
+"specie 47": {
+"name": "Mainland tiger snake",
+"binomial name": "notechis_scutatus"
+},
+"specie 48": {
+"name": "Goat",
+"binomial name": "capra_hircus"
+},
+"specie 49": {
+"name": "Mummichog",
+"binomial name": "fundulus_heteroclitus"
+},
+"specie 50": {
+"name": "American black bear",
+"binomial name": "ursus_americanus"
+},
+"specie 51": {
+"name": "Mouse NZO/HlLtJ",
+"binomial name": "mus_musculus_nzohlltj"
+},
+"specie 52": {
+"name": "Wallaby",
+"binomial name": "notamacropus_eugenii"
+},
+"specie 53": {
+"name": "Dolphin",
+"binomial name": "tursiops_truncatus"
+},
+"specie 54": {
+"name": "Western mosquitofish",
+"binomial name": "gambusia_affinis"
+},
+"specie 55": {
+"name": "Cat",
+"binomial name": "felis_catus"
+},
+"specie 56": {
+"name": "Bonobo",
+"binomial name": "pan_paniscus"
+},
+"specie 57": {
+"name": "Gibbon",
+"binomial name": "nomascus_leucogenys"
+},
+"specie 58": {
+"name": "Vervet-AGM",
+"binomial name": "chlorocebus_sabaeus"
+},
+"specie 59": {
+"name": "Cow",
+"binomial name": "bos_taurus"
+},
+"specie 60": {
+"name": "Clown anemonefish",
+"binomial name": "amphiprion_ocellaris"
+},
+"specie 61": {
+"name": "Shrew mouse",
+"binomial name": "mus_pahari"
+},
+"specie 62": {
+"name": "Japanese quail",
+"binomial name": "coturnix_japonica"
+},
+"specie 63": {
+"name": "Tarsier",
+"binomial name": "carlito_syrichta"
+},
+"specie 64": {
+"name": "Great spotted kiwi",
+"binomial name": "apteryx_haastii"
+},
+"specie 65": {
+"name": "Pig-tailed macaque",
+"binomial name": "macaca_nemestrina"
+},
+"specie 66": {
+"name": "Tuatara",
+"binomial name": "sphenodon_punctatus"
+},
+"specie 67": {
+"name": "Pink-footed goose",
+"binomial name": "anser_brachyrhynchus"
+},
+"specie 68": {
+"name": "Climbing perch",
+"binomial name": "anabas_testudineus"
+},
+"specie 69": {
+"name": "Spotted gar",
+"binomial name": "lepisosteus_oculatus"
+},
+"specie 70": {
+"name": "Golden snub-nosed monkey",
+"binomial name": "rhinopithecus_roxellana"
+},
+"specie 71": {
+"name": "Daurian ground squirrel",
+"binomial name": "spermophilus_dauricus"
+},
+"specie 72": {
+"name": "Amazon molly",
+"binomial name": "poecilia_formosa"
+},
+"specie 73": {
+"name": "Turbot",
+"binomial name": "scophthalmus_maximus"
+},
+"specie 74": {
+"name": "Algerian mouse",
+"binomial name": "mus_spretus"
+},
+"specie 75": {
+"name": "Lamprey",
+"binomial name": "petromyzon_marinus"
+},
+"specie 76": {
+"name": "Xenopus",
+"binomial name": "xenopus_tropicalis"
+},
+"specie 77": {
+"name": "Agassiz's desert tortoise",
+"binomial name": "gopherus_agassizii"
+},
+"specie 78": {
+"name": "American bison",
+"binomial name": "bison_bison_bison"
+},
+"specie 79": {
+"name": "Mouse 129S1/SvImJ",
+"binomial name": "mus_musculus_129s1svimj"
+},
+"specie 80": {
+"name": "Channel catfish",
+"binomial name": "ictalurus_punctatus"
+},
+"specie 81": {
+"name": "Degu",
+"binomial name": "octodon_degus"
+},
+"specie 82": {
+"name": "Angola colobus",
+"binomial name": "colobus_angolensis_palliatus"
+},
+"specie 83": {
+"name": "Golden-collared manakin",
+"binomial name": "manacus_vitellinus"
+},
+"specie 84": {
+"name": "Eastern happy",
+"binomial name": "astatotilapia_calliptera"
+},
+"specie 85": {
+"name": "Greater bamboo lemur",
+"binomial name": "prolemur_simus"
+},
+"specie 86": {
+"name": "Mouse WSB/EiJ",
+"binomial name": "mus_musculus_wsbeij"
+},
+"specie 87": {
+"name": "Armadillo",
+"binomial name": "dasypus_novemcinctus"
+},
+"specie 88": {
+"name": "Mangrove rivulus",
+"binomial name": "kryptolebias_marmoratus"
+},
+"specie 89": {
+"name": "Mouse DBA/2J",
+"binomial name": "mus_musculus_dba2j"
+},
+"specie 90": {
+"name": "Arctic ground squirrel",
+"binomial name": "urocitellus_parryii"
+},
+"specie 91": {
+"name": "Gorilla",
+"binomial name": "gorilla_gorilla"
+},
+"specie 92": {
+"name": "Mouse Lemur",
+"binomial name": "microcebus_murinus"
+},
+"specie 93": {
+"name": "Drill",
+"binomial name": "mandrillus_leucophaeus"
+},
+"specie 94": {
+"name": "Central bearded dragon",
+"binomial name": "pogona_vitticeps"
+},
+"specie 95": {
+"name": "American mink",
+"binomial name": "neovison_vison"
+},
+"specie 96": {
+"name": "Great Tit",
+"binomial name": "parus_major"
+},
+"specie 97": {
+"name": "Macaque",
+"binomial name": "macaca_mulatta"
+},
+"specie 98": {
+"name": "Platypus",
+"binomial name": "ornithorhynchus_anatinus"
+},
+"specie 99": {
+"name": "Japanese medaka HNI",
+"binomial name": "oryzias_latipes_hni"
+},
+"specie 100": {
+"name": "Hagfish",
+"binomial name": "eptatretus_burgeri"
+},
+"specie 101": {
+"name": "Dingo",
+"binomial name": "canis_lupus_dingo"
+},
+"specie 102": {
+"name": "Zebrafish",
+"binomial name": "danio_rerio"
+},
+"specie 103": {
+"name": "Mouse NOD/ShiLtJ",
+"binomial name": "mus_musculus_nodshiltj"
+},
+"specie 104": {
+"name": "Bicolor damselfish",
+"binomial name": "stegastes_partitus"
+},
+"specie 105": {
+"name": "Long-tailed chinchilla",
+"binomial name": "chinchilla_lanigera"
+},
+"specie 106": {
+"name": "Mouse C57BL/6NJ",
+"binomial name": "mus_musculus_c57bl6nj"
+},
+"specie 107": {
+"name": "Mexican tetra",
+"binomial name": "astyanax_mexicanus"
+},
+"specie 108": {
+"name": "Squirrel",
+"binomial name": "ictidomys_tridecemlineatus"
+},
+"specie 109": {
+"name": "Alpaca",
+"binomial name": "vicugna_pacos"
+},
+"specie 110": {
+"name": "Australian saltwater crocodile",
+"binomial name": "crocodylus_porosus"
+},
+"specie 111": {
+"name": "White-throated sparrow",
+"binomial name": "zonotrichia_albicollis"
+},
+"specie 112": {
+"name": "Orange clownfish",
+"binomial name": "amphiprion_percula"
+},
+"specie 113": {
+"name": "Tiger",
+"binomial name": "panthera_tigris_altaica"
+},
+"specie 114": {
+"name": "Turkey",
+"binomial name": "meleagris_gallopavo"
+},
+"specie 115": {
+"name": "Ugandan red Colobus",
+"binomial name": "piliocolobus_tephrosceles"
+},
+"specie 116": {
+"name": "Alpine marmot",
+"binomial name": "marmota_marmota_marmota"
+},
+"specie 117": {
+"name": "Common canary",
+"binomial name": "serinus_canaria"
+},
+"specie 118": {
+"name": "Okarito brown kiwi",
+"binomial name": "apteryx_rowi"
+},
+"specie 119": {
+"name": "Argentine black and white tegu",
+"binomial name": "salvator_merianae"
+},
+"specie 120": {
+"name": "Sloth",
+"binomial name": "choloepus_hoffmanni"
+},
+"specie 121": {
+"name": "Ryukyu mouse",
+"binomial name": "mus_caroli"
+},
+"specie 122": {
+"name": "Shrew",
+"binomial name": "sorex_araneus"
+},
+"specie 123": {
+"name": "Zebra Finch",
+"binomial name": "taeniopygia_guttata"
+},
+"specie 124": {
+"name": "Gelada",
+"binomial name": "theropithecus_gelada"
+},
+"specie 125": {
+"name": "Tiger tail seahorse",
+"binomial name": "hippocampus_comes"
+},
+"specie 126": {
+"name": "Brazilian guinea pig",
+"binomial name": "cavia_aperea"
+},
+"specie 127": {
+"name": "Periophthalmus magnuspinnatus",
+"binomial name": "periophthalmus_magnuspinnatus"
+},
+"specie 128": {
+"name": "Ma's night monkey",
+"binomial name": "aotus_nancymaae"
+},
+"specie 129": {
+"name": "Microbat",
+"binomial name": "myotis_lucifugus"
+},
+"specie 130": {
+"name": "Pig",
+"binomial name": "sus_scrofa"
+},
+"specie 131": {
+"name": "Coquerel's sifaka",
+"binomial name": "propithecus_coquereli"
+},
+"specie 132": {
+"name": "Drosophila melanogaster",
+"binomial name": "drosophila_melanogaster"
+},
+"specie 133": {
+"name": "Makobe Island cichlid",
+"binomial name": "pundamilia_nyererei"
+},
+"specie 134": {
+"name": "Lesser hedgehog tenrec",
+"binomial name": "echinops_telfairi"
+},
+"specie 135": {
+"name": "Dark-eyed junco",
+"binomial name": "junco_hyemalis"
+},
+"specie 136": {
+"name": "Red fox",
+"binomial name": "vulpes_vulpes"
+},
+"specie 137": {
+"name": "Chimpanzee",
+"binomial name": "pan_troglodytes"
+},
+"specie 138": {
+"name": "Chinese hamster CriGri",
+"binomial name": "cricetulus_griseus_crigri"
+},
+"specie 139": {
+"name": "Greater amberjack",
+"binomial name": "seriola_dumerili"
+},
+"specie 140": {
+"name": "Hedgehog",
+"binomial name": "erinaceus_europaeus"
+},
+"specie 141": {
+"name": "Elephant",
+"binomial name": "loxodonta_africana"
+},
+"specie 142": {
+"name": "Lyretail cichlid",
+"binomial name": "neolamprologus_brichardi"
+},
+"specie 143": {
+"name": "Chinese softshell turtle",
+"binomial name": "pelodiscus_sinensis"
+},
+"specie 144": {
+"name": "Prairie vole",
+"binomial name": "microtus_ochrogaster"
+},
+"specie 145": {
+"name": "Ocean sunfish",
+"binomial name": "mola_mola"
+},
+"specie 146": {
+"name": "Polar bear",
+"binomial name": "ursus_maritimus"
+},
+"specie 147": {
+"name": "Emu",
+"binomial name": "dromaius_novaehollandiae"
+},
+"specie 148": {
+"name": "Rabbit",
+"binomial name": "oryctolagus_cuniculus"
+},
+"specie 149": {
+"name": "Monterrey platyfish",
+"binomial name": "xiphophorus_couchianus"
+},
+"specie 150": {
+"name": "Sheepshead minnow",
+"binomial name": "cyprinodon_variegatus"
+},
+"specie 151": {
+"name": "C.intestinalis",
+"binomial name": "ciona_intestinalis"
+},
+"specie 152": {
+"name": "Red-bellied piranha",
+"binomial name": "pygocentrus_nattereri"
+},
+"specie 153": {
+"name": "Northern pike",
+"binomial name": "esox_lucius"
+},
+"specie 154": {
+"name": "Pika",
+"binomial name": "ochotona_princeps"
+},
+"specie 155": {
+"name": "Ferret",
+"binomial name": "mustela_putorius_furo"
+},
+"specie 156": {
+"name": "C.savignyi",
+"binomial name": "ciona_savignyi"
+},
+"specie 157": {
+"name": "Mongolian gerbil",
+"binomial name": "meriones_unguiculatus"
+},
+"specie 158": {
+"name": "Paramormyrops kingsleyae",
+"binomial name": "paramormyrops_kingsleyae"
+},
+"specie 159": {
+"name": "Lesser Egyptian jerboa",
+"binomial name": "jaculus_jaculus"
+},
+"specie 160": {
+"name": "Kangaroo rat",
+"binomial name": "dipodomys_ordii"
+},
+"specie 161": {
+"name": "Sooty mangabey",
+"binomial name": "cercocebus_atys"
+},
+"specie 162": {
+"name": "Tilapia",
+"binomial name": "oreochromis_niloticus"
+},
+"specie 163": {
+"name": "Orangutan",
+"binomial name": "pongo_abelii"
+},
+"specie 164": {
+"name": "Painted turtle",
+"binomial name": "chrysemys_picta_bellii"
+},
+"specie 165": {
+"name": "Zebra mbuna",
+"binomial name": "maylandia_zebra"
+},
+"specie 166": {
+"name": "Horse",
+"binomial name": "equus_caballus"
+},
+"specie 167": {
+"name": "Golden Hamster",
+"binomial name": "mesocricetus_auratus"
+},
+"specie 168": {
+"name": "Megabat",
+"binomial name": "pteropus_vampyrus"
+},
+"specie 169": {
+"name": "Yellowtail amberjack",
+"binomial name": "seriola_lalandi_dorsalis"
+},
+"specie 170": {
+"name": "Blue tit",
+"binomial name": "cyanistes_caeruleus"
+},
+"specie 171": {
+"name": "Mouse PWK/PhJ",
+"binomial name": "mus_musculus_pwkphj"
+},
+"specie 172": {
+"name": "Cod",
+"binomial name": "gadus_morhua"
+},
+"specie 173": {
+"name": "Burton's mouthbrooder",
+"binomial name": "haplochromis_burtoni"
+},
+"specie 174": {
+"name": "Saccharomyces cerevisiae",
+"binomial name": "saccharomyces_cerevisiae"
+},
+"specie 175": {
+"name": "Tongue sole",
+"binomial name": "cynoglossus_semilaevis"
+},
+"specie 176": {
+"name": "Dog",
+"binomial name": "canis_familiaris"
+},
+"specie 177": {
+"name": "Swamp eel",
+"binomial name": "monopterus_albus"
+},
+"specie 178": {
+"name": "Panda",
+"binomial name": "ailuropoda_melanoleuca"
+},
+"specie 179": {
+"name": "American beaver",
+"binomial name": "castor_canadensis"
+},
+"specie 180": {
+"name": "Budgerigar",
+"binomial name": "melopsittacus_undulatus"
+},
+"specie 181": {
+"name": "Northern American deer mouse",
+"binomial name": "peromyscus_maniculatus_bairdii"
+},
+"specie 182": {
+"name": "Flycatcher",
+"binomial name": "ficedula_albicollis"
+},
+"specie 183": {
+"name": "Wild yak",
+"binomial name": "bos_mutus"
+},
+"specie 184": {
+"name": "Mouse BALB/cJ",
+"binomial name": "mus_musculus_balbcj"
+},
+"specie 185": {
+"name": "Mouse CAST/EiJ",
+"binomial name": "mus_musculus_casteij"
+},
+"specie 186": {
+"name": "Rat",
+"binomial name": "rattus_norvegicus"
+},
+"specie 187": {
+"name": "Bushbaby",
+"binomial name": "otolemur_garnettii"
+},
+"specie 188": {
+"name": "Naked mole-rat male",
+"binomial name": "heterocephalus_glaber_male"
+},
+"specie 189": {
+"name": "Caenorhabditis elegans",
+"binomial name": "caenorhabditis_elegans"
+},
+"specie 190": {
+"name": "Guppy",
+"binomial name": "poecilia_reticulata"
+},
+"specie 191": {
+"name": "Japanese medaka HSOK",
+"binomial name": "oryzias_latipes_hsok"
+},
+"specie 192": {
+"name": "Tetraodon",
+"binomial name": "tetraodon_nigroviridis"
+},
+"specie 193": {
+"name": "Chilean tinamou",
+"binomial name": "nothoprocta_perdicaria"
+},
+"specie 194": {
+"name": "Tree Shrew",
+"binomial name": "tupaia_belangeri"
+},
+"specie 195": {
+"name": "Mouse C3H/HeJ",
+"binomial name": "mus_musculus_c3hhej"
+},
+"specie 196": {
+"name": "Shortfin molly",
+"binomial name": "poecilia_mexicana"
+},
+"specie 197": {
+"name": "Japanese medaka HdrR",
+"binomial name": "oryzias_latipes"
+},
+"specie 198": {
+"name": "Hyrax",
+"binomial name": "procavia_capensis"
+},
+"specie 199": {
+"name": "Mouse AKR/J",
+"binomial name": "mus_musculus_akrj"
+}
+}
+
+-> limit is a number: /listSpecies?limit=10&json=1
+
+{
+"specie 1": {
+"name": "Flycatcher",
+"binomial name": "ficedula_albicollis"
+},
+"specie 2": {
+"name": "American beaver",
+"binomial name": "castor_canadensis"
+},
+"specie 3": {
+"name": "C.intestinalis",
+"binomial name": "ciona_intestinalis"
+},
+"specie 4": {
+"name": "Central bearded dragon",
+"binomial name": "pogona_vitticeps"
+},
+"specie 5": {
+"name": "Golden-collared manakin",
+"binomial name": "manacus_vitellinus"
+},
+"specie 6": {
+"name": "Steppe mouse",
+"binomial name": "mus_spicilegus"
+},
+"specie 7": {
+"name": "White-throated sparrow",
+"binomial name": "zonotrichia_albicollis"
+},
+"specie 8": {
+"name": "Kangaroo rat",
+"binomial name": "dipodomys_ordii"
+},
+"specie 9": {
+"name": "Gibbon",
+"binomial name": "nomascus_leucogenys"
+},
+"specie 10": {
+"name": "Mouse FVB/NJ",
+"binomial name": "mus_musculus_fvbnj"
+}
+}
+
+-> limit is not a number: /listSpecies?limit=a&json=1
+
+{
+"error": "invalid limit parameter. Please, try again with a number from 1 to 199"
+}
+
+-> limit is a number bigger than the number of species: /listSpecies?limit=1234&json=1
+
+{
+"error": "there are not that many species in the database. Please, choose a number from 1 to 199"
+}
+
+
+
+---------------------------------------------- endpoint = karyotype ------------------------------------------------------------
+
+-> specie is in the database: /karyotype?specie=mouse&json=1
+
+{
+"karyotype for mouse": [
+"1",
+"2",
+"3",
+"4",
+"5",
+"6",
+"7",
+"8",
+"9",
+"10",
+"11",
+"12",
+"13",
+"14",
+"15",
+"16",
+"17",
+"18",
+"19",
+"X",
+"Y",
+"MT"
+]
+}
+
+-> specie is in the database but without karyotype: /karyotype?specie=guinea+pig&json=1
+
+{
+"error": "karyotype is not available"
+}
+
+-> specie is not in the database: /karyotype?specie=fish&json=1
+
+{
+"error": "specie is not available in the database"
+}
+
+-> specie is sth absurd: /karyotype?specie=1%2B2&json=1
+
+{
+"error": "specie is not available in the database"
+}
+
+---------------------------------------------- endpoint = chromosomeLenght ------------------------------------------------------
+
+-> specie is in the database and chromosome exists: /chromosomeLength?specie=mouse&chromo=18&json=1
+
+{
+"length": 90702639
+}
+
+-> specie exists but chromosome does not: /chromosomeLength?specie=human&chromo=33&json=1
+
+{
+"error": "chromosome not found"
+}
+
+->specie does not exists independently of the chromosome input: /chromosomeLength?specie=fish&chromo=33&json=1
+
+{
+"error": "karyotype is not available"
+}
+
+-> specie has empty karyotype: /chromosomeLength?specie=guinea+pig&chromo=33&json=1geneSeq?gene=frat1&json=1
+
+{
+"error": "chromosome not found"
+}
+
+---------------------------------------------- endpoint = geneSeq ------------------------------------------------------------
+
+-> gene exists: /geneSeq?gene=frat1&json=1
+
+{
+"sequence for FRAT1": "ATTCCGGCTCCCGCGGCTGCAGGCGCGCGGCTAGAGTGCCTGGCGGGCTCCGGCTTCCGCGTCCGCCCCGGCCCCGGTCCAGACTTAGTCTTCAGCTCCGCGCCCGCTCCGCCGCGGCCCACCGCGCCCGCCGGCAGCCGAGCCCCCAGCGACGCCCGCACAGCTCCGGGTGCCCAGACAGGGGGCCATGCCGTGCCGGAGGGAGGAGGAAGAGGAAGCCGGCGAGGAGGCGGAGGGGGAGGAAGAGGAGGAGGACAGCTTCCTCCTACTGCAGCAGTCAGTGGCGCTGGGCAGCTCGGGCGAGGTGGACCGGCTGGTGGCCCAGATCGGCGAGACGCTGCAGCTGGACGCGGCGCAGCACAGCCCGGCCTCGCCGTGCGGGCCCCCGGGGGCGCCGCTGCGGGCCCCGGGGCCCCTGGCTGCGGCGGTGCCGGCGGACAAGGCCAGGTCCCCGGCGGTGCCGCTGCTGCTGCCGCCCGCGTTGGCGGAGACTGTGGGCCCGGCGCCCCCTGGGGTCCTGCGCTGCGCCCTGGGGGACCGCGGCCGCGTGCGGGGCCGCGCTGCGCCCTACTGCGTGGCCGAGCTCGCCACAGGCCCCAGCGCGCTGTCCCCACTGCCCCCTCAGGCCGACCTTGATGGGCCTCCGGGAGCTGGCAAGCAGGGCATCCCGCAGCCGCTGTCGGGTCCGTGCCGGCGAGGATGGCTCCGGGGCGCCGCCGCCTCCCGCCGCCTGCAGCAGCGACGCGGGTCCCAACCAGAAACCCGCACAGGCGACGACGACCCGCACCGGCTTCTGCAGCAGCTAGTGCTCTCTGGAAACCTCATCAAGGAGGCCGTGCGAAGGCTTCATTCGCGACGGCTGCAGTTACGTGCAAAGCTTCCCCAACGCCCGCTCCTGGGACCTCTGTCGGCCCCGGTGCATGAACCCCCTTCGCCTCGCAGCCCTCGCGCGGCCTGCAGTGACCCTGGCGCCTCCGGGAGGGCGCAGCTCAGAACTGGCGACGGCGTTCTTGTGCCTGGCAGCTAACACGCCCGGGGTGGCCACAGCGCCAGCCTCAGACTGGAGGGCAAGGGGTTCCCTTGAGGGCTGCAGTTCTACTCAGGCTGGTGGAGAACTCTGGCTTTTGGAAGCGAGAGTAAAAAGCTAATGACGAGGAACCGAAAAATCGCGAGTGTTTCGCGGGTAACTGGGGTTGAGGGCCAAAATATTTGGAATGAAGGACTTTGGCCCTATTTAAGGCAGATTTTACAGAGCGCACCTCAAACGTACAAGTCAGTAGGACTCCTTATTTGGCGTGACCCGACCTGGCCGCGGAGCCTGCATTTCCTCGCAGCCTCTCAGTGCCCTCCAGCCCCGCGACCATGTGGCCACAATCCACGCTTCTCCGGATCGCGGTGCGCCGGAACCACGGAGGATGATGCCAGTTACTTGCTTTACCTTTTCAGGGCTGGCTCCTGATCCACTTTGGGGGAGGAGAACATGAGTAGATAATTTCAGGGTGCAGCCCAATCTGCCAGACTTAAAAAAACCATCTTGTGTCTTTGGAGGTGCTGCTTAATACCAAACATGCGGTGCCATGAAGGGACCCTTTGGGGGTTGAATAGGAGTTAACCCCTGCGCTCTCTTTGCAACTGTCTCTCTTCTCAGAGTGGTGGGGGAAGGCTGTACGACACGGGTGGGGAAAGGAGGTGGGGGCGGGGAGTATTGAATGGTGGTGGAAGGGTAGAGAGGCGCGGAGTGAACCCCACGCCCTGTCTAAAGTGTATTTTCAGAGCCGGCCCGCCTCTCCTCGGTTCAAGGTCACTGTTTCCTGGGCACGCACTGGGTTGCGGGACAGAGTAGCCAGGTTCTGCCGGTGCTCGGAGAAGAGCGCAGTGTTTTGCAAGTGCTGGAGTCTCCTGAGGACACGCGCGTCGCCGCCACCGCGGGTGTGGGAAAGCGCGGACGTGCTGGGCGGCTGTGCTTCGGTAGGCGACCACCGCCCCTGGCCGCGCTCCGGGCTTTCACGGAAACTCCCGAGACCGGGCCCTGGGTTCCTCCTCTCCTACTCGGCTCTGCAGTCCTACTCAAGCGGGTGGCTCTGGGATCCTGGGGGCCTGGGTTGGGGGCTAGGGAGACGCCATGTGATGGACACTCCAGGGACACACAGCCTAGCACAGCAGCTTATAATGGGCTCTCCGGGGCCATTTGCAATAACAGCTGCAATTCCCTGGATAGACGAGTTGATTTCCTCCCTCTGCCCCTCCCCCAGCCATGCCAGCTGGCCTTTGTAAGTGCAGGAAACCGAGTAGAAAATGTGACCCTCCAAATGGAGAAGCTGCAGGCTTTGCCATTGTGAACCATGGTGAAGTGCTTGGAACATACTGTTCACTCACTCTAAAGGCGCTGAGACTGTGCTGTTGTTCTCGTTTTTATAGTCAATGGCTTGTTCATCATCCAGATGTGGCTACTGACATATCTACACTTCGCACCGGAGTGTCTGGAATTGTGGCTATCCTGATTATAGGATTTTAACTTAACTGAAATGCCTGCTTTGAATAAATGTGTTGGGTTTTTTGTTTGGTTTTATTTTATACTTGCCATCAGTGAAAAAGATGTACAGAACACATTTCTCTGATCTCCATAAACATGAAAACACTTGAAATCTC"
+}
+
+-> gene does not exists or is sth absurd: /geneSeq?gene=fat5&json=1
+
+{
+"error": "there is no FAT5 gene for homo sapiens"
+}
+
+---------------------------------------------- endpoint = geneInfo -----------------------------------------------------------
+-> gene exists: /geneInfo?gene=frat1&json=1
+
+{
+"information for FRAT1": {
+"gene_id": "ENSG00000165879",
+"lenght": 2649,
+"start": 97319267,
+"end": 97321915,
+"chromosome": "10"
+}
+}
+
+-> gene does not exist or is absurd: /geneInfo?gene=frat3&json=1
+
+{
+"error": "there is no FRAT3 gene for homo sapiens"
+}
+
+------------------------------------------ endpoint = geneCalc --------------------------------------------------------------------
+
+-> gene exists: geneCalc?gene=frat1&json=1
+
+{
+"calculations for FRAT1": {
+"lenght": 2649,
+"percentage of A": "18.04 %",
+"percentage of C": "30.2 %",
+"percentage of G": "32.05 %",
+"percentage of T": "19.71 %"
+}
+}
+
+
+-> gene does not exist or is absurd: /geneCalc?gene=frat3&json=1
+
+{
+"error": "there is no FRAT3 gene for homo sapiens"
+}
+
+------------------------------------------ endpoint = geneList --------------------------------------------------------------------
+
+-> gene exists: /geneList?chromo=1&start=0&end=30000&json=1
+
+{
+"gene 1": {
+"name": "DDX11L1",
+"id": "ENSG00000223972"
+},
+"gene 2": {
+"name": "WASH7P",
+"id": "ENSG00000227232"
+},
+"gene 3": {
+"name": "MIR6859-1",
+"id": "ENSG00000278267"
+},
+"gene 4": {
+"name": "MIR1302-2HG",
+"id": "ENSG00000243485"
+}
+}
+
+
+-> gene does not exist or is absurd INDEPENDENTLY of the start and end points: /geneList?chromo=abcd&start=12000&end=130000&json=1
+
+{
+"error": "invalid chromosome input"
+}
+
+-> starting point is bigger than ending point with existing chromosome: /geneList?chromo=1&start=20&end=15&json=1
+
+{
+"error": "starting point cannot be bigger than ending point"
+}
+
+-> existing chromosome but the interval is bigger than the one allowed by Ensembl: /geneList?chromo=1&start=1234&end=7654321&json=1
+
+{
+"error": "interval between start and end is bigger than the limit 5000000"
+}
+
+-> chromosome exists but start or end points (or both) are absurd: /geneList?chromo=y&start=1&end=a&json=1
+
+{
+"error": "invalid start or end parameter"
+}
+
+-------------------------------------------- not any of the endpoints above -----------------------------------------------------
+
+{
+"error": "page not found"
+}
