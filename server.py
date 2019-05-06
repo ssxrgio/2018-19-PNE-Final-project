@@ -59,7 +59,7 @@ def dict_karyotype(limit, specie, data):
         json_dict = {"error" : " input is not a specie. Try again".format(specie)}
 
     elif limit == "empty":
-        json_dict = {"error": "karyotype is not available.".format(specie)}
+        json_dict = {"error": "karyotype is not available".format(specie)}
 
     else:
         json_dict = dict()
@@ -74,10 +74,10 @@ def dict_length(chromo, specie, length):
         json_dict = {"error": "chromosome not found"}
 
     elif chromo == "specie":
-        json_dict = {"error": "karyotype for is not available.".format(specie)}
+        json_dict = {"error": "karyotype is not available".format(specie)}
 
     else:
-        json_dict = {"length" : length}
+        json_dict = {"length": length}
 
     return json_dict
 
@@ -96,6 +96,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         if path == "/":
             with open("index.html", "r") as f:
                 content = f.read()
+
+            response = 200
 
         elif "listSpecies" in path:
             json_species = list()
@@ -178,6 +180,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 content = file.read().replace("OPERATION", "LIST OF SPECIES").replace("IMAGE", photo).replace("HEADER", header_inf).replace("DATA", data).replace("COLOURCARD", "#6da4f9")
                 file.close()
 
+            response = 200
+
         elif "karyotype" in path:
 
             if "&json=1" in path:
@@ -232,6 +236,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 content = file.read().replace("OPERATION", "KARYOTYPE").replace("IMAGE", photo).replace("HEADER", str("Input specie: {}.".format(specie))).replace("DATA", data).replace("COLOURCARD", "#B7EC77")
                 file.close()
 
+            response = 200
+
         elif "chromosomeLength" in path:
             specie = path[path.find("specie=") + 7:path.find("&")].lower().replace("+", "_").replace("/", "").lower()
             karyo = get_json("/info/assembly/" + specie + "?content-type=application/json")
@@ -265,7 +271,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                         NUM = "key"
                         LENGTH = None
-
 
                     else:
                         data = "Length of chromosome '{}' of the specie '{}' is {} bp.".format(num, specie.replace("_", " "), str(length))
@@ -342,6 +347,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 content = file.read().replace("OPERATION", "CHROMOSOME LENGHT").replace("IMAGE", photo).replace("HEADER", str(data)).replace("DATA", "").replace("COLOURCARD", "#ECE577")
                 file.close()
 
+            response = 200
+
         elif "geneSeq" in path:
 
             if "&json=1" in path:
@@ -364,7 +371,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                 json_data = {"sequence for {}".format(gene_input): gene_seq}
 
-
             except KeyError:
                 header = "Error: '{}' is not a valid gene for Homo Sapiens specie.".format(gene_input)
                 data = ""
@@ -375,6 +381,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             with open("results.html", "r") as file:
                 content = file.read().replace("OPERATION", "GENE SEQUENCE").replace("IMAGE", photo).replace("HEADER", header).replace("DATA", data).replace("COLOURCARD", "#EC7789")
                 file.close()
+
+            response = 200
 
         elif "geneInfo" in path:
 
@@ -408,6 +416,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             with open("results.html", "r") as file:
                 content = file.read().replace("OPERATION", "GENE INFORMATION").replace("IMAGE", photo).replace("HEADER", header).replace("DATA", data).replace("COLOURCARD", "#EC7789")
                 file.close()
+
+            response = 200
 
         elif "geneCalc" in path:
 
@@ -445,10 +455,18 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 content = file.read().replace("OPERATION", "GENE OPERATIONS").replace("IMAGE", photo).replace("HEADER", header).replace("DATA", data).replace("COLOURCARD", "#EC7789")
                 file.close()
 
+            response = 200
+
         elif "geneList" in path:
-            chromo_input = path[path.find("chromo=") + 7:path.find("&")]
-            start = path[path.find("start=") + 6:path.find("&end")]
-            end = path[path.find("end=") + 4:]
+            if "&json=1" in path:
+                end = path[path.find("end=") + 4: path.find("&json=1")]
+                chromo_input = path[path.find("chromo=") + 7:path.find("&")]
+                start = path[path.find("start=") + 6:path.find("&end")]
+
+            else:
+                chromo_input = path[path.find("chromo=") + 7:path.find("&")]
+                start = path[path.find("start=") + 6:path.find("&end")]
+                end = path[path.find("end=") + 4:]
 
             try:
                 chromo_data = get_json("/overlap/region/human/{}:{}-{}?content-type=application/json;feature=gene".format(chromo_input, start, end))
@@ -458,6 +476,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         header = "Error: the starting point '{}' can not be bigger than the ending point '{}'.".format(start, end)
                         data = ""
                         photo = "https://i.imgur.com/poj7xfa.jpg"
+
+                        json_data = {"error": "starting point cannot be bigger than ending point"}
 
                     else:
                         genes_list = list()
@@ -472,15 +492,26 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             data = ""
                             photo = "https://i.imgur.com/IITsk3C.jpg"
 
+                            json_data = {"genes": "no genes were found for the given interval"}
+
                         else:
                             header = "{} gene(s) were found in chromosome '{}' from {} to {} position:".format(len(genes_list), chromo_input.upper(), start, end)
                             data = "{}".format(genes_str)
                             photo = "https://i.imgur.com/IITsk3C.jpg"
 
+                            json_data = dict()
+
+                            for i in range(len(chromo_data)):
+                                json_data["gene {}".format(str(i + 1))] = {
+                                    "name": chromo_data[i]['external_name'], "id": chromo_data[i]['gene_id']
+                                }
+
                 except ValueError:
                     header = "Error: Invalid start or end parameter."
                     data = ""
                     photo = "https://i.imgur.com/aKaXdU6.jpg"
+
+                    json_data = {"error": "invalid start or end parameter"}
 
             except KeyError:
                 if "5000000" in chromo_data["error"]:
@@ -488,24 +519,34 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     data = ""
                     photo = "https://i.imgur.com/poj7xfa.jpg"
 
+                    json_data = {"error": "interval between start and end is bigger than the limit 5000000"}
+
                 else:
                     header = "Error: '{}' is not a valid chromosome for Homo Sapiens specie.".format(chromo_input)
                     data = ""
                     photo = "https://i.imgur.com/aKaXdU6.jpg"
 
+                    json_data = {"error": "invalid chromosome input"}
+
             with open("results.html", "r") as file:
                 content = file.read().replace("OPERATION", "GENE LIST").replace("IMAGE", photo).replace("HEADER", header).replace("DATA", data).replace("COLOURCARD", "#EC7789")
                 file.close()
+
+            response = 200
 
         else:
             with open("error.html", "r") as file:
                 content = file.read()
                 file.close()
 
+            json_data = {"error": "page not found"}
+
+            response = 400
+
         if "json=1" in path:
             content = json.dumps(json_data)
 
-            self.send_response(200)
+            self.send_response(response)
 
             self.send_header('Content-Type', 'application/json')
             self.send_header('Content-Length', len(str.encode(content)))
