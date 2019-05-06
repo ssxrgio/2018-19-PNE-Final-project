@@ -35,10 +35,10 @@ def dict_species(limit, list_1, list_2):
         json_dict = dict()
 
         if limit > len(list_1):
-            json_dict = {"error" : "there are not that many species in the database. Please, choose a number from 1 to {}.".format(str(len(list_1)))}
+            json_dict = {"error" : "there are not that many species in the database. Please, choose a number from 1 to {}".format(str(len(list_1)))}
 
         elif limit <= 0:
-            json_dict = {"error" : "invalid limit parameter. Please, try again with a number from 1 to {}.".format(str(len(list_1)))}
+            json_dict = {"error" : "invalid limit parameter. Please, try again with a number from 1 to {}".format(str(len(list_1)))}
 
         else:
             for i in range(limit):
@@ -47,16 +47,19 @@ def dict_species(limit, list_1, list_2):
                 }
 
     except TypeError:
-        json_dict = {"error": "invalid limit parameter. Please, try again with a number from 1 to {}.".format(str(len(list_1)))}
+        json_dict = {"error": "invalid limit parameter. Please, try again with a number from 1 to {}".format(str(len(list_1)))}
 
     return json_dict
 
 def dict_karyotype(limit, specie, data):
-    if limit == 'key':
-        json_dict = {"error": "specie '{}' is not available in the database.".format(specie.replace("_", " "))}
+    if limit == "key":
+        json_dict = {"error": "specie is not available in the database"}
 
-    elif limit == 'value':
-        json_dict = {"error" : "'{}' is not a specie. Try again.".format(specie)}
+    elif limit == "value":
+        json_dict = {"error" : " input is not a specie. Try again".format(specie)}
+
+    elif limit == "empty":
+        json_dict = {"error": "karyotype is not available.".format(specie)}
 
     else:
         json_dict = dict()
@@ -71,10 +74,10 @@ def dict_length(chromo, specie, length):
         json_dict = {"error": "chromosome not found"}
 
     elif chromo == "specie":
-        json_dict = {"error": "karyotype for {} is not available.".format(specie)}
+        json_dict = {"error": "karyotype for is not available.".format(specie)}
 
     else:
-        json_dict = {"length of chromosome {} for {}".format(chromo, specie): length}
+        json_dict = {"length" : length}
 
     return json_dict
 
@@ -195,6 +198,9 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         data = "Karyotype not available in the database."
                         photo = "https://i.imgur.com/poj7xfa.jpg"
 
+                        DATA = None
+                        LIMIT = "empty"
+
                     else:
                         for i in range(len(karyotype)):
                             data_list.append(karyotype[i])
@@ -202,8 +208,9 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         data = "Showing karyotype: {}".format(str(data_list).strip("[]").replace("'", ""))
                         photo = "https://i.imgur.com/ihzq1ZU.jpg"
 
-                    DATA = None
-                    LIMIT = "key"
+                        DATA = data_list
+                        LIMIT = len(karyotype)
+
 
                 except KeyError:
                     data = "Error: specie '{}' is not available in the database.".format(specie.replace("_", " "))
